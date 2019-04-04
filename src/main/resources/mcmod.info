@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ["Josia50", "Psychokiller", "Toma"],
   "credits": "LuCraft for the permission",
-  "logoFile": "",
+  "logoFile": "logo.png",
   "screenshots": [],
   "dependencies": []
 }

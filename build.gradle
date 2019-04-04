@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = "0.0.1"
-group = "com.speedstersreborn" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "com.speedstersreborn"
 archivesBaseName = "SpeedstersHeroesReborn-1.12.2-"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
@@ -32,6 +32,23 @@ minecraft {
     // mappings = "snapshot_20171003"
     mappings = "stable_39"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+}
+
+repositories {
+    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven"
+    }
+
+    maven {
+        name = "JitPack"
+        url = "https://jitpack.io"
+    }
+
+    maven {
+        name = "IC2"
+        url = "http://maven.ic2.player.to"
+    }
 }
 
 dependencies {
