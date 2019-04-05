@@ -28,6 +28,7 @@ public class SpeedsterHeroesReborn
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        proxy.preInit();
     }
 
     @EventHandler
