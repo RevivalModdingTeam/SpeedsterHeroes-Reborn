@@ -1,4 +1,4 @@
-
+package com.speedstersreborn.client.renderers;
 
 import com.speedstersreborn.common.entity.EntityRingDummy;
 import net.minecraft.client.model.ModelBiped;
