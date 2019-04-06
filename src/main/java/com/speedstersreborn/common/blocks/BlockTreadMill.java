@@ -1,0 +1,50 @@
+package com.speedstersreborn.common.blocks;
+
+import com.speedstersreborn.SpeedsterHeroesReborn;
+import com.speedstersreborn.common.entity.EntityTreadmill;
+import com.speedstersreborn.common.items.SHRItems;
+import com.speedstersreborn.common.tileentity.TileTreadMill;
+import com.speedstersreborn.tabs.ModTabs;
+import com.speedstersreborn.util.handlers.IHasModel;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+public class BlockTreadMill extends Block implements IHasModel {
+    public BlockTreadMill(String name, Material material) {
+        super(material);
+        setTranslationKey(name);
+        setRegistryName(name);
+        setCreativeTab(ModTabs.shrTab);
+
+        SHRBlocks.BLOCK_LIST.add(this);
+        SHRItems.ITEM_LIST.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (worldIn.isRemote) return true;
+        TileTreadMill treadMill = (TileTreadMill) worldIn.getTileEntity(pos);
+        if (treadMill != null && !treadMill.ridden) {
+            EntityTreadmill entity = new EntityTreadmill(worldIn);
+            entity.setPos(pos);
+            entity.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+            treadMill.ridden = true;
+            playerIn.startRiding(entity);
+            worldIn.spawnEntity(entity);
+        }
+        return true;
+    }
+
+    @Override
+    public void registerModels() {
+        SpeedsterHeroesReborn.proxy.registerItemRenderer(Item.getItemFromBlock(this),0, "inventory");
+    }
+}

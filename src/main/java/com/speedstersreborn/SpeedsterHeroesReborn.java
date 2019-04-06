@@ -1,10 +1,6 @@
 package com.speedstersreborn;
 
-import com.speedstersreborn.common.items.ItemZoomRing;
 import com.speedstersreborn.proxy.IProxy;
-import com.speedstersreborn.tabs.SHRTab;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -23,7 +19,6 @@ public class SpeedsterHeroesReborn
     public static final String MODID = "shr";
     public static final String NAME = "Speedsters Heroes Reborn";
     public static final String VERSION = "0.0.1";
-    public static final CreativeTabs shrtab = new SHRTab("shrtab");
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)

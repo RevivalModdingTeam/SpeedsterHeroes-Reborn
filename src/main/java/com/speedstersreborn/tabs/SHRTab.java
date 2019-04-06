@@ -1,7 +1,6 @@
 package com.speedstersreborn.tabs;
 
-import com.revivalcore.common.blocks.CoreBlocks;
-import com.revivalcore.common.items.CoreItems;
+import com.speedstersreborn.common.blocks.SHRBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,6 +13,6 @@ public class SHRTab extends CreativeTabs {
 
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(Item.getItemFromBlock(CoreBlocks.SUIT_MAKER));
+        return new ItemStack(Item.getItemFromBlock(SHRBlocks.TREADMILL));
     }
 }
