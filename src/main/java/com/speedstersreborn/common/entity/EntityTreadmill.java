@@ -12,7 +12,7 @@ public class EntityTreadmill extends Entity {
 
     public EntityTreadmill(World worldIn) {
         super(worldIn);
-        setSize(1.0f, 1.0f);
+        setSize(1f, 0.3f);
     }
 
     @Override

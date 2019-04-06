@@ -59,6 +59,16 @@ public class BlockTreadMill extends Block implements IHasModel, ITileEntityProvi
     }
 
     @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+
+    @Override
     public boolean hasTileEntity(IBlockState state) {
         return true;
     }
