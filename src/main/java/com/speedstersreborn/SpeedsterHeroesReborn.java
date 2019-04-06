@@ -1,6 +1,8 @@
 package com.speedstersreborn;
 
+import com.speedstersreborn.common.tileentity.TileTreadMill;
 import com.speedstersreborn.proxy.IProxy;
+import com.speedstersreborn.util.handlers.RegistryHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -24,6 +26,7 @@ public class SpeedsterHeroesReborn
     public void preInit(FMLPreInitializationEvent event)
     {
         proxy.preInit();
+        RegistryHandler.registerTileEntity(TileTreadMill.class, "tile_treadmill");
     }
 
     @EventHandler

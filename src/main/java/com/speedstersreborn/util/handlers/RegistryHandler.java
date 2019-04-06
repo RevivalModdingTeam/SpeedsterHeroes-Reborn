@@ -4,6 +4,7 @@ import com.revivalcore.common.events.RVRecipeRegistryEvent;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.blocks.SHRBlocks;
 import com.speedstersreborn.common.entity.EntityRingDummy;
+import com.speedstersreborn.common.entity.EntityTreadmill;
 import com.speedstersreborn.common.items.SHRItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -19,9 +20,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import java.util.ArrayList;
-import java.util.List;
 
     @EventBusSubscriber
     public class RegistryHandler {
@@ -60,12 +58,13 @@ import java.util.List;
         @SubscribeEvent
         public static void addEntities(RegistryEvent.Register<EntityEntry> e) {
             IForgeRegistry<EntityEntry> reg = e.getRegistry();
-            reg.registerAll(EntityEntries.DUMMY);
+            reg.registerAll(EntityEntries.DUMMY, EntityEntries.TREADMILL);
         }
 
         public static class EntityEntries {
 
             public static final EntityEntry DUMMY = EntityEntryBuilder.create().entity(EntityRingDummy.class).id(new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_dummy"), 0).name("ring_dummy").tracker(80, 3, true).build();
+            public static final EntityEntry TREADMILL = EntityEntryBuilder.create().entity(EntityTreadmill.class).id(new ResourceLocation(SpeedsterHeroesReborn.MODID, "tread_mill"), 0).name("tread_mill").tracker(80, 3, false).build();
         }
 
         // Use in preinit in mod.

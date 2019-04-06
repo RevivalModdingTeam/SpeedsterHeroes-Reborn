@@ -1,14 +1,28 @@
 package com.speedstersreborn.common.entity;
 
-import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityRingDummy extends EntityCow {
+public class EntityRingDummy extends Entity {
 
 
     public EntityRingDummy(World worldIn) {
         super(worldIn);
     }
 
+    @Override
+    protected void entityInit() {
 
+    }
+
+    @Override
+    protected void readEntityFromNBT(NBTTagCompound compound) {
+
+    }
+
+    @Override
+    protected void writeEntityToNBT(NBTTagCompound compound) {
+
+    }
 }
