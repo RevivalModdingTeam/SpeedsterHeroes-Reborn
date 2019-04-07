@@ -1,12 +1,9 @@
 package com.speedstersreborn.client;
 
-import com.revivalcore.common.capabilities.CapabilitySpeedster;
-import com.revivalcore.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.network.packets.PacketSetSpeed;
 import com.speedstersreborn.network.packets.PacketSetSpeedster;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
