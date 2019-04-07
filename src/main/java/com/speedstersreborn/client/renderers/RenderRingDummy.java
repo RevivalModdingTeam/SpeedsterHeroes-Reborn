@@ -2,7 +2,6 @@ package com.speedstersreborn.client.renderers;
 
 import com.speedstersreborn.common.entity.EntityRingDummy;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;

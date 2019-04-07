@@ -1,5 +1,7 @@
 package com.speedstersreborn.common.blocks;
 
+import com.revivalcore.common.capabilities.CapabilitySpeedster;
+import com.revivalcore.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.entity.EntityTreadmill;
 import com.speedstersreborn.common.items.SHRItems;
