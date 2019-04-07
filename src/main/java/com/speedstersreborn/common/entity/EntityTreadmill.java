@@ -1,5 +1,6 @@
 package com.speedstersreborn.common.entity;
 
+import com.speedstersreborn.common.blocks.SHRBlocks;
 import com.speedstersreborn.common.tileentity.TileTreadMill;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,10 +43,17 @@ public class EntityTreadmill extends Entity {
                 remove();
             if (this.getPassengers() == null || this.getPassengers().size() < 1)
                 remove();
+            if(world.getBlockState(position).getBlock() != SHRBlocks.TREADMILL) {
+                remove();
+            }
         }
     }
 
     public void remove() {
+        if(world.getBlockState(position).getBlock() != SHRBlocks.TREADMILL) {
+            this.setDead();
+            return;
+        }
         if (position != null && !BlockPos.ORIGIN.equals(position)) {
             TileTreadMill treadMill = (TileTreadMill) world.getTileEntity(position);
             treadMill.ridden = false;
