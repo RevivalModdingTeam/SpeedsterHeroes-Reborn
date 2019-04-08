@@ -25,7 +25,7 @@ public class EventHandlePower {
         }
     }
 
-  /*  @SubscribeEvent
+  /* @SubscribeEvent
     public static void setXPAdd(LivingEvent.LivingUpdateEvent e) {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
