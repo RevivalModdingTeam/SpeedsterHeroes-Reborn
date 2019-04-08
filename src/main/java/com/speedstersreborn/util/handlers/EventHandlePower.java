@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventHandlePower {
 
     @SubscribeEvent
-    public static void Particle(LivingEvent.LivingUpdateEvent e) {
+    public static void Trail(LivingEvent.LivingUpdateEvent e) {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
@@ -24,4 +24,35 @@ public class EventHandlePower {
             }
         }
     }
+
+  /*  @SubscribeEvent
+    public static void setXPAdd(LivingEvent.LivingUpdateEvent e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            if (cap.isSpeedster()) {
+                if (player.posX != player.prevPosX || player.posZ != player.prevPosZ) cap.setXP(cap.getXP() + 0.1);
+
+                if (cap.getXP() == 100) {
+                    cap.setLevel(2);
+                    cap.sync();
+                }
+
+                if (cap.getXP() == 200) {
+                    cap.setLevel(3);
+                    cap.sync();
+                }
+
+                if (cap.getXP() == 300) {
+                    cap.setLevel(4);
+                    cap.sync();
+                }
+
+                if (cap.getXP() == 400) {
+                    cap.setLevel(5);
+                    cap.sync();
+                }
+            }
+        }
+    }*/ // TODO New Version import for xp & level
 }

@@ -5,7 +5,6 @@ import com.revivalcore.common.capabilities.ISpeedsterCap;
 import com.revivalcore.util.helper.PlayerHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -15,10 +14,6 @@ public class PacketSetSpeed implements IMessage {
 
 
     public PacketSetSpeed() {
-    }
-
-    public PacketSetSpeed(EntityPlayer player) {
-
     }
 
     @Override
@@ -37,8 +32,8 @@ public class PacketSetSpeed implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
                 EntityPlayer player = ctx.getServerHandler().player;
                 ISpeedsterCap data = CapabilitySpeedster.get(player);
-                if (data.isSpeedster() && data.getSpeedLevel() < 1.0f) {
-                    data.setSpeedLevel(data.getSpeedLevel() + 0.1F);
+                if (data.isSpeedster() && data.getSpeedLevel() < 1.0f) { // TODO change to maxSpeedLevel
+                    data.setSpeedLevel(data.getSpeedLevel() + 1);
                     PlayerHelper.sendMessage(player, "Speed: " + data.getSpeedLevel(), true);
                 }
                 data.sync();

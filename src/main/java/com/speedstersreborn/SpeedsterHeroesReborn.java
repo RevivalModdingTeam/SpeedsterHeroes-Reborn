@@ -12,10 +12,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION)
+@Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION,dependencies = "required-after:revivalcore@[0.0.3,)")
 public class SpeedsterHeroesReborn
 {
-    // ,dependencies = "required-after:revivalcore@[0.0.4,)"
     @Mod.Instance
     public static SpeedsterHeroesReborn instance;
 
