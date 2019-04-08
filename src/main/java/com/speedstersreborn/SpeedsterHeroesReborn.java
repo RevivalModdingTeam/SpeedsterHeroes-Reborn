@@ -10,9 +10,10 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION, dependencies = "required-after:revivalcore@[0.0.4,)")
+@Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION)
 public class SpeedsterHeroesReborn
 {
+    // ,dependencies = "required-after:revivalcore@[0.0.4,)"
     @Mod.Instance
     public static SpeedsterHeroesReborn instance;
 
