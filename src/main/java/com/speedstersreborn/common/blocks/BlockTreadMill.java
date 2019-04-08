@@ -1,13 +1,12 @@
 package com.speedstersreborn.common.blocks;
 
-import com.revivalcore.common.capabilities.CapabilitySpeedster;
-import com.revivalcore.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.entity.EntityTreadmill;
 import com.speedstersreborn.common.items.SHRItems;
 import com.speedstersreborn.common.tileentity.TileTreadMill;
 import com.speedstersreborn.tabs.ModTabs;
 import com.speedstersreborn.util.handlers.IHasModel;
+import com.speedstersreborn.util.helper.PlayerHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -38,22 +37,32 @@ public class BlockTreadMill extends Block implements IHasModel, ITileEntityProvi
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (worldIn.isRemote) return true;
         TileTreadMill treadMill = (TileTreadMill) worldIn.getTileEntity(pos);
-        if (treadMill != null && !treadMill.ridden) {
-            EntityTreadmill entity = new EntityTreadmill(worldIn);
-            entity.setPos(pos);
-            entity.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-            treadMill.ridden = true;
-            playerIn.startRiding(entity);
-            worldIn.spawnEntity(entity);
+        if (treadMill != null) {
+            if (!treadMill.getRidden()) {
+                EntityTreadmill entity = new EntityTreadmill(worldIn);
+                entity.setPos(pos);
+                entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                treadMill.setRidden();
+                worldIn.spawnEntity(entity);
+                playerIn.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+            } else {
+                treadMill.setRidden();
+            }
         }
         return true;
     }
 
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+        super.onBlockHarvested(worldIn, pos, state, player);
+        PlayerHelper.setboolean(player, "ontread", false);
+    }
+
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return new AxisAlignedBB(0.2,0,0,0.7,0.4,1);
+        return new AxisAlignedBB(0.2, 0, 0, 0.7, 0.4, 1);
     }
 
     @Override
@@ -63,7 +72,7 @@ public class BlockTreadMill extends Block implements IHasModel, ITileEntityProvi
 
     @Override
     public void registerModels() {
-        SpeedsterHeroesReborn.proxy.registerItemRenderer(Item.getItemFromBlock(this),0, "inventory");
+        SpeedsterHeroesReborn.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     @Nullable
