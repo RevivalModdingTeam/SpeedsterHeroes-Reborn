@@ -4,10 +4,12 @@ import com.speedstersreborn.common.tileentity.TileTreadMill;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.proxy.IProxy;
 import com.speedstersreborn.util.handlers.RegistryHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION)
@@ -36,5 +38,12 @@ public class SpeedsterHeroesReborn
     public void init(FMLInitializationEvent event)
     {
         proxy.init();
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        if (Loader.isModLoaded("speedsterheroes")) {
+            throw new IllegalStateException("SpeedsterHeroes isn't compatible with SpeedsterHeroesReborn");
+        }
     }
 }
