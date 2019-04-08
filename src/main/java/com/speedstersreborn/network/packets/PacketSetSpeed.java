@@ -41,5 +41,4 @@ public class PacketSetSpeed implements IMessage {
             return null;
         }
     }
-
 }
