@@ -1,5 +1,6 @@
 package com.speedstersreborn.network.packets;
 
+import com.revivalcore.api.SpeedAPI;
 import com.revivalcore.common.capabilities.CapabilitySpeedster;
 import com.revivalcore.common.capabilities.ISpeedsterCap;
 import com.revivalcore.util.helper.PlayerHelper;
@@ -32,7 +33,7 @@ public class PacketSetSpeed implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
                 EntityPlayer player = ctx.getServerHandler().player;
                 ISpeedsterCap data = CapabilitySpeedster.get(player);
-                if (data.isSpeedster() && data.getSpeedLevel() < 1.0f) { // TODO change to maxSpeedLevel
+                if (data.isSpeedster() && data.getSpeedLevel() < SpeedAPI.MaxSpeedLevel) {
                     data.setSpeedLevel(data.getSpeedLevel() + 1);
                     PlayerHelper.sendMessage(player, "Speed: " + data.getSpeedLevel(), true);
                 }

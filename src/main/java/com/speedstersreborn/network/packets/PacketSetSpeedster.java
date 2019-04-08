@@ -16,10 +16,6 @@ public class PacketSetSpeedster implements IMessage {
     public PacketSetSpeedster() {
     }
 
-    public PacketSetSpeedster(EntityPlayer player) {
-
-    }
-
     @Override
     public void toBytes(ByteBuf buf) {
 

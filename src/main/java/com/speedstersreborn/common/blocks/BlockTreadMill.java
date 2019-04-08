@@ -6,7 +6,6 @@ import com.speedstersreborn.common.items.SHRItems;
 import com.speedstersreborn.common.tileentity.TileTreadMill;
 import com.speedstersreborn.tabs.ModTabs;
 import com.speedstersreborn.util.handlers.IHasModel;
-import com.speedstersreborn.util.helper.PlayerHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -57,7 +56,6 @@ public class BlockTreadMill extends Block implements IHasModel, ITileEntityProvi
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         super.onBlockHarvested(worldIn, pos, state, player);
-        PlayerHelper.setboolean(player, "ontread", false);
     }
 
     @Override

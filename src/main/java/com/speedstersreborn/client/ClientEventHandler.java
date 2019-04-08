@@ -4,11 +4,7 @@ import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.network.packets.PacketSetSpeed;
 import com.speedstersreborn.network.packets.PacketSetSpeedster;
-import com.speedstersreborn.util.helper.PlayerHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -38,26 +34,6 @@ public class ClientEventHandler {
 
         if (UP.isPressed()) {
             NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeed());
-        }
-    }
-
-    @SubscribeEvent
-    public static void keyInput(InputUpdateEvent e) {
-        if (Minecraft.getMinecraft().player == null)
-            return;
-
-        if (PlayerHelper.getboolean(Minecraft.getMinecraft().player, "ontread")) {
-            EntityPlayer entityPlayer = Minecraft.getMinecraft().player;
-           /* MovementInput moveType = e.getMovementInput();
-            moveType.rightKeyDown = false;
-            moveType.leftKeyDown = false;
-            moveType.backKeyDown = false;
-            moveType.jump = false;
-            moveType.moveForward = 0.1F;
-            moveType.sneak = false;
-            moveType.moveStrafe = 0.0F;*/
-            BlockPos pos = new BlockPos(entityPlayer.getEntityData().getInteger("x"), entityPlayer.getEntityData().getInteger("y"), entityPlayer.getEntityData().getInteger("z"));
-            Minecraft.getMinecraft().player.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
         }
     }
 }
