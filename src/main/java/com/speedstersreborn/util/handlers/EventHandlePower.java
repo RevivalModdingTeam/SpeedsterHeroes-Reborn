@@ -23,7 +23,8 @@ public class EventHandlePower {
             if (!player.world.isRemote) {
                 if (cap.isSpeedster() && !player.capabilities.isCreativeMode) {
                     if (isMoving(player)) {
-                        cap.setXP(cap.getXP() + 0.1 * cap.getSpeedLevel());
+                        cap.setXP(cap.getXP() + 0.01 * cap.getSpeedLevel());
+                        System.out.println(cap.getXP());
                         PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
                     }
 
@@ -54,6 +55,6 @@ public class EventHandlePower {
     }
 
     public static boolean isMoving(EntityLivingBase entity) {
-        return (entity.distanceWalkedModified / 0.6F != entity.prevDistanceWalkedModified / 0.6F);
+        return (entity.distanceWalkedModified != entity.prevDistanceWalkedModified);
     }
 }
