@@ -28,7 +28,7 @@ public class SpeedsterHeroesReborn
     public static final String MODID = "shr";
     public static final String NAME = "Speedsters Heroes Reborn";
     public static final String VERSION = "0.0.1";
-    public static final String UPDATEURL = "";
+    public static final String UPDATEURL = "https://raw.githubusercontent.com/revivalmodding/SpeedsterHeroesReborn/master/update.json";
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
