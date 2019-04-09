@@ -1,9 +1,9 @@
 package com.speedstersreborn.network.packets;
 
-import com.revivalcore.api.SpeedAPI;
-import com.revivalcore.common.capabilities.CapabilitySpeedster;
-import com.revivalcore.common.capabilities.ISpeedsterCap;
 import com.revivalcore.util.helper.PlayerHelper;
+import com.speedstersreborn.api.SpeedAPI;
+import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
+import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

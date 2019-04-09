@@ -64,7 +64,7 @@ import net.minecraftforge.registries.IForgeRegistry;
         public static class EntityEntries {
 
             public static final EntityEntry DUMMY = EntityEntryBuilder.create().entity(EntityRingDummy.class).id(new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_dummy"), 0).name("ring_dummy").tracker(80, 3, true).build();
-            public static final EntityEntry TREADMILL = EntityEntryBuilder.create().entity(EntityTreadmill.class).id(new ResourceLocation(SpeedsterHeroesReborn.MODID, "tread_mill"), 0).name("tread_mill").tracker(80, 3, false).build();
+            public static final EntityEntry TREADMILL = EntityEntryBuilder.create().entity(EntityTreadmill.class).id(new ResourceLocation(SpeedsterHeroesReborn.MODID, "tread_mill"), 1).name("tread_mill").tracker(80, 3, false).build();
         }
 
         // Use in preinit in mod.

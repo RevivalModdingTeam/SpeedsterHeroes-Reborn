@@ -1,6 +1,7 @@
 package com.speedstersreborn.network;
 
 import com.speedstersreborn.SpeedsterHeroesReborn;
+import com.speedstersreborn.network.packets.PacketCapSync;
 import com.speedstersreborn.network.packets.PacketSetSpeed;
 import com.speedstersreborn.network.packets.PacketSetSpeedster;
 import com.speedstersreborn.network.packets.PacketTeleport;
@@ -15,6 +16,7 @@ public class NetworkHandler {
     public static void init() {
         INSTANCE.registerMessage(PacketSetSpeedster.Handler.class, PacketSetSpeedster.class, id++, Side.SERVER);
         INSTANCE.registerMessage(PacketSetSpeed.Handler.class, PacketSetSpeed.class, id++, Side.SERVER);
+        INSTANCE.registerMessage(PacketCapSync.Handler.class, PacketCapSync.class, id++, Side.CLIENT);
         INSTANCE.registerMessage(PacketTeleport.Handler.class, PacketTeleport.class, id++, Side.SERVER);
     }
 }

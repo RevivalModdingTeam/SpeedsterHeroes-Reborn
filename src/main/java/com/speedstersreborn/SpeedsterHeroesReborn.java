@@ -1,9 +1,13 @@
 package com.speedstersreborn;
 
+import com.speedstersreborn.common.capabilities.CapSpeedstersStorage;
+import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
+import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.common.tileentity.TileTreadMill;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.proxy.IProxy;
 import com.speedstersreborn.util.handlers.RegistryHandler;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -30,6 +34,7 @@ public class SpeedsterHeroesReborn
     {
         proxy.preInit();
         NetworkHandler.init();
+        CapabilityManager.INSTANCE.register(ISpeedsterCap.class, new CapSpeedstersStorage(), CapabilitySpeedster::new);
         RegistryHandler.registerTileEntity(TileTreadMill.class, "tile_treadmill");
     }
 
