@@ -4,17 +4,19 @@ import net.minecraft.util.IStringSerializable;
 
 public class EnumHandler {
 
-    public static enum RingTypes implements IStringSerializable {
+    public enum RingTypes implements IStringSerializable {
 
-        ZOOM("zoom", 0),
-        REVERSE("reverse_flash", 1);
+        ZOOM("zoom", 0, 0),
+        REVERSE("reverse_flash", 1,1);
 
         private int ID;
         private String name;
+        private int suit;
 
-        private RingTypes(String name, int ID) {
+         RingTypes(String name, int ID, int suit) {
             this.ID = ID;
             this.name = name;
+            this.suit = suit;
         }
 
         @Override
@@ -24,6 +26,10 @@ public class EnumHandler {
 
         public int getID() {
             return ID;
+        }
+
+        public int getSuit() {
+            return suit;
         }
 
         @Override
