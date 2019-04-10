@@ -70,8 +70,7 @@ public class BlockTreadMill extends Block implements IHasModel, ITileEntityProvi
 
     @Override
     public void registerModels() {
-        SpeedsterHeroesReborn.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, this.getRegistryName().toString().substring(4
-        ), "inventory");
+        SpeedsterHeroesReborn.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     @Nullable

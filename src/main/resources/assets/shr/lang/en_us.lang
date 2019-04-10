@@ -1,0 +1,9 @@
+//Config
+config.tab.speedsterheroesreborn=SpeedsterHeroes Reborn
+config.shr.updatechecker=Update Checker
+
+// Item
+item.ring.name=Suit Ring
+
+//Block
+tile.treadmill.name=Treadmill

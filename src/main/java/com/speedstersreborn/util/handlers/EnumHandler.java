@@ -7,7 +7,9 @@ public class EnumHandler {
     public enum RingTypes implements IStringSerializable {
 
         ZOOM("zoom", 0, 0),
-        REVERSE("reverse_flash", 1,1);
+        REVERSE("reverse_flash", 1,1),
+        GOD_SPEED("god_speed", 2, 2),
+        KID_FLASH("kid_flash", 3,3);
 
         private int ID;
         private String name;

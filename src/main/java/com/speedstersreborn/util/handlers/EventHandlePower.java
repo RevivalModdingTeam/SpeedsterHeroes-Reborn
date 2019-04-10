@@ -64,7 +64,7 @@ public class EventHandlePower {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
 
-            if (player.isSprinting() && cap.isSpeedster() && player.world.getBlockState(player.getPosition().add(0, -1, 0)).getBlock() instanceof BlockLiquid) {
+            if (player.isSprinting() && cap.isSpeedster() && cap.getSpeedLevel() >= 1 && player.world.getBlockState(player.getPosition().add(0, -1, 0)).getBlock() instanceof BlockLiquid) {
                 {
                     player.posY -= player.motionY;
                     player.motionY = 0D;

@@ -26,7 +26,12 @@ public class ClientProxy implements IProxy {
     }
 
     @Override
-    public void registerItemRenderer(Item item, int meta, String filename, String id) {
+    public void registerItemRenderer(Item item, int meta, String id) {
+        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
+    }
+
+    @Override
+    public void registerItemRendererMeta(Item item, int meta, String filename, String id) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(SpeedsterHeroesReborn.MODID, filename), id));
     }
 
