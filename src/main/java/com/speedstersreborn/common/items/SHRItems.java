@@ -8,5 +8,5 @@ import java.util.List;
 public class SHRItems {
     public static final List<Item> ITEM_LIST = new ArrayList<Item>();
 
-    public static final Item RING = new ItemZoomRing("zoom_ring");
+    public static final Item RING = new ItemRing("ring");
 }

@@ -17,7 +17,12 @@ public class CommonProxy implements IProxy {
     }
 
     @Override
-    public void registerItemRenderer(Item item, int meta, String id) {
+    public void registerItemRenderer(Item item, int meta, String filename, String id) {
+
+    }
+
+    @Override
+    public void registerModelBakeryVariants() {
 
     }
 }

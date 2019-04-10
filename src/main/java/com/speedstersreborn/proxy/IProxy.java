@@ -8,5 +8,7 @@ public interface IProxy {
 
     void init();
 
-    void registerItemRenderer(Item item, int meta, String id);
+    void registerItemRenderer(Item item, int meta, String filename ,String id);
+
+    void registerModelBakeryVariants();
 }

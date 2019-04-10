@@ -1,6 +1,5 @@
 package com.speedstersreborn.util.handlers;
 
-
 import com.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;

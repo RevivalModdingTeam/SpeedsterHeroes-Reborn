@@ -2,11 +2,12 @@
   "homepage": "https://minecraft.curseforge.com/projects/speedsters-heroes-reborn",
 
   "promos": {
-    "1.12.2-latest": "0.0.1",
-    "1.12.2-recommended": "0.0.1"
+    "1.12.2-latest": "0.0.2",
+    "1.12.2-recommended": "0.0.2"
   },
 
   "1.12.2": {
-    "0.0.1": "Current"
+    "0.0.1": "Current",
+    "0.0.2": "Another test version"
   }
 }
