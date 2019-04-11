@@ -10,6 +10,10 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+/**
+ * Created by Josia50
+ * on 10/04/2019.
+ */
 
 @Mod.EventBusSubscriber
 public class EventHandlePower {

@@ -2,6 +2,11 @@ package com.speedstersreborn.util.handlers;
 
 import net.minecraft.util.IStringSerializable;
 
+/**
+ * Created by Josia50
+ * on 10/04/2019.
+ */
+
 public class EnumHandler {
 
     public enum RingTypes implements IStringSerializable {
