@@ -42,17 +42,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
         @SubscribeEvent
         public static void onModelRegister(ModelRegistryEvent event) {
-            for (Item item : SHRItems.ITEM_LIST) {
-                if (item instanceof IHasModel) {
-                    ((IHasModel) item).registerModels();
-                }
-            }
-
-            for (Block block : SHRBlocks.BLOCK_LIST) {
-                if (block instanceof IHasModel) {
-                    ((IHasModel) block).registerModels();
-                }
-            }
+            SHRItems.registerRenders();
         }
 
         @SubscribeEvent
@@ -73,14 +63,8 @@ import net.minecraftforge.registries.IForgeRegistry;
         }
 
 
-        public static class TileRegistry {
-            public static void init() {
 
-            }
 
             @SideOnly(Side.CLIENT)
-            public static void bindEntityTEISR() {
-
-            }
-        }
+            public static void bindEntityTEISR() {}
     }

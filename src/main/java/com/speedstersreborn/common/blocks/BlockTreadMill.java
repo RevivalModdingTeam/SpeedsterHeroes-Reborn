@@ -1,18 +1,13 @@
 package com.speedstersreborn.common.blocks;
 
-import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.entity.EntityTreadmill;
-import com.speedstersreborn.common.items.SHRItems;
 import com.speedstersreborn.common.tileentity.TileTreadMill;
-import com.speedstersreborn.tabs.ModTabs;
-import com.speedstersreborn.util.handlers.IHasModel;
+import com.speedstersreborn.util.helper.IHasItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -23,15 +18,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockTreadMill extends Block implements IHasModel, ITileEntityProvider {
-    public BlockTreadMill(String name, Material material) {
+public class BlockTreadMill extends Block implements ITileEntityProvider, IHasItem {
+    public BlockTreadMill(Material material) {
         super(material);
-        setTranslationKey(name);
-        setRegistryName(name);
-        setCreativeTab(ModTabs.shrTab);
-
-        SHRBlocks.BLOCK_LIST.add(this);
-        SHRItems.ITEM_LIST.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
@@ -63,15 +52,6 @@ public class BlockTreadMill extends Block implements IHasModel, ITileEntityProvi
         return new AxisAlignedBB(0.2, 0, 0, 0.7, 0.4, 1);
     }
 
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public void registerModels() {
-        SpeedsterHeroesReborn.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-    }
 
     @Nullable
     @Override
@@ -91,6 +71,11 @@ public class BlockTreadMill extends Block implements IHasModel, ITileEntityProvi
 
     @Override
     public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean hasItem() {
         return true;
     }
 }

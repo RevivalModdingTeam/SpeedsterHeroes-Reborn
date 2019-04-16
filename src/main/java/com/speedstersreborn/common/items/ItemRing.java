@@ -1,11 +1,8 @@
 package com.speedstersreborn.common.items;
 
 
-import com.revivalcore.core.RevivalCore;
 import com.revivalcore.util.helper.StringHelper;
-import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.util.handlers.EnumHandler.RingTypes;
-import com.speedstersreborn.util.handlers.IHasModel;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -17,15 +14,12 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemRing extends Item implements IHasModel {
+public class ItemRing extends Item {
 
     public ItemRing(String name) {
         setTranslationKey(name);
         setRegistryName(name);
-        setCreativeTab(RevivalCore.coretab);
         setHasSubtypes(true);
-
-        SHRItems.ITEM_LIST.add(this);
     }
 
 
@@ -62,13 +56,6 @@ public class ItemRing extends Item implements IHasModel {
             } else {
                 continue;
             }
-        }
-    }
-
-    @Override
-    public void registerModels() {
-        for (int i = 0; i < RingTypes.values().length; i++) {
-            SpeedsterHeroesReborn.proxy.registerItemRendererMeta(this, i, "ring_" + RingTypes.values()[i].getName(), "inventory");
         }
     }
 }

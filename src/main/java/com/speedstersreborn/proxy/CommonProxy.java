@@ -1,8 +1,6 @@
 package com.speedstersreborn.proxy;
 
 
-import net.minecraft.item.Item;
-
 public class CommonProxy implements IProxy {
 
 
@@ -13,15 +11,6 @@ public class CommonProxy implements IProxy {
 
     @Override
     public void init() {
-
-    }
-
-    @Override
-    public void registerItemRenderer(Item item, int meta, String id) {
-    }
-
-    @Override
-    public void registerItemRendererMeta(Item item, int meta, String filename, String id) {
 
     }
 

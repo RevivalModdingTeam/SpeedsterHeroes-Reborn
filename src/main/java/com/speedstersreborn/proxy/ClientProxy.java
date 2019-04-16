@@ -7,10 +7,7 @@ import com.speedstersreborn.client.renderers.RenderRingDummy;
 import com.speedstersreborn.common.entity.EntityRingDummy;
 import com.speedstersreborn.common.items.SHRItems;
 import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy implements IProxy {
@@ -26,17 +23,7 @@ public class ClientProxy implements IProxy {
     }
 
     @Override
-    public void registerItemRenderer(Item item, int meta, String id) {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
-    }
-
-    @Override
-    public void registerItemRendererMeta(Item item, int meta, String filename, String id) {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(SpeedsterHeroesReborn.MODID, filename), id));
-    }
-
-    @Override
     public void registerModelBakeryVariants() {
-        ModelBakery.registerItemVariants(SHRItems.RING, new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_zoom"), new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_reverse_flash"));
+        ModelBakery.registerItemVariants(SHRItems.ring, new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_zoom"), new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_reverse_flash"));
     }
 }
