@@ -2,7 +2,7 @@ package com.speedstersreborn.common.blocks;
 
 import com.speedstersreborn.common.items.SHRItems;
 import com.speedstersreborn.tabs.ModTabs;
-import com.speedstersreborn.util.helper.IHasItem;
+import com.speedstersreborn.util.helper.IHaveItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
@@ -20,15 +20,17 @@ public class SHRBlocks {
         block.setTranslationKey(name);
         SHRBlocks.BLOCK_LIST.add(block);
 
-        if (block instanceof IHasItem) {
-            ItemBlock itemBlock = (ItemBlock) new ItemBlock(block).setRegistryName(name);
+        if (block instanceof IHaveItem) {
+            if (((IHaveItem) block).hasItem()) {
+                ItemBlock itemBlock = (ItemBlock) new ItemBlock(block).setRegistryName(name);
 
-            if (tab) {
-                block.setCreativeTab(ModTabs.shrTab);
+                if (tab) {
+                    block.setCreativeTab(ModTabs.shrTab);
+                }
+                SHRItems.registerRender(itemBlock);
+                SHRItems.ITEM_LIST.add(itemBlock);
+
             }
-            SHRItems.registerRender(itemBlock);
-            SHRItems.ITEM_LIST.add(itemBlock);
-
         }
         return block;
     }

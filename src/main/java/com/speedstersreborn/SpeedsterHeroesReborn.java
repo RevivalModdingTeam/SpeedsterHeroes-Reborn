@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION,dependencies = "required-after:revivalcore@[0.0.3,)", updateJSON = SpeedsterHeroesReborn.UPDATEURL)
 public class SpeedsterHeroesReborn
@@ -25,6 +26,7 @@ public class SpeedsterHeroesReborn
 
     @SidedProxy(clientSide = "com.speedstersreborn.proxy.ClientProxy", serverSide = "com.speedstersreborn.proxy.CommonProxy")
     public static IProxy proxy;
+    public static Logger logger;
 
     public static final String MODID = "shr";
     public static final String NAME = "Speedsters Heroes Reborn";

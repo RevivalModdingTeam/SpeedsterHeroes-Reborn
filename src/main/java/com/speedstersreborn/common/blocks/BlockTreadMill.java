@@ -2,7 +2,7 @@ package com.speedstersreborn.common.blocks;
 
 import com.speedstersreborn.common.entity.EntityTreadmill;
 import com.speedstersreborn.common.tileentity.TileTreadMill;
-import com.speedstersreborn.util.helper.IHasItem;
+import com.speedstersreborn.util.helper.IHaveItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockTreadMill extends Block implements ITileEntityProvider, IHasItem {
+public class BlockTreadMill extends Block implements ITileEntityProvider, IHaveItem {
     public BlockTreadMill(Material material) {
         super(material);
     }

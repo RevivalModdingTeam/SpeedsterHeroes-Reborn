@@ -1,6 +1,6 @@
 package com.speedstersreborn.util.helper;
 
-public interface IHasItem {
+public interface IHaveItem {
 
     boolean hasItem();
 }
