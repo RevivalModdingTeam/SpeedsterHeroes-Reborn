@@ -20,13 +20,14 @@ public class SHRBlocks {
         block.setTranslationKey(name);
         SHRBlocks.BLOCK_LIST.add(block);
 
-        if(block instanceof IHasItem) {
+        if (block instanceof IHasItem) {
             ItemBlock itemBlock = (ItemBlock) new ItemBlock(block).setRegistryName(name);
 
-            if(tab) {
+            if (tab) {
                 block.setCreativeTab(ModTabs.shrTab);
             }
-                SHRItems.ITEM_LIST.add(itemBlock);
+            SHRItems.registerRender(itemBlock);
+            SHRItems.ITEM_LIST.add(itemBlock);
 
         }
         return block;
