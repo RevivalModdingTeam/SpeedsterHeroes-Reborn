@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class SpeedAPI {
 
-    public static int MaxSpeedLevel = 4;
+    public static int MaxSpeedLevel = 8;
 
     public static void setSpeed(EntityPlayer player, int level) {
         float speed = 0.1f;
@@ -34,6 +34,22 @@ public class SpeedAPI {
 
         if(level == 4) {
             speed = 1.0f;
+        }
+
+        if(level == 5) {
+            speed = 1.2f;
+        }
+
+        if(level == 6) {
+            speed = 1.4f;
+        }
+
+        if(level == 7) {
+            speed = 1.6f;
+        }
+
+        if(level == 8) {
+            speed = 2.5f;
         }
 
         // TODO More speeds but own handler with potion for more speed!!!

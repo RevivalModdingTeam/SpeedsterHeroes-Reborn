@@ -5,6 +5,8 @@ import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.network.packets.PacketSetSpeed;
 import com.speedstersreborn.network.packets.PacketSetSpeedster;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -12,9 +14,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.input.Keyboard;
 
+import java.util.ArrayList;
+
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientEventHandler {
+
+    private static ArrayList<EntityPlayer> layersAddedTo = new ArrayList<>();
+    private static World lastWorld;
 
     public static KeyBinding SPEEDSTER;
     public static KeyBinding UP;

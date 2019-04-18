@@ -52,7 +52,7 @@ public class SpeedsterHeroesReborn
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         if (Loader.isModLoaded("speedsterheroes")) {
-            throw new IllegalStateException("SpeedsterHeroes isn't compatible with SpeedsterHeroesReborn");
+            throw new IllegalStateException("SpeedsterHeroes isn't compatible with SpeedsterHeroesReborn!");
         }
     }
 }
