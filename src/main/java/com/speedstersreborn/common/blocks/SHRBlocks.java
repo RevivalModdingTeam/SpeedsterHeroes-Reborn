@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SHRBlocks {
-    public static final List<Block> BLOCK_LIST = new ArrayList<Block>();
+
+    public static final List<Block> BLOCK_LIST = new ArrayList<>();
 
     public static Block TREADMILL = RegisterBlock(new BlockTreadMill(Material.ROCK), "treadmill", true);
 

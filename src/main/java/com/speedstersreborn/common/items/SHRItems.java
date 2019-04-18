@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SHRItems {
-    public static final List<Item> ITEM_LIST = new ArrayList<Item>();
+    public static final List<Item> ITEM_LIST = new ArrayList<>();
 
     public static Item ring, flashboots, flashhelmet;
 

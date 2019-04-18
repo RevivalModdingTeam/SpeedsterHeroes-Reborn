@@ -39,7 +39,6 @@ public class EventHandlePower {
                         PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
                     }
 
-
                     if (cap.getXP() >= 100 && cap.getXP() < 100.5) {
                         cap.setLevel(2);
                     }
