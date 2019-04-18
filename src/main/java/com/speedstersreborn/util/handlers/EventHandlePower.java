@@ -34,28 +34,26 @@ public class EventHandlePower {
                 if (cap.isSpeedster() && !player.capabilities.isCreativeMode) {
                     if (isMoving(player)) {
                         cap.setXP(cap.getXP() + 0.01 * cap.getSpeedLevel());
+                        player.spawnRunningParticles();
+                        player.addExhaustion(0.001f);
                         PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
                     }
 
 
                     if (cap.getXP() >= 100 && cap.getXP() < 100.5) {
                         cap.setLevel(2);
-                        PlayerHelper.sendMessage(player, "Level: " + cap.getLevel(), false);
                     }
 
                     if (cap.getXP() >= 200 && cap.getXP() < 200.5) {
                         cap.setLevel(3);
-                        PlayerHelper.sendMessage(player, "Level: " + cap.getLevel(), false);
                     }
 
                     if (cap.getXP() >= 300 && cap.getXP() < 300.5) {
                         cap.setLevel(4);
-                        PlayerHelper.sendMessage(player, "Level: " + cap.getLevel(), false);
                     }
 
                     if (cap.getXP() >= 400 && cap.getXP() < 400.5) {
                         cap.setLevel(5);
-                        PlayerHelper.sendMessage(player, "Level: " + cap.getLevel(), false);
                     }
                 }
             }
