@@ -11,19 +11,17 @@ public class EnumHandler {
 
     public enum RingTypes implements IStringSerializable {
 
-        ZOOM("zoom", 0, 0),
-        REVERSE("reverse_flash", 1,1),
-        GOD_SPEED("god_speed", 2, 2),
-        KID_FLASH("kid_flash", 3,3);
+        ZOOM("zoom", 0),
+        REVERSE("reverse_flash", 1),
+        GOD_SPEED("god_speed", 2),
+        KID_FLASH("kid_flash", 3);
 
         private int ID;
         private String name;
-        private int suit;
 
-         RingTypes(String name, int ID, int suit) {
+        RingTypes(String name, int ID) {
             this.ID = ID;
             this.name = name;
-            this.suit = suit;
         }
 
         @Override
@@ -33,10 +31,6 @@ public class EnumHandler {
 
         public int getID() {
             return ID;
-        }
-
-        public int getSuit() {
-            return suit;
         }
 
         @Override
