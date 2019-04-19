@@ -22,6 +22,7 @@ public class EventHandlePower {
     public static void MainPowers(LivingEvent.LivingUpdateEvent e) {
         setXPAdd(e);
         runWater(e);
+        runAbilities(e);
     }
 
 
@@ -74,6 +75,18 @@ public class EventHandlePower {
                 }
             }
         }
+    }
+
+    public static void runAbilities(LivingEvent.LivingUpdateEvent e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            if (cap.isSpeedster() && cap.getSpeedLevel() >= 1) {
+                player.stepHeight = 1.3f;
+                player.sendPlayerAbilities();
+            }
+        }
+
     }
 
     public static boolean isMoving(EntityLivingBase entity) {
