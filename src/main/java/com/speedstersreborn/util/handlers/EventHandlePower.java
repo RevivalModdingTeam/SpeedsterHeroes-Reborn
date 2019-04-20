@@ -42,7 +42,6 @@ public class EventHandlePower {
                 if (isMoving(player)) {
                     cap.setXP(cap.getXP() + 0.01 * cap.getSpeedLevel());
                     player.spawnRunningParticles();
-                    player.addExhaustion(0.001f);
                     PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
                 }
 
