@@ -121,7 +121,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         nbt.setBoolean("is_phasing", isPhasing);
         nbt.setDouble("xp_level", xp);
         nbt.setInteger("level", level);
-        nbt.setBoolean("wall_run", isWallRunning);
+        nbt.setBoolean("is_wall_run", isWallRunning);
         return nbt;
     }
 
@@ -132,7 +132,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         isPhasing = nbt.getBoolean("is_phasing");
         xp = nbt.getDouble("xp_level");
         level = nbt.getInteger("level");
-        isWallRunning = nbt.getBoolean("wall_run");
+        isWallRunning = nbt.getBoolean("is_wall_run");
     }
 
 
