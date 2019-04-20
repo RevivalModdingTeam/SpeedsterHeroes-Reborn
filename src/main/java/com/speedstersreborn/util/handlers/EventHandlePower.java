@@ -22,6 +22,7 @@ public class EventHandlePower {
     public static void MainPowers(LivingEvent.LivingUpdateEvent e) {
         setXPAdd(e);
         runWater(e);
+        runWall(e);
         runAbilities(e);
     }
 
@@ -40,26 +41,21 @@ public class EventHandlePower {
                         PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
                     }
 
-                    if (cap.getXP() >= 100 && cap.getXP() < 100.5) {
+                    if (cap.getXP() >= 100 && cap.getXP() < 100.5)
                         cap.setLevel(2);
-                    }
 
-                    if (cap.getXP() >= 200 && cap.getXP() < 200.5) {
+                    if (cap.getXP() >= 200 && cap.getXP() < 200.5)
                         cap.setLevel(3);
-                    }
 
-                    if (cap.getXP() >= 300 && cap.getXP() < 300.5) {
+                    if (cap.getXP() >= 300 && cap.getXP() < 300.5)
                         cap.setLevel(4);
-                    }
 
-                    if (cap.getXP() >= 400 && cap.getXP() < 400.5) {
+                    if (cap.getXP() >= 400 && cap.getXP() < 400.5)
                         cap.setLevel(5);
-                    }
                 }
             }
         }
     }
-
 
     public static void runWater(LivingEvent.LivingUpdateEvent e) {
         if (e.getEntity() instanceof EntityPlayer) {
@@ -67,11 +63,28 @@ public class EventHandlePower {
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
 
             if (player.isSprinting() && cap.isSpeedster() && cap.getSpeedLevel() >= 1 && player.world.getBlockState(player.getPosition().add(0, -1, 0)).getBlock() instanceof BlockLiquid) {
-                {
-                    player.posY -= player.motionY;
-                    player.motionY = 0D;
-                    player.fallDistance = 0.0F;
-                    player.onGround = true;
+                player.posY -= player.motionY;
+                player.motionY = 0D;
+                player.fallDistance = 0.0F;
+                player.onGround = true;
+            }
+        }
+    }
+
+    public static void runWall(LivingEvent.LivingUpdateEvent e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+
+            if (cap.isSpeedster()) {
+                if (player.collidedHorizontally) {
+                    if (cap.isWallRunning()) {
+                        if (cap.getSpeedLevel() >= 3) {
+                            player.motionY = 0.8D;
+                            player.fallDistance = 0F;
+                            cap.setWallRunning(true);
+                        }
+                    }
                 }
             }
         }
