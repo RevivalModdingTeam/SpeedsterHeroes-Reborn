@@ -6,6 +6,7 @@ import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -24,6 +25,7 @@ public class EventHandlePower {
         runWater(e);
         runWall(e);
         runAbilities(e);
+        Phasing(e);
     }
 
 
@@ -86,6 +88,19 @@ public class EventHandlePower {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    public static void Phasing(LivingEvent.LivingUpdateEvent e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+
+            if (cap.isSpeedster() && cap.isPhasing() && player.world.isBlockFullCube(new BlockPos(player.posX, player.posY - 0.1F, player.posZ))) {
+                player.noClip = true;
+                player.motionY = 0;
+                player.onGround = true;
             }
         }
     }
