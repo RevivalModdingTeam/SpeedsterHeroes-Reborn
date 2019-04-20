@@ -97,7 +97,7 @@ public class EventHandlePower {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
 
-            if (cap.isSpeedster() && cap.isPhasing() && player.world.isBlockFullCube(new BlockPos(player.posX, player.posY - 0.1F, player.posZ))) {
+            if (cap.isPhasing() && player.world.isBlockFullCube(new BlockPos(player.posX, player.posY - 0.1F, player.posZ))) { // TODO , Add check if you actually have speedster powers
                 player.noClip = true;
                 player.motionY = 0;
                 player.onGround = true;
