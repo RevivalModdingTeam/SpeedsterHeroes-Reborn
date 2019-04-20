@@ -19,65 +19,58 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber
 public class EventHandlePower {
 
+    // TODO , Add check if you actually have speedster powers -> Meta Cap
+
     @SubscribeEvent
     public static void MainPowers(LivingEvent.LivingUpdateEvent e) {
-        setXPAdd(e);
-        runWater(e);
-        runWall(e);
-        runAbilities(e);
-        Phasing(e);
-    }
-
-
-    public static void setXPAdd(LivingEvent.LivingUpdateEvent e) {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
 
-            if (!player.world.isRemote) {
-                if (cap.isSpeedster() && !player.capabilities.isCreativeMode) {
-                    if (isMoving(player)) {
-                        cap.setXP(cap.getXP() + 0.01 * cap.getSpeedLevel());
-                        player.spawnRunningParticles();
-                        player.addExhaustion(0.001f);
-                        PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
-                    }
+            setXPAdd(player, cap);
+            runWater(player, cap);
+            runWall(player, cap);
+            runAbilities(player, cap);
+            Phasing(player, cap);
+        }
+    }
 
-                    if (cap.getXP() >= 100 && cap.getXP() < 100.5)
-                        cap.setLevel(2);
 
-                    if (cap.getXP() >= 200 && cap.getXP() < 200.5)
-                        cap.setLevel(3);
-
-                    if (cap.getXP() >= 300 && cap.getXP() < 300.5)
-                        cap.setLevel(4);
-
-                    if (cap.getXP() >= 400 && cap.getXP() < 400.5)
-                        cap.setLevel(5);
+    public static void setXPAdd(EntityPlayer player, ISpeedsterCap cap) {
+        if (!player.world.isRemote) {
+            if (cap.isSpeedster() && !player.capabilities.isCreativeMode) {
+                if (isMoving(player)) {
+                    cap.setXP(cap.getXP() + 0.01 * cap.getSpeedLevel());
+                    player.spawnRunningParticles();
+                    player.addExhaustion(0.001f);
+                    PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
                 }
+
+                if (cap.getXP() >= 100 && cap.getXP() < 100.5)
+                    cap.setLevel(2);
+
+                if (cap.getXP() >= 200 && cap.getXP() < 200.5)
+                    cap.setLevel(3);
+
+                if (cap.getXP() >= 300 && cap.getXP() < 300.5)
+                    cap.setLevel(4);
+
+                if (cap.getXP() >= 400 && cap.getXP() < 400.5)
+                    cap.setLevel(5);
             }
         }
     }
 
-    public static void runWater(LivingEvent.LivingUpdateEvent e) {
-        if (e.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) e.getEntity();
-            ISpeedsterCap cap = CapabilitySpeedster.get(player);
-
-            if (player.isSprinting() && cap.isSpeedster() && cap.getSpeedLevel() >= 1 && player.world.getBlockState(player.getPosition().add(0, -1, 0)).getBlock() instanceof BlockLiquid) {
-                player.posY -= player.motionY;
-                player.motionY = 0D;
-                player.fallDistance = 0.0F;
-                player.onGround = true;
-            }
+    public static void runWater(EntityPlayer player, ISpeedsterCap cap) {
+        if (player.isSprinting() && cap.isSpeedster() && cap.getSpeedLevel() >= 1 && player.world.getBlockState(player.getPosition().add(0, -1, 0)).getBlock() instanceof BlockLiquid) {
+            player.posY -= player.motionY;
+            player.motionY = 0D;
+            player.fallDistance = 0.0F;
+            player.onGround = true;
         }
     }
 
-    public static void runWall(LivingEvent.LivingUpdateEvent e) {
-        if (e.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) e.getEntity();
-            ISpeedsterCap cap = CapabilitySpeedster.get(player);
-
+    public static void runWall(EntityPlayer player, ISpeedsterCap cap) {
             if (cap.isSpeedster()) {
                 if (player.collidedHorizontally) {
                     if (cap.isWallRunning()) {
@@ -89,31 +82,21 @@ public class EventHandlePower {
                     }
                 }
             }
-        }
     }
 
-    public static void Phasing(LivingEvent.LivingUpdateEvent e) {
-        if (e.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) e.getEntity();
-            ISpeedsterCap cap = CapabilitySpeedster.get(player);
-
-            if (cap.isPhasing() && player.world.isBlockFullCube(new BlockPos(player.posX, player.posY - 0.1F, player.posZ))) { // TODO , Add check if you actually have speedster powers
+    public static void Phasing(EntityPlayer player, ISpeedsterCap cap) {
+            if (cap.isPhasing() && player.world.isBlockFullCube(new BlockPos(player.posX, player.posY - 0.1F, player.posZ))) {
                 player.noClip = true;
                 player.motionY = 0;
                 player.onGround = true;
             }
-        }
     }
 
-    public static void runAbilities(LivingEvent.LivingUpdateEvent e) {
-        if (e.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) e.getEntity();
-            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+    public static void runAbilities(EntityPlayer player, ISpeedsterCap cap) {
             if (cap.isSpeedster() && cap.getSpeedLevel() >= 1) {
                 player.stepHeight = 1.3f;
                 player.sendPlayerAbilities();
             }
-        }
     }
 
     public static boolean isMoving(EntityLivingBase entity) {
