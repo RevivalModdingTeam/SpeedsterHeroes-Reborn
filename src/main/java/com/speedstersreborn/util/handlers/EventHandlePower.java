@@ -99,7 +99,6 @@ public class EventHandlePower {
                 player.sendPlayerAbilities();
             }
         }
-
     }
 
     public static boolean isMoving(EntityLivingBase entity) {
