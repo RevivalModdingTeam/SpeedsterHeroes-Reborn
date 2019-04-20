@@ -3,7 +3,7 @@ package com.speedstersreborn.common.capabilities;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.network.NetworkHandler;
-import com.speedstersreborn.network.packets.PacketCapSync;
+import com.speedstersreborn.network.packets.speedstercap.PacketCapSync;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,6 +26,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private boolean isPhasing = false;
     private int level = 1;
     private double xp = 0.0;
+    private boolean isWallRunning = false;
 
     public CapabilitySpeedster() {
 
@@ -39,11 +40,10 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     public void update() {
         if (!isSpeedster()) {
             setSpeedLevel(0);
+            setWallRunning(false);
             SpeedAPI.setSpeedFromCap(player);
         } else {
-            if (getSpeedLevel() != player.capabilities.getWalkSpeed()) {
-                SpeedAPI.setSpeedFromCap(player);
-            }
+            SpeedAPI.setSpeedFromCap(player);
         }
     }
 
@@ -83,6 +83,16 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     }
 
     @Override
+    public void setWallRunning(boolean wallRunning) {
+        isWallRunning = wallRunning;
+    }
+
+    @Override
+    public boolean isWallRunning() {
+        return isWallRunning;
+    }
+
+    @Override
     public void setLevel(int level) {
         this.level = level;
     }
@@ -111,6 +121,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         nbt.setBoolean("is_phasing", isPhasing);
         nbt.setDouble("xp_level", xp);
         nbt.setInteger("level", level);
+        nbt.setBoolean("wall_run", isWallRunning);
         return nbt;
     }
 
@@ -121,6 +132,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         isPhasing = nbt.getBoolean("is_phasing");
         xp = nbt.getDouble("xp_level");
         level = nbt.getInteger("level");
+        isWallRunning = nbt.getBoolean("wall_run");
     }
 
 
@@ -129,8 +141,8 @@ public class CapabilitySpeedster implements ISpeedsterCap {
 
         @SubscribeEvent
         public static void attach(AttachCapabilitiesEvent<Entity> event) {
-                if (event.getObject() instanceof EntityPlayer)
-                    event.addCapability(new ResourceLocation(SpeedsterHeroesReborn.MODID, "speedsters_cap"), new CapSpeedstersStorage.SpeedsterCapProvider((EntityPlayer) event.getObject()));
+            if (event.getObject() instanceof EntityPlayer)
+                event.addCapability(new ResourceLocation(SpeedsterHeroesReborn.MODID, "speedsters_cap"), new CapSpeedstersStorage.SpeedsterCapProvider((EntityPlayer) event.getObject()));
         }
 
         @SubscribeEvent
