@@ -21,6 +21,10 @@ public interface ISpeedsterCap extends INBTSerializable<NBTTagCompound> {
 
     boolean isPhasing();
 
+    void setWallRunning(boolean wallRunning);
+
+    boolean isWallRunning();
+
     void setLevel(int level);
 
     int getLevel();

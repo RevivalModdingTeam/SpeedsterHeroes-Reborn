@@ -2,10 +2,10 @@ package com.speedstersreborn.proxy;
 
 
 import com.speedstersreborn.SpeedsterHeroesReborn;
-import com.speedstersreborn.client.ClientEventHandler;
 import com.speedstersreborn.client.renderers.RenderRingDummy;
 import com.speedstersreborn.common.entity.EntityRingDummy;
 import com.speedstersreborn.common.items.SHRItems;
+import com.speedstersreborn.util.handlers.client.ClientEventHandler;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;

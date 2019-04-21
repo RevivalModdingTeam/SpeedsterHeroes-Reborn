@@ -1,4 +1,4 @@
-package com.speedstersreborn.network.packets;
+package com.speedstersreborn.network.packets.speedstercap;
 
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import io.netty.buffer.ByteBuf;

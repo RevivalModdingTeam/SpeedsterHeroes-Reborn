@@ -1,7 +1,6 @@
-package com.speedstersreborn.network.packets;
+package com.speedstersreborn.network.packets.speedstercap;
 
 import com.revivalcore.util.helper.PlayerHelper;
-import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import io.netty.buffer.ByteBuf;
@@ -10,11 +9,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketSetSpeed implements IMessage {
+public class PacketSetSpeedster implements IMessage {
 
 
 
-    public PacketSetSpeed() {
+    public PacketSetSpeedster() {
     }
 
     @Override
@@ -27,19 +26,23 @@ public class PacketSetSpeed implements IMessage {
 
     }
 
-    public static class Handler implements IMessageHandler<PacketSetSpeed, IMessage> {
+    public static class Handler implements IMessageHandler<PacketSetSpeedster, IMessage> {
         @Override
-        public IMessage onMessage(PacketSetSpeed message, MessageContext ctx) {
+        public IMessage onMessage(PacketSetSpeedster message, MessageContext ctx) {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
                 EntityPlayer player = ctx.getServerHandler().player;
                 ISpeedsterCap data = CapabilitySpeedster.get(player);
-                if (data.isSpeedster() && data.getSpeedLevel() < SpeedAPI.MaxSpeedLevel) {
-                    data.setSpeedLevel(data.getSpeedLevel() + 1);
-                    PlayerHelper.sendMessage(player, "Speed: " + data.getSpeedLevel(), true);
+                if (data.isSpeedster()) {
+                    data.setSpeedster(false);
+                    PlayerHelper.sendMessage(player, "Disabled Speedster Power", true);
+                } else {
+                    data.setSpeedster(true);
+                    PlayerHelper.sendMessage(player, "You're a speedster!", true);
                 }
                 data.sync();
             });
             return null;
         }
     }
+
 }
