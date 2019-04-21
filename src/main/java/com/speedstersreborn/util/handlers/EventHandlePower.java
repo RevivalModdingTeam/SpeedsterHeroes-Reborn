@@ -27,11 +27,14 @@ public class EventHandlePower {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
 
-            setXPAdd(player, cap);
-            runWater(player, cap);
-            runWall(player, cap);
-            runAbilities(player, cap);
-            Phasing(player, cap);
+            if(MetaHelper.getMetaPowerName == MetaPowerStrings.SPEEDSTER) {
+
+                setXPAdd(player, cap);
+                runWater(player, cap);
+                runWall(player, cap);
+                runAbilities(player, cap);
+                Phasing(player, cap);
+            }
         }
     }
 
