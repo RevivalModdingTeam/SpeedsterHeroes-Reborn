@@ -1,5 +1,7 @@
 package com.speedstersreborn.util.handlers;
 
+import com.revivalcore.meta.capability.CapabilityMeta;
+import com.revivalcore.meta.capability.IMetaCap;
 import com.revivalcore.meta.util.MetaHelper;
 import com.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalcore.util.helper.PlayerHelper;
