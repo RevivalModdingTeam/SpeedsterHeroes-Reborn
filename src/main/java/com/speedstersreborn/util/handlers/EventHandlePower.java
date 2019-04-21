@@ -28,9 +28,10 @@ public class EventHandlePower {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            IMetaCap capmeta = CapabilityMeta.get(player);
 
             //TODO: Not sure about the 0, but since there's only one value I'll use it
-            if(MetaHelper.getMetaPowerName(0) == MetaPowerStrings.SPEEDSTER) {
+            if(MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
 
                 setXPAdd(player, cap);
                 runWater(player, cap);
