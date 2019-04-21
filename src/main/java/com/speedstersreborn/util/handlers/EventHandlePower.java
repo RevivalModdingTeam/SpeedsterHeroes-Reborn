@@ -1,5 +1,7 @@
 package com.speedstersreborn.util.handlers;
 
+import com.revivalcore.meta.util.MetaHelper;
+import com.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
@@ -27,7 +29,8 @@ public class EventHandlePower {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
 
-            if(MetaHelper.getMetaPowerName == MetaPowerStrings.SPEEDSTER) {
+            //TODO: Not sure about the 0, but since there's only one value I'll use it
+            if(MetaHelper.getMetaPowerName(0) == MetaPowerStrings.SPEEDSTER) {
 
                 setXPAdd(player, cap);
                 runWater(player, cap);

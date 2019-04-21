@@ -1,6 +1,6 @@
 package com.speedstersreborn.util.handlers;
 
-import com.revivalcore.common.events.RVRecipeRegistryEvent;
+import com.revivalcore.core.common.events.RVRecipeRegistryEvent;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.blocks.SHRBlocks;
 import com.speedstersreborn.common.entity.EntityRingDummy;

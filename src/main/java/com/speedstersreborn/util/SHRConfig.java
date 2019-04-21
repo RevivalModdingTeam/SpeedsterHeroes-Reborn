@@ -1,6 +1,6 @@
 package com.speedstersreborn.util;
 
-import com.revivalcore.core.RevivalCore;
+import com.revivalcore.RevivalCore;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
