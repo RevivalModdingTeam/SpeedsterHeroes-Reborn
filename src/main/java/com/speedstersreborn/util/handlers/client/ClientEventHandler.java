@@ -2,6 +2,7 @@ package com.speedstersreborn.util.handlers.client;
 
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.network.NetworkHandler;
+import com.speedstersreborn.network.packets.speedstercap.PacketSetPhasing;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeed;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeedster;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetWallRunning;
@@ -20,6 +21,7 @@ public class ClientEventHandler {
     public static KeyBinding SPEEDSTER;
     public static KeyBinding UP;
     public static KeyBinding WALL_RUN;
+    public static KeyBinding PHASING;
 
     public static void init() {
         SPEEDSTER = new KeyBinding(SpeedsterHeroesReborn.MODID + ".keybinds.speedster", Keyboard.KEY_X, SpeedsterHeroesReborn.NAME);
@@ -28,6 +30,8 @@ public class ClientEventHandler {
         ClientRegistry.registerKeyBinding(UP);
         WALL_RUN = new KeyBinding(SpeedsterHeroesReborn.MODID + ".keybinds.wall", Keyboard.KEY_O, SpeedsterHeroesReborn.NAME);
         ClientRegistry.registerKeyBinding(WALL_RUN);
+        PHASING = new KeyBinding(SpeedsterHeroesReborn.MODID + ".keybinds.phasing", Keyboard.KEY_C, SpeedsterHeroesReborn.NAME);
+        ClientRegistry.registerKeyBinding(PHASING);
     }
 
     @SubscribeEvent
@@ -42,6 +46,10 @@ public class ClientEventHandler {
 
         if(WALL_RUN.isPressed()) {
             NetworkHandler.INSTANCE.sendToServer(new PacketSetWallRunning());
+        }
+
+        if(PHASING.isPressed()) {
+            NetworkHandler.INSTANCE.sendToServer(new PacketSetPhasing());
         }
     }
 

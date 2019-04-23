@@ -4,7 +4,7 @@ import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.items.suit.ItemFlashSuitBoots;
 import com.speedstersreborn.common.items.suit.ItemFlashSuitHelm;
 import com.speedstersreborn.tabs.ModTabs;
-import com.speedstersreborn.util.handlers.EnumHandler;
+import com.speedstersreborn.util.handlers.EnumHandler.RingTypes;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -28,15 +28,15 @@ public class SHRItems {
     public static void registerRenders() {
         registerRender(flashhelmet);
         registerRender(flashboots);
-       for (int i = 0; i < EnumHandler.RingTypes.values().length; i++) {
-            registerRenderMeta(ring, i, "ring_" + EnumHandler.RingTypes.values()[i].getName());
+        for (int i = 0; i < RingTypes.values().length; i++) {
+            registerRenderMeta(ring, i, "ring_" + RingTypes.values()[i].getName());
         }
     }
 
     public static Item registerItem(Item item, boolean tab) {
         if (tab)
             item.setCreativeTab(ModTabs.shrTab);
-        ITEM_LIST.add(item);
+        SHRItems.ITEM_LIST.add(item);
         return item;
     }
 

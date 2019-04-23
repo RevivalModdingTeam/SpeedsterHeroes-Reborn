@@ -41,7 +41,6 @@ import net.minecraftforge.registries.IForgeRegistry;
             //e.register(recipe);
         }
 
-
         @SubscribeEvent
         public static void onModelRegister(ModelRegistryEvent event) {
             SHRItems.registerRenders();
@@ -53,7 +52,7 @@ import net.minecraftforge.registries.IForgeRegistry;
         @SubscribeEvent
         public static void addEntities(RegistryEvent.Register<EntityEntry> e) {
             IForgeRegistry<EntityEntry> reg = e.getRegistry();
-            reg.registerAll(EntityEntries.DUMMY, EntityEntries.TREADMILL);
+            reg.registerAll(EntityEntries.DUMMY);
         }
 
         public static class EntityEntries {
