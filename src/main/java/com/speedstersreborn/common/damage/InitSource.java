@@ -12,7 +12,7 @@ public class InitSource extends DamageSource {
 
     public InitSource(String name, boolean blockable) {
         super(name);
-        this.message = "damagesource.igauntlet." + name;
+        this.message = "damagesource.speedster." + name;
         this.blockable = blockable;
     }
 
