@@ -1,6 +1,6 @@
 package com.speedstersreborn.network.packets.speedstercap;
 
-import com.revivalcore.util.helper.PlayerHelper;
+import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import io.netty.buffer.ByteBuf;

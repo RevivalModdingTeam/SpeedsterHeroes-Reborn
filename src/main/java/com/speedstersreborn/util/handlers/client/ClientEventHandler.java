@@ -18,6 +18,8 @@ import org.lwjgl.input.Keyboard;
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientEventHandler {
 
+    // TODO This has to get main buttons from core for Meta etc
+
     public static KeyBinding SPEEDSTER;
     public static KeyBinding UP;
     public static KeyBinding WALL_RUN;

@@ -1,7 +1,7 @@
 package com.speedstersreborn.common.items;
 
 
-import com.revivalcore.util.helper.StringHelper;
+import com.revivalmodding.revivalcore.util.helper.StringHelper;
 import com.speedstersreborn.util.handlers.EnumHandler.RingTypes;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;

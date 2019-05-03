@@ -1,10 +1,10 @@
 package com.speedstersreborn.util.handlers;
 
-import com.revivalcore.meta.capability.CapabilityMeta;
-import com.revivalcore.meta.capability.IMetaCap;
-import com.revivalcore.meta.util.MetaHelper;
-import com.revivalcore.meta.util.MetaPowerStrings;
-import com.revivalcore.util.helper.PlayerHelper;
+import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
+import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
+import com.revivalmodding.revivalcore.meta.util.MetaHelper;
+import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
+import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import net.minecraft.block.BlockLiquid;
