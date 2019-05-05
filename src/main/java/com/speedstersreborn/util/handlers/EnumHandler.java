@@ -38,4 +38,21 @@ public class EnumHandler {
             return this.name;
         }
     }
+
+    public enum PowerTypes implements IStringSerializable {
+        ;
+
+        private int ID;
+        private String name;
+
+        PowerTypes(String name, int ID) {
+            this.ID = ID;
+            this.name = name;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+    }
 }

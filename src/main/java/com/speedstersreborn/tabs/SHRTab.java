@@ -13,6 +13,6 @@ public class SHRTab extends CreativeTabs {
 
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(Item.getItemFromBlock(SHRBlocks.TREADMILL));
+        return new ItemStack(Item.getItemFromBlock(SHRBlocks.treadmill));
     }
 }

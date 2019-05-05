@@ -54,10 +54,10 @@ public class BlockTreadMill extends Block implements IHaveItem {
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
         super.onEntityWalk(worldIn, pos, entityIn);
-        switch (blockState.getBaseState().getValue(FACING)) {
+       /* switch (blockState.getBaseState().getValue(FACING)) {
             case EAST:
 
-        }
+        }*/
     }
 
     @Override

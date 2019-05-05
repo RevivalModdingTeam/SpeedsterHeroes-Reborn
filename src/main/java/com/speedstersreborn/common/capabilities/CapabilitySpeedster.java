@@ -45,6 +45,10 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         } else {
             SpeedAPI.setSpeedFromCap(player);
         }
+
+        if(getSpeedLevel() < 0) {
+            setSpeedLevel(0);
+        }
     }
 
     @Override

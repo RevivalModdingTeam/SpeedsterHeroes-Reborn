@@ -5,6 +5,7 @@ import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
+import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import net.minecraft.block.BlockLiquid;
@@ -14,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.Sys;
 
 /**
  * Created by Josia50
@@ -32,7 +34,7 @@ public class EventHandlePower {
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IMetaCap capmeta = CapabilityMeta.get(player);
 
-            if(MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
+            if (MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
                 setXPAdd(player, cap);
                 runWater(player, cap);
                 runWall(player, cap);
@@ -77,32 +79,32 @@ public class EventHandlePower {
     }
 
     public static void runWall(EntityPlayer player, ISpeedsterCap cap) {
-            if (cap.isSpeedster()) {
-                if (player.collidedHorizontally) {
-                    if (cap.isWallRunning()) {
-                        if (cap.getSpeedLevel() >= 3) {
-                            player.motionY = 0.8D;
-                            player.fallDistance = 0F;
-                            cap.setWallRunning(true);
-                        }
+        if (cap.isSpeedster()) {
+            if (player.collidedHorizontally) {
+                if (cap.isWallRunning()) {
+                    if (cap.getSpeedLevel() >= 3) {
+                        player.motionY = 0.8D;
+                        player.fallDistance = 0F;
+                        cap.setWallRunning(true);
                     }
                 }
             }
+        }
     }
 
     public static void Phasing(EntityPlayer player, ISpeedsterCap cap) {
-            if (cap.isPhasing() && player.world.isBlockFullCube(new BlockPos(player.posX, player.posY - 0.1F, player.posZ))) {
-                player.noClip = true;
-                player.motionY = 0;
-                player.onGround = true;
-            }
+        if (cap.isPhasing() && player.world.isBlockFullCube(new BlockPos(player.posX, player.posY - 0.1F, player.posZ))) {
+            player.noClip = true;
+            player.motionY = 0;
+            player.onGround = true;
+        }
     }
 
     public static void runAbilities(EntityPlayer player, ISpeedsterCap cap) {
-            if (cap.isSpeedster() && cap.getSpeedLevel() >= 1) {
-                player.stepHeight = 1.3f;
-                player.sendPlayerAbilities();
-            }
+        if (cap.isSpeedster() && cap.getSpeedLevel() >= 1) {
+            player.stepHeight = 1.3f;
+            player.sendPlayerAbilities();
+        }
     }
 
     public static boolean isMoving(EntityLivingBase entity) {
