@@ -1,8 +1,6 @@
 package com.speedstersreborn.common.items;
 
 import com.speedstersreborn.SpeedsterHeroesReborn;
-import com.speedstersreborn.common.items.suit.ItemFlashSuitBoots;
-import com.speedstersreborn.common.items.suit.ItemFlashSuitHelm;
 import com.speedstersreborn.tabs.ModTabs;
 import com.speedstersreborn.util.handlers.EnumHandler.RingTypes;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -16,18 +14,14 @@ import java.util.List;
 public class SHRItems {
     public static final List<Item> ITEM_LIST = new ArrayList<>();
 
-    public static Item ring, flashboots, flashhelmet;
+    public static Item ring;
 
     public static void init() {
         ring = registerItem(new ItemRing("ring"), true);
-        flashhelmet = registerItem(new ItemFlashSuitHelm("flash_suit_helmet"), true);
-        flashboots = registerItem(new ItemFlashSuitBoots("flash_suit_boots"), true);
     }
 
 
     public static void registerRenders() {
-        registerRender(flashhelmet);
-        registerRender(flashboots);
         for (int i = 0; i < RingTypes.values().length; i++) {
             registerRenderMeta(ring, i, "ring_" + RingTypes.values()[i].getName());
         }

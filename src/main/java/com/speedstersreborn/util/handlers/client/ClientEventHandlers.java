@@ -31,7 +31,6 @@ public class ClientEventHandlers {
 
             if (ClientEventHandler.ENABLE.isPressed()) {
                 NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeedster());
-                System.out.println("SHIT");
             }
 
             if (ClientEventHandler.POWER1.isPressed()) {
