@@ -116,7 +116,7 @@ public class EventHandlePower {
             }
              player.getFoodStats().addExhaustion(0.010f);
             if (player.getFoodStats().getFoodLevel() <= 1) {
-                player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 500, 2));
+                player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 2));
             }
         }
         if (player.getHealth() < player.getMaxHealth()) {
