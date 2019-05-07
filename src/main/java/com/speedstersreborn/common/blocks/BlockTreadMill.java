@@ -50,6 +50,7 @@ public class BlockTreadMill extends Block implements IHaveItem {
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
         super.onEntityWalk(worldIn, pos, entityIn);
+        // TODO use this with veloocity backwards , should seem like real running , but speed of velocity is checked with capa
        /* switch (blockState.getBaseState().getValue(FACING)) {
             case EAST:
 
