@@ -11,6 +11,8 @@ import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -113,6 +115,11 @@ public class EventHandlePower {
         if (cap.isSpeedster() && cap.getSpeedLevel() > 1 && isMoving(player)) {
             if (player.isBurning()) {
                 player.extinguish();
+            }
+
+            player.getFoodStats().setFoodLevel((int) (player.getFoodStats().getFoodLevel() - 0.001f * cap.getSpeedLevel()));
+            if (player.getFoodStats().getFoodLevel() == 1) {
+                player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 5, 2));
             }
         }
         if (player.getHealth() > player.getMaxHealth()) {
