@@ -18,6 +18,13 @@ public class SHRConfig {
         @Config.LangKey("config.shr.updatechecker")
         @Config.Comment("Toggle the update checker")
         public boolean updatechecker = true;
+        
+        @Config.LangKey("config.shr.speedlevelmultiplier")
+        @Config.Comment({"Modify the speed which is additionally added per speed level","Final speed is = level * speedMultiplier"})
+        public float speedIncreaseOverLevel = 0.15f;
+        
+        @Config.LangKey("config.shr.category.devutils")
+        public DeveloperUtils devUtils = new DeveloperUtils();
 
         @Mod.EventBusSubscriber
         public static class Event {
@@ -27,5 +34,13 @@ public class SHRConfig {
                     ConfigManager.sync(RevivalCore.MODID, Config.Type.INSTANCE);
             }
         }
+    }
+    
+    // bunch of utilities for devs to debug things
+    public static class DeveloperUtils
+    {
+    	@Config.LangKey("config.shr.xpdebug")
+    	@Config.Comment("Toggle the xp debugger")
+    	public boolean xpDebugInfo = true;
     }
 }

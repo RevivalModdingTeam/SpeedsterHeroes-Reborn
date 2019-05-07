@@ -2,6 +2,8 @@ package com.speedstersreborn.api;
 
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
+import com.speedstersreborn.util.SHRConfig;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +19,9 @@ public class SpeedAPI {
     public static int MaxSpeedLevel = 8;
 
     public static void setSpeed(EntityPlayer player, int level) {
-        float speed = 0.1f;
-
-        if(level == 0) {
+    	//TODO: For josia, decide how do you want to keep it
+        float speed = level > 0 ? level * SHRConfig.speedstersHeroesReborn.speedIncreaseOverLevel : 0.1f;
+        /*if(level == 0) {
             speed = 0.1f;
         }
 
@@ -53,7 +55,7 @@ public class SpeedAPI {
 
         if(level == 8) {
             speed = 2.5f;
-        }
+        }*/
 
         // TODO More speeds but own handler with potion for more speed!!!
 
