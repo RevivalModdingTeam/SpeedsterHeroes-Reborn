@@ -36,6 +36,7 @@ public class PacketSetSpeed implements IMessage {
                     if (!player.isSneaking()) {
                         data.setSpeedLevel(data.getSpeedLevel() + 1);
                     } else {
+                        if(data.getSpeedLevel() != 0)
                         data.setSpeedLevel(data.getSpeedLevel() - 1);
                     }
                     PlayerHelper.sendMessage(player, "Speed: " + data.getSpeedLevel(), true);

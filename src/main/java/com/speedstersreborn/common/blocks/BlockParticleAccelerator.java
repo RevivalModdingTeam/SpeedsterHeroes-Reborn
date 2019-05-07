@@ -23,7 +23,7 @@ public class BlockParticleAccelerator extends Block implements IHaveItem {
         IMetaCap cap = CapabilityMeta.get(playerIn);
         if(playerIn.isSneaking()) {
             cap.clear();
-        }else{
+        }else{ // TODO make real stuff
             cap.setMetaPower(0);
         }
         return true;

@@ -46,7 +46,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             SpeedAPI.setSpeedFromCap(player);
         }
 
-        if(getSpeedLevel() < 0) {
+        if (getSpeedLevel() < 0) {
             setSpeedLevel(0);
         }
     }
@@ -173,7 +173,6 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             get(event.getEntityPlayer()).sync();
         }
     }
-
 
     @SubscribeEvent
     public static void onPlayerRespawn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
