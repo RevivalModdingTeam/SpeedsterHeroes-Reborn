@@ -40,6 +40,7 @@ public class EventHandlePower {
                 runWall(player, cap);
                 runAbilities(player, cap);
                 Phasing(player, cap);
+                whileRunning(player, cap, capmeta);
             }
         }
     }
@@ -104,6 +105,21 @@ public class EventHandlePower {
         if (cap.isSpeedster() && cap.getSpeedLevel() >= 1) {
             player.stepHeight = 1.3f;
             player.sendPlayerAbilities();
+        }
+    }
+
+
+    public static void whileRunning(EntityPlayer player, ISpeedsterCap cap, IMetaCap capmeta) {
+        if (cap.isSpeedster() && cap.getSpeedLevel() > 1 && isMoving(player)) {
+            if (player.isBurning()) {
+                player.extinguish();
+            }
+        }
+        if (player.getHealth() > player.getMaxHealth()) {
+            if (!player.getFoodStats().needFood()) {
+                player.shouldHeal();
+                player.setHealth(player.getHealth() + 1.0f);
+            }
         }
     }
 

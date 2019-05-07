@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class PacketSetSpeed implements IMessage {
 
 
-
     public PacketSetSpeed() {
     }
 
@@ -34,7 +33,11 @@ public class PacketSetSpeed implements IMessage {
                 EntityPlayer player = ctx.getServerHandler().player;
                 ISpeedsterCap data = CapabilitySpeedster.get(player);
                 if (data.isSpeedster() && data.getSpeedLevel() < SpeedAPI.MaxSpeedLevel) {
-                    data.setSpeedLevel(data.getSpeedLevel() + 1);
+                    if (!player.isSneaking()) {
+                        data.setSpeedLevel(data.getSpeedLevel() + 1);
+                    } else {
+                        data.setSpeedLevel(data.getSpeedLevel() - 1);
+                    }
                     PlayerHelper.sendMessage(player, "Speed: " + data.getSpeedLevel(), true);
                 }
                 data.sync();
