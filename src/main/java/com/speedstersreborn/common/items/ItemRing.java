@@ -4,10 +4,8 @@ package com.speedstersreborn.common.items;
 import com.revivalmodding.revivalcore.util.helper.StringHelper;
 import com.speedstersreborn.util.handlers.EnumHandler.RingTypes;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -31,13 +29,6 @@ public class ItemRing extends Item {
 
     @Override
     public String getTranslationKey(ItemStack stack) {
-      /*  for (int i = 0; i < RingTypes.values().length; i++) {
-            if (stack.getItemDamage() == i) {
-                return this.getTranslationKey() + "." + RingTypes.values()[i].getName();
-            } else {
-                continue;
-            }
-        }*/
         return this.getTranslationKey();
     }
 
