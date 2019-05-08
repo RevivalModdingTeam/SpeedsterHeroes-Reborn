@@ -32,9 +32,6 @@ public class EventHandlePower {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             
-            if(player.hasCapability(CapMetaStorage.CAPABILITY, null)) {
-            	return;
-            }
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IMetaCap capmeta = CapabilityMeta.get(player);
 

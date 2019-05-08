@@ -16,17 +16,12 @@ import java.util.List;
 
 public class ItemRing extends Item {
 
-    public ItemRing(String name) {
+	private final RingTypes ringType;
+	
+    public ItemRing(String name, RingTypes typeOfRing) {
         setTranslationKey(name);
         setRegistryName(name);
-        setHasSubtypes(true);
-    }
-
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        for (int i = 0; i < RingTypes.values().length; i++) {
-            items.add(new ItemStack(this, 1, i)); // TODO Make it seperate rings later
-        }
+        this.ringType = typeOfRing;
     }
 
     @Override
@@ -48,13 +43,6 @@ public class ItemRing extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        for (int i = 0; i < RingTypes.values().length; i++) {
-            if (stack.getItemDamage() == i) {
-                tooltip.add(TextFormatting.GRAY + "" + TextFormatting.BOLD + "Click to summon " + RingTypes.values()[i].getName() + "'s suit!");
-            } else {
-                continue;
-            }
-        }
+    	tooltip.add(TextFormatting.GRAY + "" + TextFormatting.BOLD + "Click to summon " + ringType.getName() + "'s suit!");
     }
 }

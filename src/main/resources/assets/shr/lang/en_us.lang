@@ -1,9 +1,13 @@
 //Config
 config.tab.speedsterheroesreborn=SpeedsterHeroes Reborn
 config.shr.updatechecker=Update Checker
+config.shr.speedlevelmultiplier=Speed Level Multiplier
 
 // Item
-item.ring.name=Suit Ring
+item.ring_reverse.name=Reverse Ring
+item.ring_zoom.name=Zoom Ring
+item.ring_god_speed.name=God Speed Ring
+item.ring_kid_flash.name=Kid Flash Ring
 
 //Block
 tile.treadmill.name=Treadmill

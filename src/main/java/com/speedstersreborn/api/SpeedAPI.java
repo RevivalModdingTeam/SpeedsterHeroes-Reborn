@@ -16,47 +16,11 @@ import net.minecraft.util.EnumFacing;
 
 public class SpeedAPI {
 
-    public static int MaxSpeedLevel = 8;
+    public static int MaxSpeedLevel = 20;
 
     public static void setSpeed(EntityPlayer player, int level) {
-    	//TODO: For josia, decide how do you want to keep it
+    	// 2.5F for level 20 (with default config value)
         float speed = level > 0 ? level * SHRConfig.speedstersHeroesReborn.speedIncreaseOverLevel : 0.1f;
-        /*if(level == 0) {
-            speed = 0.1f;
-        }
-
-        if(level == 1) {
-            speed = 0.3f;
-        }
-
-        if(level == 2) {
-            speed = 0.5f;
-        }
-
-        if(level == 3) {
-            speed = 0.7f;
-        }
-
-        if(level == 4) {
-            speed = 1.0f;
-        }
-
-        if(level == 5) {
-            speed = 1.2f;
-        }
-
-        if(level == 6) {
-            speed = 1.4f;
-        }
-
-        if(level == 7) {
-            speed = 1.6f;
-        }
-
-        if(level == 8) {
-            speed = 2.5f;
-        }*/
-
         // TODO More speeds but own handler with potion for more speed!!!
 
         player.capabilities.setPlayerWalkSpeed(speed);
