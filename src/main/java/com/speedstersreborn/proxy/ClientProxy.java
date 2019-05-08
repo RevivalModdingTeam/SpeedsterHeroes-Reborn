@@ -22,6 +22,6 @@ public class ClientProxy implements IProxy {
 
     @Override
     public void registerModelBakeryVariants() {
-        ModelBakery.registerItemVariants(SHRItems.ring, new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_zoom"), new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_reverse_flash"));
+        //ModelBakery.registerItemVariants(SHRItems.ring, new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_zoom"), new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_reverse_flash"));
     }
 }

@@ -1,5 +1,6 @@
 package com.speedstersreborn.util.handlers;
 
+import com.revivalmodding.revivalcore.meta.capability.CapMetaStorage;
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
@@ -7,6 +8,7 @@ import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
+
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,12 +31,14 @@ public class EventHandlePower {
     public static void mainPowers(LivingEvent.LivingUpdateEvent e) {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
-
+            
+            if(player.hasCapability(CapMetaStorage.CAPABILITY, null)) {
+            	return;
+            }
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IMetaCap capmeta = CapabilityMeta.get(player);
 
             if (MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
-                ISpeedsterCap cap = CapabilitySpeedster.get(player);
-
                 setXPAdd(player, cap);
                 runWater(player, cap);
                 runWall(player, cap);
@@ -114,15 +118,16 @@ public class EventHandlePower {
             if (player.isBurning()) {
                 player.extinguish();
             }
-             player.getFoodStats().addExhaustion(0.010f);
-            if (player.getFoodStats().getFoodLevel() <= 1) {
-                player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 2));
+
+            player.getFoodStats().setFoodLevel((int) (player.getFoodStats().getFoodLevel() - 0.001f * cap.getSpeedLevel()));
+            if (player.getFoodStats().getFoodLevel() == 1) {
+                player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 5, 2));
             }
         }
-        if (player.getHealth() < player.getMaxHealth()) {
-            if (!(player.getFoodStats().getFoodLevel() < 6)) {
+        if (player.getHealth() > player.getMaxHealth()) {
+            if (!player.getFoodStats().needFood()) {
                 player.shouldHeal();
-                player.setHealth(player.getHealth() + 0.025f);
+                player.setHealth(player.getHealth() + 1.0f);
             }
         }
     }

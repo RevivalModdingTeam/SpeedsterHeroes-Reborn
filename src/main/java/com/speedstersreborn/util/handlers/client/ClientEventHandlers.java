@@ -26,7 +26,7 @@ public class ClientEventHandlers {
     @SubscribeEvent
     public static void onClientTick(InputUpdateEvent e) {
         IMetaCap metaCap = CapabilityMeta.get(Minecraft.getMinecraft().player);
-
+        
         if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
 
             if (ClientEventHandler.ENABLE.isPressed()) {
