@@ -1,16 +1,13 @@
 package com.speedstersreborn.util.handlers;
 
-import com.revivalmodding.revivalcore.meta.capability.CapMetaStorage;
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.helper.ModHelper;
 import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
-import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
-
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 /**
  * Created by Josia50
@@ -130,12 +126,9 @@ public class EventHandlePower {
     }
     
     private static void updateLevel(ISpeedsterCap cap) {
-    	if(cap.getLevel() > 0) {
         	final double xp = cap.getXP();
         	final double required = (cap.getLevel()+1) * 100 + 100.0D;
-        	if(xp >= required) {
+        	if(xp >= required)
         		cap.setLevel(cap.getLevel() + 1);
-        	}
-    	}
     }
 }
