@@ -9,7 +9,6 @@ import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.proxy.IProxy;
 import com.speedstersreborn.util.handlers.RegistryHandler;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -18,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION,dependencies = "required-after:revivalcore@[0.1.3,)", updateJSON = SpeedsterHeroesReborn.UPDATEURL)
+@Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION,dependencies = "required-after:revivalcore@[0.0.8,)", updateJSON = SpeedsterHeroesReborn.UPDATEURL)
 public class SpeedsterHeroesReborn
 {
     @Mod.Instance
@@ -30,7 +29,7 @@ public class SpeedsterHeroesReborn
 
     public static final String MODID = "shr";
     public static final String NAME = "Speedsters Heroes Reborn";
-    public static final String VERSION = "0.0.3";
+    public static final String VERSION = "0.0.4";
     public static final String UPDATEURL = "https://raw.githubusercontent.com/revivalmodding/SpeedsterHeroesReborn/master/update.json";
 
 
@@ -52,8 +51,8 @@ public class SpeedsterHeroesReborn
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        if (Loader.isModLoaded("speedsterheroes")) {
-            throw new IllegalStateException("SpeedsterHeroes isn't compatible with SpeedsterHeroesReborn!");
-        }
+        //if (Loader.isModLoaded("speedsterheroes")) {
+         //   throw new IllegalStateException("SpeedsterHeroes isn't compatible with SpeedsterHeroesReborn!");
+       // } // TODO Should check if it's really incompatible , i guess it is
     }
 }

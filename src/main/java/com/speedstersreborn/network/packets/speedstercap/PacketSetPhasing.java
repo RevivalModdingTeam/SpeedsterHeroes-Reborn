@@ -26,19 +26,19 @@ public class PacketSetPhasing implements IMessage {
 
     public static class Handler implements IMessageHandler<PacketSetPhasing, IMessage> {
 
-            @Override
-            public IMessage onMessage (PacketSetPhasing message, MessageContext ctx){
-                ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
-                    EntityPlayer player = ctx.getServerHandler().player;
-                    ISpeedsterCap data = CapabilitySpeedster.get(player);
-                        if (data.isPhasing()) {
-                            data.setPhasing(false);
-                        } else {
-                            data.setPhasing(true);
-                        }
-                        data.sync();
-                });
-                return null;
-            }
+        @Override
+        public IMessage onMessage(PacketSetPhasing message, MessageContext ctx) {
+            ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
+                EntityPlayer player = ctx.getServerHandler().player;
+                ISpeedsterCap data = CapabilitySpeedster.get(player);
+                if (data.isPhasing()) {
+                    data.setPhasing(false);
+                } else {
+                    data.setPhasing(true);
+                }
+                data.sync();
+            });
+            return null;
         }
+    }
 }

@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class PacketSetSpeedster implements IMessage {
 
 
-
     public PacketSetSpeedster() {
     }
 

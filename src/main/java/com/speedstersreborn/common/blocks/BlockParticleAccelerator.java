@@ -21,9 +21,9 @@ public class BlockParticleAccelerator extends Block implements IHaveItem {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         IMetaCap cap = CapabilityMeta.get(playerIn);
-        if(playerIn.isSneaking()) {
+        if (playerIn.isSneaking()) {
             cap.clear();
-        }else{ // TODO make real stuff
+        } else { // TODO make real stuff
             cap.setMetaPower(0);
         }
         return true;

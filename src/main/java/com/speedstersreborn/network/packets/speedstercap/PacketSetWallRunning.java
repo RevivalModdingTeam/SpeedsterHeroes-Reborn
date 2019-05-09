@@ -26,21 +26,21 @@ public class PacketSetWallRunning implements IMessage {
 
     public static class Handler implements IMessageHandler<PacketSetWallRunning, IMessage> {
 
-            @Override
-            public IMessage onMessage (PacketSetWallRunning message, MessageContext ctx){
-                ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
-                    EntityPlayer player = ctx.getServerHandler().player;
-                    ISpeedsterCap data = CapabilitySpeedster.get(player);
-                    if(data.isSpeedster()) {
-                        if (data.isWallRunning()) {
-                            data.setWallRunning(false);
-                        } else {
-                            data.setWallRunning(true);
-                        }
-                        data.sync();
+        @Override
+        public IMessage onMessage(PacketSetWallRunning message, MessageContext ctx) {
+            ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
+                EntityPlayer player = ctx.getServerHandler().player;
+                ISpeedsterCap data = CapabilitySpeedster.get(player);
+                if (data.isSpeedster()) {
+                    if (data.isWallRunning()) {
+                        data.setWallRunning(false);
+                    } else {
+                        data.setWallRunning(true);
                     }
-                });
-                return null;
-            }
+                    data.sync();
+                }
+            });
+            return null;
         }
+    }
 }

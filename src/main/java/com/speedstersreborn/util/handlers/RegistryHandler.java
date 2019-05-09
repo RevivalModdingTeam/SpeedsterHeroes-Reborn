@@ -22,51 +22,49 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
-    @EventBusSubscriber
-    public class RegistryHandler {
+@EventBusSubscriber
+public class RegistryHandler {
 
-        @SubscribeEvent
-        public static void onItemRegister(RegistryEvent.Register<Item> event) {
-            event.getRegistry().registerAll(SHRItems.ITEM_LIST.toArray(new Item[0]));
-        }
-
-        @SubscribeEvent
-        public static void onBlockRegister(RegistryEvent.Register<Block> event) {
-            event.getRegistry().registerAll(SHRBlocks.BLOCK_LIST.toArray(new Block[0]));
-        }
-
-        @SubscribeEvent
-        public static void onSuitMakerRecipesRegister(RVRecipeRegistryEvent.SuitMakerRecipeRegistryEvent e) {
-            //e.register(recipe);
-        }
-
-        @SubscribeEvent
-        public static void onModelRegister(ModelRegistryEvent event) {
-            SHRItems.registerRenders();
-            for(Block block : SHRBlocks.BLOCK_LIST) {
-                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
-            }
-        }
-
-        @SubscribeEvent
-        public static void addEntities(RegistryEvent.Register<EntityEntry> e) {
-            IForgeRegistry<EntityEntry> reg = e.getRegistry();
-            reg.registerAll(EntityEntries.DUMMY);
-        }
-
-        public static class EntityEntries {
-
-            public static final EntityEntry DUMMY = EntityEntryBuilder.create().entity(EntityRingDummy.class).id(new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_dummy"), 0).name("ring_dummy").tracker(80, 3, true).build();
-        }
-
-        // Use in preinit in mod.
-        public static void registerTileEntity(Class<? extends TileEntity> clazz, String name) {
-            GameRegistry.registerTileEntity(clazz, new ResourceLocation(SpeedsterHeroesReborn.MODID, name));
-        }
-
-
-
-
-            @SideOnly(Side.CLIENT)
-            public static void bindEntityTEISR() {}
+    @SubscribeEvent
+    public static void onItemRegister(RegistryEvent.Register<Item> event) {
+        event.getRegistry().registerAll(SHRItems.ITEM_LIST.toArray(new Item[0]));
     }
+
+    @SubscribeEvent
+    public static void onBlockRegister(RegistryEvent.Register<Block> event) {
+        event.getRegistry().registerAll(SHRBlocks.BLOCK_LIST.toArray(new Block[0]));
+    }
+
+    @SubscribeEvent
+    public static void onSuitMakerRecipesRegister(RVRecipeRegistryEvent.SuitMakerRecipeRegistryEvent e) {
+        //e.register(recipe);
+    }
+
+    @SubscribeEvent
+    public static void onModelRegister(ModelRegistryEvent event) {
+        SHRItems.registerRenders();
+        for (Block block : SHRBlocks.BLOCK_LIST) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
+        }
+    }
+
+    @SubscribeEvent
+    public static void addEntities(RegistryEvent.Register<EntityEntry> e) {
+        IForgeRegistry<EntityEntry> reg = e.getRegistry();
+        reg.registerAll(EntityEntries.DUMMY);
+    }
+
+    public static class EntityEntries {
+
+        public static final EntityEntry DUMMY = EntityEntryBuilder.create().entity(EntityRingDummy.class).id(new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_dummy"), 0).name("ring_dummy").tracker(80, 3, true).build();
+    }
+
+    // Use in preinit in mod.
+    public static void registerTileEntity(Class<? extends TileEntity> clazz, String name) {
+        GameRegistry.registerTileEntity(clazz, new ResourceLocation(SpeedsterHeroesReborn.MODID, name));
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void bindEntityTEISR() {
+    }
+}
