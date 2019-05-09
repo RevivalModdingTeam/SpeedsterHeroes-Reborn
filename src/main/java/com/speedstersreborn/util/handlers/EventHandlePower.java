@@ -5,7 +5,9 @@ import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
+import com.revivalmodding.revivalcore.util.helper.ModHelper;
 import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
+import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 
@@ -14,10 +16,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.FoodStats;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 /**
  * Created by Josia50
@@ -31,10 +35,6 @@ public class EventHandlePower {
     public static void mainPowers(LivingEvent.LivingUpdateEvent e) {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
-            
-            if(player.hasCapability(CapMetaStorage.CAPABILITY, null)) {
-            	return;
-            }
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IMetaCap capmeta = CapabilityMeta.get(player);
 
@@ -49,27 +49,16 @@ public class EventHandlePower {
         }
     }
 
-
     public static void setXPAdd(EntityPlayer player, ISpeedsterCap cap) {
         if (!player.world.isRemote) {
             if (cap.isSpeedster() && !player.capabilities.isCreativeMode) {
                 if (isMoving(player)) {
                     cap.setXP(cap.getXP() + 0.01 * cap.getSpeedLevel());
                     player.spawnRunningParticles();
-                    PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
+                    if(ModHelper.getIsDev())
+                    	PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
                 }
-
-                if (cap.getXP() >= 100 && cap.getXP() < 100.5)
-                    cap.setLevel(2);
-
-                if (cap.getXP() >= 200 && cap.getXP() < 200.5)
-                    cap.setLevel(3);
-
-                if (cap.getXP() >= 300 && cap.getXP() < 300.5)
-                    cap.setLevel(4);
-
-                if (cap.getXP() >= 400 && cap.getXP() < 400.5)
-                    cap.setLevel(5);
+                updateLevel(cap);
             }
         }
     }
@@ -114,14 +103,18 @@ public class EventHandlePower {
 
 
     public static void whileRunning(EntityPlayer player, ISpeedsterCap cap, IMetaCap capmeta) {
-        if (cap.isSpeedster() && cap.getSpeedLevel() > 1 && isMoving(player)) {
+        if (!player.world.isRemote && cap.isSpeedster() && cap.getSpeedLevel() > 1 && isMoving(player)) {
             if (player.isBurning()) {
                 player.extinguish();
             }
-
-            player.getFoodStats().setFoodLevel((int) (player.getFoodStats().getFoodLevel() - 0.001f * cap.getSpeedLevel()));
-            if (player.getFoodStats().getFoodLevel() == 1) {
-                player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 5, 2));
+            FoodStats food = player.getFoodStats();
+            food.setFoodSaturationLevel(food.getSaturationLevel() - 0.05f * cap.getSpeedLevel());
+            if(food.getSaturationLevel() < 0f && food.getFoodLevel() > 0) {
+            	food.setFoodSaturationLevel(20.0F);
+            	food.setFoodLevel(food.getFoodLevel() - 1);
+            }
+            if (food.getFoodLevel() <= 1) {
+                player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 2, false, true));
             }
         }
         if (player.getHealth() > player.getMaxHealth()) {
@@ -134,5 +127,15 @@ public class EventHandlePower {
 
     public static boolean isMoving(EntityLivingBase entity) {
         return (entity.distanceWalkedModified != entity.prevDistanceWalkedModified);
+    }
+    
+    private static void updateLevel(ISpeedsterCap cap) {
+    	if(cap.getLevel() > 0) {
+        	final double xp = cap.getXP();
+        	final double required = (cap.getLevel()+1) * 100 + 100.0D;
+        	if(xp >= required) {
+        		cap.setLevel(cap.getLevel() + 1);
+        	}
+    	}
     }
 }

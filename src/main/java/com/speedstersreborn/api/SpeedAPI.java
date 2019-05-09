@@ -6,6 +6,7 @@ import com.speedstersreborn.util.SHRConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
 /**
@@ -72,6 +73,19 @@ public class SpeedAPI {
                 }
             }
         }
+    }
+    
+    public static void invertProjectilesAroundPlayer(EntityPlayer player, int range, double speed)
+    {
+    	for(Entity e : player.world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().grow(range))) {
+    		if(e instanceof IProjectile) {
+    			NBTTagCompound data = e.getEntityData();
+    			if(!data.hasKey("edited") || !data.getBoolean("edited")) {
+    				data.setBoolean("edited", true);
+    				e.setVelocity(-e.motionX, e.motionY, -e.motionZ);
+    			}
+    		}
+    	}
     }
 
     public static void SlowOtherPlayers(EntityPlayer player, int range, float slow) {
