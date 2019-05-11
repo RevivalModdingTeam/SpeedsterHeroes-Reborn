@@ -41,7 +41,7 @@ public class SpeedAPI {
         }
     }
 
-    public static void invertProjectilesAroundPlayer(EntityPlayer player, int range, double speed) {
+    public static void invertProjectilesAroundPlayer(EntityPlayer player, int range) {
         for (Entity e : player.world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().grow(range))) {
             if (e instanceof IProjectile) {
                 NBTTagCompound data = e.getEntityData();

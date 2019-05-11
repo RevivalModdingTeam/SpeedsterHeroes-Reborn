@@ -9,6 +9,7 @@ import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
+
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,9 +17,9 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 /**
  * Created by Josia50
@@ -29,23 +30,21 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventHandlePower {
 
     @SubscribeEvent
-    public static void mainPowers(LivingEvent.LivingUpdateEvent e) {
-        if (e.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) e.getEntity();
-            ISpeedsterCap cap = CapabilitySpeedster.get(player);
-            IMetaCap capmeta = CapabilityMeta.get(player);
+    public static void mainPowers(TickEvent.PlayerTickEvent e) {
+        EntityPlayer player = (EntityPlayer) e.player;
+        ISpeedsterCap cap = CapabilitySpeedster.get(player);
+        IMetaCap capmeta = CapabilityMeta.get(player);
 
-            if (MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
-                setXPAdd(player, cap);
-                runWater(player, cap);
-                runWall(player, cap);
-                runAbilities(player, cap);
-                phasing(player, cap);
-                whileRunning(player, cap, capmeta);
-                SpeedAPI.SlowProjectiles(player, 20, true);
-            }else{
-                SpeedAPI.SlowProjectiles(player, 20, false);
-            }
+        if (MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
+            setXPAdd(player, cap);
+            runWater(player, cap);
+            runWall(player, cap);
+            runAbilities(player, cap);
+            phasing(player, cap);
+            whileRunning(player, cap, capmeta);
+            SpeedAPI.SlowProjectiles(player, 20, true);
+        }else{
+            SpeedAPI.SlowProjectiles(player, 20, false);
         }
     }
 
