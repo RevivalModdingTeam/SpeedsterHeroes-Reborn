@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION,dependencies = "required-after:revivalcore@[0.0.8,)", updateJSON = SpeedsterHeroesReborn.UPDATEURL)
+@Mod(modid = SpeedsterHeroesReborn.MODID, name = SpeedsterHeroesReborn.NAME, version = SpeedsterHeroesReborn.VERSION,dependencies = "required-after:revivalcore@[0.1.3,)", updateJSON = SpeedsterHeroesReborn.UPDATEURL)
 public class SpeedsterHeroesReborn
 {
     @Mod.Instance
