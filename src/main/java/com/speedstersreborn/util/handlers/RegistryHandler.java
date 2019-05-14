@@ -1,6 +1,6 @@
 package com.speedstersreborn.util.handlers;
 
-import com.revivalmodding.revivalcore.core.common.events.RVRecipeRegistryEvent;
+import com.revivalmodding.revivalcore.core.common.events.RVRegistryEvent;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.blocks.SHRBlocks;
 import com.speedstersreborn.common.entity.EntityRingDummy;
@@ -36,7 +36,7 @@ public class RegistryHandler {
     }
 
     @SubscribeEvent
-    public static void onSuitMakerRecipesRegister(RVRecipeRegistryEvent.SuitMakerRecipeRegistryEvent e) {
+    public static void onSuitMakerRecipesRegister(RVRegistryEvent.SuitMakerRecipeRegistryEvent e) {
         //e.register(recipe);
     }
 

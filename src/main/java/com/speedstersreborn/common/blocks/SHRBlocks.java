@@ -29,7 +29,6 @@ public class SHRBlocks {
                 if (tab) {
                     block.setCreativeTab(ModTabs.shrTab);
                 }
-                SHRItems.registerRender(itemBlock);
                 SHRItems.ITEM_LIST.add(itemBlock);
             }
         }

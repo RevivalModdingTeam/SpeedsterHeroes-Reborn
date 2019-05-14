@@ -6,10 +6,8 @@ import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.helper.ModHelper;
 import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
-import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
-
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,9 +40,6 @@ public class EventHandlePower {
             runAbilities(player, cap);
             phasing(player, cap);
             whileRunning(player, cap, capmeta);
-            SpeedAPI.SlowProjectiles(player, 20, true);
-        }else{
-            SpeedAPI.SlowProjectiles(player, 20, false);
         }
     }
 
