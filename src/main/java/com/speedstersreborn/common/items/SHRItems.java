@@ -15,7 +15,7 @@ public class SHRItems {
     public static final List<Item> ITEM_LIST = new ArrayList<>();
 
     // Rings
-    public static Item ring_reverse_flash, ring_zoom, ring_god_speed, ring_kid_flash;
+    public static ItemRing ring_reverse_flash, ring_zoom, ring_god_speed, ring_kid_flash;
 
     public static void init() {
         ring_reverse_flash = registerItem(new ItemRing("ring_reverse_flash", RingTypes.REVERSE), true);
@@ -29,12 +29,18 @@ public class SHRItems {
     	    registerRender(i);
         }
     }
-
-    public static Item registerItem(Item item, boolean tab) {
-        if (tab)
-            item.setCreativeTab(ModTabs.shrTab);
-        SHRItems.ITEM_LIST.add(item);
-        return item;
+    
+    public static <T extends Item> T registerItem(T item)
+    {
+    	SHRItems.ITEM_LIST.add(item);
+    	return item;
+    }
+    
+    public static <T extends Item> T registerItem(T item, boolean tab)
+    {
+    	if(tab)
+    		item.setCreativeTab(ModTabs.shrTab);
+    	return registerItem(item);
     }
 
     public static void registerRender(Item item) {
