@@ -11,7 +11,6 @@ import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.FoodStats;
@@ -50,8 +49,8 @@ public class EventHandlePower {
                 if (isMoving(player)) {
                     cap.setXP(cap.getXP() + 0.01 * cap.getSpeedLevel());
                     player.spawnRunningParticles();
-                    if(ModHelper.getIsDev())
-                    	PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
+                    if (ModHelper.getIsDev())
+                        PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
                 }
                 updateLevel(cap);
             }
@@ -95,13 +94,6 @@ public class EventHandlePower {
             player.stepHeight = 1.3f;
             player.sendPlayerAbilities();
         }
-
-        if(EventHandlePower.isMoving(player) && cap.isSpeedster() && cap.getSpeedLevel() >= 6) {
-            BlockPos blockPos = new BlockPos(player.posX, player.posY - 1, player.posZ);
-            if(player.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN) {
-                player.world.setBlockState(player.getPosition(), Blocks.FIRE.getDefaultState());
-            }
-        }
     }
 
     public static void whileRunning(EntityPlayer player, ISpeedsterCap cap, IMetaCap capmeta) {
@@ -111,9 +103,9 @@ public class EventHandlePower {
             }
             FoodStats food = player.getFoodStats();
             food.setFoodSaturationLevel(food.getSaturationLevel() - 0.05f * cap.getSpeedLevel());
-            if(food.getSaturationLevel() < 0f && food.getFoodLevel() > 0) {
-            	food.setFoodSaturationLevel(20.0F);
-            	food.setFoodLevel(food.getFoodLevel() - 1);
+            if (food.getSaturationLevel() < 0f && food.getFoodLevel() > 0) {
+                food.setFoodSaturationLevel(20.0F);
+                food.setFoodLevel(food.getFoodLevel() - 1);
             }
             if (food.getFoodLevel() <= 1) {
                 player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 2, false, true));
@@ -130,11 +122,11 @@ public class EventHandlePower {
     public static boolean isMoving(EntityLivingBase entity) {
         return (entity.distanceWalkedModified != entity.prevDistanceWalkedModified);
     }
-    
+
     private static void updateLevel(ISpeedsterCap cap) {
-        	final double xp = cap.getXP();
-        	final double required = (cap.getLevel()+1) * 100 + 100.0D;
-        	if(xp >= required)
-        		cap.setLevel(cap.getLevel() + 1);
+        final double xp = cap.getXP();
+        final double required = (cap.getLevel() + 1) * 100 + 100.0D;
+        if (xp >= required)
+            cap.setLevel(cap.getLevel() + 1);
     }
 }
