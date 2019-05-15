@@ -2,6 +2,7 @@ package com.speedstersreborn.util.handlers.client;
 
 import com.google.common.collect.Maps;
 import com.speedstersreborn.SpeedsterHeroesReborn;
+import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -46,6 +47,13 @@ public class TrailRenderHandler {
     }
 
     @SubscribeEvent
+    public static void onDeath(PlayerEvent.PlayerRespawnEvent e) {
+        if(TRAIL_ENTITIES.containsKey(e.player)) {
+            TRAIL_ENTITIES.remove(e.player);
+        }
+    }
+
+    @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent e) {
         if (e.phase == TickEvent.Phase.END && e.player.world.isRemote) {
             LinkedList<EntityTrail> trails = TRAIL_ENTITIES.containsKey(e.player) ? TRAIL_ENTITIES.get(e.player) : new LinkedList<>();
@@ -64,11 +72,11 @@ public class TrailRenderHandler {
             if (renderTrail(e.player)) {
                 EntityPlayer player = e.player;
 
-                if (trails.getLast().getDistance(player) >= player.width * 1.1F) {
-                    EntityTrail esm = new EntityTrail(player.world, player, getTrailType(player));
-                    player.world.spawnEntity(esm);
-                    addTrailEntity(player, esm);
-                }
+                    if (trails.isEmpty() || trails.getLast().getDistance(player) >= player.width * 1.1F) {
+                        EntityTrail esm = new EntityTrail(player.world, player, getTrailType(player));
+                        player.world.spawnEntity(esm);
+                        addTrailEntity(player, esm);
+                    }
             }
         }
     }
@@ -88,8 +96,7 @@ public class TrailRenderHandler {
      * @return
      */
     private static boolean renderTrail(EntityPlayer player) {
-        return true;
-        //return CapabilitySpeedster.get(player).isSpeedster();
+        return CapabilitySpeedster.get(player).isSpeedster();
     }
 
     /**
