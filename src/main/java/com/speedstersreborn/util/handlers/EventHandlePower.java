@@ -15,9 +15,9 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 /**
  * Created by Josia50
@@ -28,18 +28,21 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public class EventHandlePower {
 
     @SubscribeEvent
-    public static void mainPowers(TickEvent.PlayerTickEvent e) {
-        EntityPlayer player = e.player;
-        ISpeedsterCap cap = CapabilitySpeedster.get(player);
-        IMetaCap capmeta = CapabilityMeta.get(player);
+    public static void mainPowers(LivingEvent.LivingUpdateEvent e) {
 
-        if (MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
-            setXPAdd(player, cap);
-            runWater(player, cap);
-            runWall(player, cap);
-            runAbilities(player, cap);
-            phasing(player, cap);
-            whileRunning(player, cap, capmeta);
+        if (e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            IMetaCap capmeta = CapabilityMeta.get(player);
+
+            if (MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
+                setXPAdd(player, cap);
+                runWater(player, cap);
+                runWall(player, cap);
+                runAbilities(player, cap);
+                phasing(player, cap);
+                whileRunning(player, cap, capmeta);
+            }
         }
     }
 
