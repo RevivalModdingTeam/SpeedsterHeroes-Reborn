@@ -54,6 +54,13 @@ public class TrailRenderHandler {
     }
 
     @SubscribeEvent
+    public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent e) {
+        if(TRAIL_ENTITIES.containsKey(e.player)) {
+            TRAIL_ENTITIES.remove(e.player);
+        }
+    }
+
+    @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent e) {
         if (e.phase == TickEvent.Phase.END && e.player.world.isRemote) {
             LinkedList<EntityTrail> trails = TRAIL_ENTITIES.containsKey(e.player) ? TRAIL_ENTITIES.get(e.player) : new LinkedList<>();
@@ -96,7 +103,7 @@ public class TrailRenderHandler {
      * @return
      */
     private static boolean renderTrail(EntityPlayer player) {
-        return CapabilitySpeedster.get(player).isSpeedster();
+       return CapabilitySpeedster.get(player).isSpeedster();
     }
 
     /**
