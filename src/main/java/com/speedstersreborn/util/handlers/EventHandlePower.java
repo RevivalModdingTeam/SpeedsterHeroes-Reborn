@@ -11,6 +11,7 @@ import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.FoodStats;
@@ -29,7 +30,7 @@ public class EventHandlePower {
 
     @SubscribeEvent
     public static void mainPowers(TickEvent.PlayerTickEvent e) {
-        EntityPlayer player = (EntityPlayer) e.player;
+        EntityPlayer player = e.player;
         ISpeedsterCap cap = CapabilitySpeedster.get(player);
         IMetaCap capmeta = CapabilityMeta.get(player);
 
@@ -85,6 +86,7 @@ public class EventHandlePower {
             player.noClip = true;
             player.motionY = 0;
             player.onGround = true;
+            player.sendPlayerAbilities();
         }
     }
 
@@ -93,8 +95,14 @@ public class EventHandlePower {
             player.stepHeight = 1.3f;
             player.sendPlayerAbilities();
         }
-    }
 
+        if(EventHandlePower.isMoving(player) && cap.isSpeedster() && cap.getSpeedLevel() >= 6) {
+            BlockPos blockPos = new BlockPos(player.posX, player.posY - 1, player.posZ);
+            if(player.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN) {
+                player.world.setBlockState(player.getPosition(), Blocks.FIRE.getDefaultState());
+            }
+        }
+    }
 
     public static void whileRunning(EntityPlayer player, ISpeedsterCap cap, IMetaCap capmeta) {
         if (!player.world.isRemote && cap.isSpeedster() && cap.getSpeedLevel() > 1 && isMoving(player)) {
