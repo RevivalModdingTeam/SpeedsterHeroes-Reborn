@@ -57,6 +57,7 @@ public class RegistryHandler {
     public static class EntityEntries {
 
         public static final EntityEntry DUMMY = EntityEntryBuilder.create().entity(EntityRingDummy.class).id(new ResourceLocation(SpeedsterHeroesReborn.MODID, "ring_dummy"), 0).name("ring_dummy").tracker(80, 3, true).build();
+      //  public static final EntityEntry LIGHTNING = EntityEntryBuilder.create().entity(EntityLightning.class).id(new ResourceLocation(SpeedsterHeroesReborn.MODID, "lightning"), 1).name("lightning").tracker(80, 3, true).build();
     }
 
     // Use in preinit in mod.
