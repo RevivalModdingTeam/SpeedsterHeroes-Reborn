@@ -41,6 +41,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         if (!isSpeedster()) {
             setSpeedLevel(0);
             setWallRunning(false);
+            setPhasing(false);
             SpeedAPI.setSpeedFromCap(player);
         } else {
             SpeedAPI.setSpeedFromCap(player);

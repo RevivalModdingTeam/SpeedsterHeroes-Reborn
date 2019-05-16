@@ -3,6 +3,7 @@ package com.speedstersreborn.util.handlers.client;
 import com.google.common.collect.Maps;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
+import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -48,14 +49,14 @@ public class TrailRenderHandler {
 
     @SubscribeEvent
     public static void onDeath(PlayerEvent.PlayerRespawnEvent e) {
-        if(TRAIL_ENTITIES.containsKey(e.player)) {
+        if (TRAIL_ENTITIES.containsKey(e.player)) {
             TRAIL_ENTITIES.remove(e.player);
         }
     }
 
     @SubscribeEvent
     public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent e) {
-        if(TRAIL_ENTITIES.containsKey(e.player)) {
+        if (TRAIL_ENTITIES.containsKey(e.player)) {
             TRAIL_ENTITIES.remove(e.player);
         }
     }
@@ -79,11 +80,11 @@ public class TrailRenderHandler {
             if (renderTrail(e.player)) {
                 EntityPlayer player = e.player;
 
-                    if (trails.isEmpty() || trails.getLast().getDistance(player) >= player.width * 1.1F) {
-                        EntityTrail esm = new EntityTrail(player.world, player, getTrailType(player));
-                        player.world.spawnEntity(esm);
-                        addTrailEntity(player, esm);
-                    }
+                if (trails.isEmpty() || trails.getLast().getDistance(player) >= player.width * 1.1f) {
+                    EntityTrail esm = new EntityTrail(player.world, player, getTrailType(player));
+                    player.world.spawnEntity(esm);
+                    addTrailEntity(player, esm);
+                }
             }
         }
     }
@@ -103,7 +104,7 @@ public class TrailRenderHandler {
      * @return
      */
     private static boolean renderTrail(EntityPlayer player) {
-       return CapabilitySpeedster.get(player).isSpeedster();
+        return CapabilitySpeedster.get(player).isSpeedster();
     }
 
     /**
@@ -310,7 +311,8 @@ public class TrailRenderHandler {
             GlStateManager.blendFunc(770, 1);
             setLightmapTextureCoords(240, 240);
             EntityPlayer mcPlayer = Minecraft.getMinecraft().player;
-            translateRendering(mcPlayer, player, partialRenderTicks);
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            translateRendering(mcPlayer, player, partialRenderTicks + getOffsetFunctionSpeed(cap.getSpeedLevel()));
 
             int amountOfLightnings = 6;
             float lightningSpace = player.height / amountOfLightnings;
@@ -326,9 +328,9 @@ public class TrailRenderHandler {
                             .add((player.getPositionEyes(partialRenderTicks).add(0.0D, -1.62F * (player.height / 1.8F), 0.0D)));
                     Vec3d firstEnd = trailEntities.getLast().getLightningPosVector(j);
                     float a = 1F - (trailEntities.getLast().ticksExisted + partialRenderTicks) / 10F;
-                    drawLine(firstStart.add(add).add(0, player.height, 0),
-                            firstEnd.add(add.add(0, trailEntities.getLast().lightningFactor[j] * differ, 0)), lineWidth, innerLineWidth,
-                            getTrailColor(player, trail), a);
+                  drawLine(firstStart.add(add).add(0, player.height, 0),
+                          firstEnd.add(add.add(0, trailEntities.getLast().lightningFactor[j] * differ, 0)), lineWidth, innerLineWidth,
+                           getTrailColor(player, trail), a);
 
                     for (int i = 0; i < trailEntities.size(); i++) {
                         if (i < (trailEntities.size() - 1)) {
@@ -350,7 +352,13 @@ public class TrailRenderHandler {
             GlStateManager.enableTexture2D();
             GlStateManager.popMatrix();
         }
-
+        private float getOffsetFunctionSpeed(int level) {
+         switch(level) {
+             case 1:
+                 return 1.0f;
+         }
+            return 0.8f;
+        }
     }
 
     public static class TrailRendererNormal extends TrailRenderer {
