@@ -1,5 +1,7 @@
 package com.speedstersreborn.util.handlers;
 
+import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
+import com.revivalmodding.revivalcore.core.common.suits.SuitDebug;
 import net.minecraft.util.IStringSerializable;
 
 /**
@@ -11,17 +13,17 @@ public class EnumHandler {
 
     public enum RingTypes implements IStringSerializable {
 
-        ZOOM("zoom", 0),
-        REVERSE("reverse_flash", 1),
-        GOD_SPEED("god_speed", 2),
-        KID_FLASH("kid_flash", 3);
+        ZOOM("zoom", new SuitDebug()),
+        REVERSE("reverse_flash", new SuitDebug()),
+        GOD_SPEED("god_speed", new SuitDebug()),
+        KID_FLASH("kid_flash", new SuitDebug());
 
-        private int ID;
         private String name;
+        private AbstractSuit bsuit;
 
-        RingTypes(String name, int ID) {
-            this.ID = ID;
+        RingTypes(String name, AbstractSuit suit) {
             this.name = name;
+            this.bsuit = suit;
         }
 
         @Override
@@ -29,8 +31,8 @@ public class EnumHandler {
             return getName();
         }
 
-        public int getID() {
-            return ID;
+        public AbstractSuit getBsuit() {
+            return bsuit;
         }
 
         @Override

@@ -1,5 +1,6 @@
 package com.speedstersreborn.common.entity;
 
+import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -15,6 +16,7 @@ public class EntityRingDummy extends EntityLivingBase {
 
     public float dirX;
     public float dirZ;
+    public AbstractSuit suit;
 
     public NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
 
@@ -22,10 +24,20 @@ public class EntityRingDummy extends EntityLivingBase {
         super(worldIn);
     }
 
+    public EntityRingDummy(World world, AbstractSuit suit) {
+        super(world);
+        this.suit = suit;
+        this.inventory.set(3, new ItemStack(suit.getHelmet()));
+        this.inventory.set(2, new ItemStack(suit.getChest()));
+        this.inventory.set(1, new ItemStack(suit.getLeggings()));
+        this.inventory.set(0, new ItemStack(suit.getBoots()));
+    }
+
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
         this.rotationYawHead = rotationYaw;
+
 
         if (ticksExisted < 20) {
             this.motionX = dirX / 10F;
@@ -65,6 +77,7 @@ public class EntityRingDummy extends EntityLivingBase {
         else
             player.inventory.addItemStackToInventory(getItemStackFromSlot(EntityEquipmentSlot.FEET));
 
+        this.inventory.clear();
         this.setDead();
     }
 
