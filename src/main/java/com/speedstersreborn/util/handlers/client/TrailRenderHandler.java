@@ -61,14 +61,16 @@ public class TrailRenderHandler {
         }
     }
 
+
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent e) {
         if (e.phase == TickEvent.Phase.END && e.player.world.isRemote) {
+            ISpeedsterCap cap = CapabilitySpeedster.get(e.player);
             LinkedList<EntityTrail> trails = TRAIL_ENTITIES.containsKey(e.player) ? TRAIL_ENTITIES.get(e.player) : new LinkedList<>();
             boolean b = false;
             List<EntityTrail> toDelete = new LinkedList<>();
             for (EntityTrail trail : trails) {
-                if (trail.isDead || trail.dimension != e.player.dimension) {
+                if (trail.isDead || trail.dimension != e.player.dimension || trail.getDistance(e.player) >= 20 * cap.getSpeedLevel()) {
                     toDelete.add(trail);
                 }
             }
@@ -353,12 +355,31 @@ public class TrailRenderHandler {
             GlStateManager.popMatrix();
         }
         private float getOffsetFunctionSpeed(int level) {
-         switch(level) {
-             case 1:
-                 return 1.0f;
-         }
-            return 0.8f;
-        }
+            switch(level) {
+                case 1:
+                    return 1.0f;
+                case 2:
+                    return 0.94f;
+                case 3:
+                    return 1.1f;
+                case 4:
+                    return 1f;
+                case 5:
+                    return 0.9f;
+                case 6:
+                    return 0.9f;
+                case 7:
+                    return 0.9f;
+                case 9:
+                    return 0.9f;
+                case 15:
+                    return 0.95f;
+                case 16:
+                    return 0.95f;
+                case 17:
+                    return 0.91f;
+            }
+            return 0.94f;        }
     }
 
     public static class TrailRendererNormal extends TrailRenderer {
