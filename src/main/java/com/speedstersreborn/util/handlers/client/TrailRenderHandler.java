@@ -316,7 +316,7 @@ public class TrailRenderHandler {
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             translateRendering(mcPlayer, player, partialRenderTicks + getOffsetFunctionSpeed(cap.getSpeedLevel()));
 
-            int amountOfLightnings = 6;
+            int amountOfLightnings = 10;
             float lightningSpace = player.height / amountOfLightnings;
 
             for (int j = 0; j < amountOfLightnings; j++) {
@@ -361,7 +361,7 @@ public class TrailRenderHandler {
                 case 2:
                     return 0.94f;
                 case 3:
-                    return 1.1f;
+                    return 0.96f;
                 case 4:
                     return 1f;
                 case 5:
