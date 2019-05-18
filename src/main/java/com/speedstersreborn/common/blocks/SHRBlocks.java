@@ -6,10 +6,14 @@ import com.speedstersreborn.util.helper.IHaveItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Mod.EventBusSubscriber
 public class SHRBlocks {
 
     public static final List<Block> BLOCK_LIST = new ArrayList<>();
@@ -33,5 +37,10 @@ public class SHRBlocks {
             }
         }
         return block;
+    }
+
+    @SubscribeEvent
+    public static void onBlockRegister(RegistryEvent.Register<Block> event) {
+        event.getRegistry().registerAll(SHRBlocks.BLOCK_LIST.toArray(new Block[0]));
     }
 }
