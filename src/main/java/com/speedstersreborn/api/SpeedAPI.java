@@ -37,7 +37,6 @@ public class SpeedAPI {
 
     public static void setSpeedFromCap(EntityPlayer player) {
         ISpeedsterCap cap = CapabilitySpeedster.get(player);
-        if (cap.isSpeedster())
             setSpeed(player, cap.getSpeedLevel());
     }
 

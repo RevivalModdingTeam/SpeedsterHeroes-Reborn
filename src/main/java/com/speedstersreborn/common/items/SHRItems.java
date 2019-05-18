@@ -25,22 +25,20 @@ public class SHRItems {
     }
 
     public static void registerRenders() {
-    	for(Item i : ITEM_LIST) {
-    	    registerRender(i);
+        for (Item i : ITEM_LIST) {
+            registerRender(i);
         }
     }
-    
-    public static <T extends Item> T registerItem(T item)
-    {
-    	SHRItems.ITEM_LIST.add(item);
-    	return item;
+
+    public static <T extends Item> T registerItem(T item) {
+        SHRItems.ITEM_LIST.add(item);
+        return item;
     }
-    
-    public static <T extends Item> T registerItem(T item, boolean tab)
-    {
-    	if(tab)
-    		item.setCreativeTab(ModTabs.shrTab);
-    	return registerItem(item);
+
+    public static <T extends Item> T registerItem(T item, boolean tab) {
+        if (tab)
+            item.setCreativeTab(ModTabs.shrTab);
+        return registerItem(item);
     }
 
     public static void registerRender(Item item) {
