@@ -5,8 +5,12 @@ import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.SHRConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.UUID;
 
 /**
  * Created by Josia50
@@ -19,26 +23,30 @@ public class SpeedAPI {
 
     public static void setSpeed(EntityPlayer player, int level) {
         // 2.5F for level 20 (with default config value)
-        float speed = level > 0 ? level * SHRConfig.speedstersHeroesReborn.speedIncreaseOverLevel : 0.1f;
+        float speed = level * SHRConfig.speedstersHeroesReborn.speedIncreaseOverLevel;
+        AttributeModifier mod = new AttributeModifier(UUID.fromString("42b68862-2bdc-4df4-9fbe-4ad597cda211"), "Speed", speed, 0);
 
-        player.capabilities.setPlayerWalkSpeed(speed);
-        Sync(player);
+        if (speed > 0) {
+            player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(mod);
+            if (!player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(mod))
+                player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(mod);
+        }else{
+            player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(mod);
+        }
     }
 
     public static void setSpeedFromCap(EntityPlayer player) {
-        if (!player.world.isRemote) {
-            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+        ISpeedsterCap cap = CapabilitySpeedster.get(player);
+        if (cap.isSpeedster())
             setSpeed(player, cap.getSpeedLevel());
-        }
     }
 
     public static void setSpeedToCap(EntityPlayer player, int level) {
-        if (!player.world.isRemote) {
-            ISpeedsterCap cap = CapabilitySpeedster.get(player);
-            cap.setSpeedLevel(level);
-            setSpeed(player, level);
-            cap.sync();
-        }
+        ISpeedsterCap cap = CapabilitySpeedster.get(player);
+        cap.setSpeedLevel(level);
+        setSpeed(player, level);
+        cap.sync();
+
     }
 
     public static void invertProjectilesAroundPlayer(EntityPlayer player, int range) {

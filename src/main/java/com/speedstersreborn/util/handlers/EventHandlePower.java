@@ -77,6 +77,7 @@ public class EventHandlePower {
                         player.motionY = 0.8D;
                         player.fallDistance = 0F;
                         cap.setWallRunning(true);
+                        player.sendPlayerAbilities();
                     }
                 }
             }
