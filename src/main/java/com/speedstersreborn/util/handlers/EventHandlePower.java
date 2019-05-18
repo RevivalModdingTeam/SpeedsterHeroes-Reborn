@@ -100,7 +100,7 @@ public class EventHandlePower {
     }
 
     public static void whileRunning(EntityPlayer player, ISpeedsterCap cap, IMetaCap capmeta) {
-        if (!player.world.isRemote && cap.isSpeedster() && cap.getSpeedLevel() > 1 && isMoving(player)) {
+        if (!player.world.isRemote && cap.isSpeedster() && cap.getSpeedLevel() > 1 && isMoving(player) && !player.isCreative()) {
             if (player.isBurning()) {
                 player.extinguish();
             }
@@ -108,7 +108,6 @@ public class EventHandlePower {
             food.setFoodSaturationLevel(food.getSaturationLevel() - 0.05f * cap.getSpeedLevel());
             if (food.getSaturationLevel() < 0f && food.getFoodLevel() > 0) {
                 food.setFoodSaturationLevel(20.0F);
-                food.setFoodLevel(food.getFoodLevel() - 1);
             }
             if (food.getFoodLevel() <= 1) {
                 player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 2, false, true));
