@@ -11,17 +11,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class PacketSetPhasing implements IMessage {
 
 
-    public PacketSetPhasing() {
+    public PacketSetPhasing(boolean enable) {
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-
     }
 
     public static class Handler implements IMessageHandler<PacketSetPhasing, IMessage> {
@@ -31,11 +29,10 @@ public class PacketSetPhasing implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
                 EntityPlayer player = ctx.getServerHandler().player;
                 ISpeedsterCap data = CapabilitySpeedster.get(player);
-                if (data.isPhasing()) {
-                    data.setPhasing(false);
-                } else {
+                if(!data.isPhasing())
                     data.setPhasing(true);
-                }
+                else
+                    data.setPhasing(false);
                 data.sync();
             });
             return null;

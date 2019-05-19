@@ -20,9 +20,11 @@ import net.minecraftforge.fml.relauncher.Side;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientEventHandlers {
+
     @SubscribeEvent
     public static void onClientTick(InputUpdateEvent e) {
         IMetaCap metaCap = CapabilityMeta.get(Minecraft.getMinecraft().player);
+
 
         if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
 
@@ -39,9 +41,7 @@ public class ClientEventHandlers {
             }
 
             if (ClientEventHandler.POWER3.isKeyDown()) {
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetPhasing());
-            }else{
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetPhasing());
+                NetworkHandler.INSTANCE.sendToServer(new PacketSetPhasing(true));
             }
         }
     }

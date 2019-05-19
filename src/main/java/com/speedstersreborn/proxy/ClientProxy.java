@@ -2,6 +2,7 @@ package com.speedstersreborn.proxy;
 
 
 import com.speedstersreborn.client.renderers.RenderEntityTrail;
+import com.speedstersreborn.client.renderers.RenderEntityTrailSecond;
 import com.speedstersreborn.client.renderers.RenderRingDummy;
 import com.speedstersreborn.common.entity.EntityRingDummy;
 import com.speedstersreborn.util.handlers.client.TrailRenderHandler;
@@ -13,6 +14,7 @@ public class ClientProxy implements IProxy {
     public void preInit() {
         RenderingRegistry.registerEntityRenderingHandler(EntityRingDummy.class, RenderRingDummy::new);
         RenderingRegistry.registerEntityRenderingHandler(TrailRenderHandler.EntityTrail.class, RenderEntityTrail::new);
+        RenderingRegistry.registerEntityRenderingHandler(TrailRenderHandler.EntityTrailSecond.class, RenderEntityTrailSecond::new);
     }
 
     @Override
