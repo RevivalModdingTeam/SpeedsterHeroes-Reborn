@@ -537,7 +537,7 @@ public class TrailRenderHandler {
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             translateRendering(mcPlayer, player, partialRenderTicks + getOffsetFunctionSpeed(cap.getSpeedLevel()));
 
-            int amountOfLightnings = 5;
+            int amountOfLightnings = 6;
             float lightningSpace = player.height / amountOfLightnings;
 
             for (int j = 0; j < amountOfLightnings; j++) {
@@ -578,6 +578,8 @@ public class TrailRenderHandler {
 
         private float getOffsetFunctionSpeed(int level) {
             switch (level) {
+                case 0:
+                    return 0.8f;
                 case 1:
                     return 1.0f;
                 case 2:
@@ -622,7 +624,7 @@ public class TrailRenderHandler {
             Color c = getTrailColor(entity.owner, trail);
             float progress = MathHelper.clamp(1F - (entity.ticksExisted + partialRenderTicks) / 10F, 0F, 0.5F);
             float translate = -MathHelper.clamp(1F - (entity.ticksExisted) / 10F, 0F, 0.5F) / 15F;
-            GlStateManager.translate(0F, translate * (entity.height / 1.8F), 0F);
+            GlStateManager.translate(0F, translate * (entity.height /1.8F), 0F);
             GL11.glBlendFunc(770, 771);
             GL11.glAlphaFunc(516, 0.003921569F);
             GlStateManager.color((float) c.getRed() / 255F, (float) c.getGreen() / 255F, (float) c.getBlue() / 255F, progress);
@@ -670,7 +672,7 @@ public class TrailRenderHandler {
             GL11.glBlendFunc(770, 771);
             GL11.glAlphaFunc(516, 0.003921569F);
             GlStateManager.color((float) c.getRed() / 255F, (float) c.getGreen() / 255F, (float) c.getBlue() / 255F, progress);
-            entity.alpha = progress;
+           entity.alpha = progress;
             return true;
         }
 
@@ -1002,16 +1004,17 @@ public class TrailRenderHandler {
         BufferBuilder wr = tes.getBuffer();
 
         if (lineWidth > 0) {
-            GlStateManager.color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha);
+            GlStateManager.color(color.getRed() / 255F , color.getGreen() / 255F , color.getBlue() / 255F , alpha);
             GlStateManager.glLineWidth(lineWidth);
             wr.begin(GL11.GL_LINE_STRIP, DefaultVertexFormats.POSITION);
             wr.pos(start.x, start.y, start.z).endVertex();
+            wr.pos(end.x, end.y, end.z).endVertex();
             wr.pos(end.x, end.y, end.z).endVertex();
             tes.draw();
         }
 
         if (innerLineWidth > 0) {
-            GlStateManager.color(1, 1, 1, MathHelper.clamp(alpha - 0.2F, 0, 1));
+           GlStateManager.color(color.getRed(), color.getGreen(), color.getBlue(), MathHelper.clamp(alpha - 0.2F, 0, 1));
             GlStateManager.glLineWidth(innerLineWidth);
             wr.begin(GL11.GL_LINE_STRIP, DefaultVertexFormats.POSITION);
             wr.pos(start.x, start.y, start.z).endVertex();

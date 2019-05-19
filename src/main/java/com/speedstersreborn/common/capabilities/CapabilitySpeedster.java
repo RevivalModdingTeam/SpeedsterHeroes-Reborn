@@ -30,7 +30,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private boolean isWallRunning = false;
     private boolean hasSecondTrail = false;
     private int pr = Color.ORANGE.getRed(),pg = Color.ORANGE.getGreen(), pb = Color.ORANGE.getBlue();
-    private int sr = Color.YELLOW.getRed(), sg = Color.YELLOW.getGreen(), sb = Color.YELLOW.getBlue();
+    private int sr = Color.RED.getRed(), sg = Color.RED.getGreen(), sb = Color.RED.getBlue();
 
     public CapabilitySpeedster() {
 
