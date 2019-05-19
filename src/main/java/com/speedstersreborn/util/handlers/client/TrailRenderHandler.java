@@ -78,6 +78,7 @@ public class TrailRenderHandler {
             boolean b = false;
             List<EntityTrail> toDelete = new LinkedList<>();
             List<EntityTrailSecond> toSecondDelete = new LinkedList<>();
+
             for (EntityTrail trail : trails) {
                 if (trail.isDead || trail.dimension != e.player.dimension || trail.getDistance(e.player) >= 20 * cap.getSpeedLevel()) {
                     toDelete.add(trail);
@@ -123,7 +124,7 @@ public class TrailRenderHandler {
         TrailType trailType = getTrailType(e.getEntityPlayer());
         if (trailType != null) {
             trailType.getTrailRenderer().renderTrail(e.getEntityPlayer(), trailType, getTrailEntities(e.getEntityPlayer()), e.getPartialRenderTick());
-            trailType.getTrailRenderer().renderSecondTrail(e.getEntityPlayer(), trailType, getTrailEntities(e.getEntityPlayer()), e.getPartialRenderTick());
+            trailType.getTrailRenderer().renderSecondTrail(e.getEntityPlayer(), trailType, getSecondTrailEntities(e.getEntityPlayer()), e.getPartialRenderTick());
         }
     }
 
@@ -168,6 +169,10 @@ public class TrailRenderHandler {
 
     private static LinkedList<EntityTrail> getTrailEntities(EntityPlayer player) {
         return TRAIL_ENTITIES.containsKey(player) ? TRAIL_ENTITIES.get(player) : new LinkedList<>();
+    }
+
+    private static LinkedList<EntityTrailSecond> getSecondTrailEntities(EntityPlayer player) {
+        return TRAIL_SECOND.containsKey(player) ? TRAIL_SECOND.get(player) : new LinkedList<>();
     }
 
     private static void addTrailEntity(EntityPlayer player, EntityTrail trail) {
@@ -442,7 +447,7 @@ public class TrailRenderHandler {
         public abstract void renderTrail(EntityPlayer player, TrailType trail, LinkedList<EntityTrail> trailEntities, float partialRenderTicks);
 
         @SideOnly(Side.CLIENT)
-        public abstract void renderSecondTrail(EntityPlayer player, TrailType trail, LinkedList<EntityTrail> trailEntities, float partialRenderTicks);
+        public abstract void renderSecondTrail(EntityPlayer player, TrailType trail, LinkedList<EntityTrailSecond> trailEntities, float partialRenderTicks);
 
 
         public boolean preRenderSpeedMirage(EntityTrail entity, TrailType trail, float partialRenderTicks) {
@@ -517,7 +522,7 @@ public class TrailRenderHandler {
         }
 
         @Override
-        public void renderSecondTrail(EntityPlayer player, TrailType trail, LinkedList<EntityTrail> trailEntities, float partialRenderTicks) {
+        public void renderSecondTrail(EntityPlayer player, TrailType trail, LinkedList<EntityTrailSecond> trailEntities, float partialRenderTicks) {
             if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && player == Minecraft.getMinecraft().player)
                 return;
 
@@ -552,8 +557,8 @@ public class TrailRenderHandler {
 
                     for (int i = 0; i < trailEntities.size(); i++) {
                         if (i < (trailEntities.size() - 1)) {
-                            EntityTrail speedMirage = trailEntities.get(i);
-                            EntityTrail speedMirage2 = trailEntities.get(i + 1);
+                            EntityTrailSecond speedMirage = trailEntities.get(i);
+                            EntityTrailSecond speedMirage2 = trailEntities.get(i + 1);
                             Vec3d start = speedMirage.getLightningPosVector(j);
                             Vec3d end = speedMirage2.getLightningPosVector(j);
                             float progress = 1F - (speedMirage.ticksExisted + partialRenderTicks) / 10F;
@@ -608,7 +613,7 @@ public class TrailRenderHandler {
         }
 
         @Override
-        public void renderSecondTrail(EntityPlayer player, TrailType trail, LinkedList<EntityTrail> trailEntities, float partialRenderTicks) {
+        public void renderSecondTrail(EntityPlayer player, TrailType trail, LinkedList<EntityTrailSecond> trailEntities, float partialRenderTicks) {
 
         }
 
@@ -759,7 +764,7 @@ public class TrailRenderHandler {
         }
 
         @Override
-        public void renderSecondTrail(EntityPlayer player, TrailType trail, LinkedList<EntityTrail> list, float partialRenderTicks) {
+        public void renderSecondTrail(EntityPlayer player, TrailType trail, LinkedList<EntityTrailSecond> list, float partialRenderTicks) {
             if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && player == Minecraft.getMinecraft().player)
                 return;
 
@@ -791,8 +796,8 @@ public class TrailRenderHandler {
 
                     for (int i = 0; i < list.size(); i++) {
                         if (i < (list.size() - 1)) {
-                            EntityTrail speedMirage = list.get(i);
-                            EntityTrail speedMirage2 = list.get(i + 1);
+                            EntityTrailSecond speedMirage = list.get(i);
+                            EntityTrailSecond speedMirage2 = list.get(i + 1);
                             Vec3d start = speedMirage.getLightningPosVector(j);
                             Vec3d end = speedMirage2.getLightningPosVector(j);
                             float progress = 1F - (speedMirage.ticksExisted + partialRenderTicks) / 10F;
@@ -809,8 +814,8 @@ public class TrailRenderHandler {
 
                 for (int i = 0; i < list.size(); i++) {
                     if (i < (list.size() - 1)) {
-                        EntityTrail speedMirage = list.get(i);
-                        EntityTrail speedMirage2 = list.get(i + 1);
+                        EntityTrailSecond speedMirage = list.get(i);
+                        EntityTrailSecond speedMirage2 = list.get(i + 1);
                         float progress = 1F - (speedMirage.ticksExisted + partialRenderTicks) / 10F;
                         drawInnerLight(speedMirage.getPositionVector(), speedMirage2.getPositionVector(), speedMirage.height, c, progress);
                     }
@@ -895,7 +900,7 @@ public class TrailRenderHandler {
         }
 
         @Override
-        public void renderSecondTrail(EntityPlayer en, TrailType trail, LinkedList<EntityTrail> list, float partialRenderTicks) {
+        public void renderSecondTrail(EntityPlayer en, TrailType trail, LinkedList<EntityTrailSecond> list, float partialRenderTicks) {
             if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && en == Minecraft.getMinecraft().player)
                 return;
 
@@ -919,7 +924,7 @@ public class TrailRenderHandler {
 
             for (int i = 0; i < 20; i++) {
                 if (i < list.size() - 1) {
-                    EntityTrail mirage = list.get(i);
+                    EntityTrailSecond mirage = list.get(i);
 
                     Vec3d start = en.getPositionVector().add(mirage.lightningFactor[0] * en.width - f, mirage.lightningFactor[0] * en.height,
                             mirage.lightningFactor[0] * en.width - f);
