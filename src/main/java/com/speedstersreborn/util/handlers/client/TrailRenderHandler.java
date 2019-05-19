@@ -85,7 +85,7 @@ public class TrailRenderHandler {
             }
             toDelete.forEach(t -> trails.remove(t));
 
-            for(EntityTrailSecond trailSecond : trailsS) {
+            for (EntityTrailSecond trailSecond : trailsS) {
                 if (trailSecond.isDead || trailSecond.dimension != e.player.dimension || trailSecond.getDistance(e.player) >= 20 * cap.getSpeedLevel()) {
                     toSecondDelete.add(trailSecond);
                 }
@@ -105,15 +105,14 @@ public class TrailRenderHandler {
                     player.world.spawnEntity(esm);
                     addTrailEntity(player, esm);
                 }
-            }
 
-            if (renderSecondTrail(e.player)) {
-                EntityPlayer player = e.player;
+                if (renderSecondTrail(player)) {
 
-                if (trails.isEmpty() || trails.getLast().getDistance(player) >= player.width * 1.1f) {
-                    EntityTrailSecond esm = new EntityTrailSecond(player.world, player, getTrailType(player));
-                    player.world.spawnEntity(esm);
-                    addSecondTrailEntity(player, esm);
+                    if (trailsS.isEmpty() || trailsS.getLast().getDistance(player) >= player.width * 1.1f) {
+                        EntityTrailSecond esm = new EntityTrailSecond(player.world, player, getTrailType(player));
+                        player.world.spawnEntity(esm);
+                        addSecondTrailEntity(player, esm);
+                    }
                 }
             }
         }
@@ -139,7 +138,7 @@ public class TrailRenderHandler {
     }
 
     private static boolean renderSecondTrail(EntityPlayer player) {
-        return true;
+        return CapabilitySpeedster.get(player).hasSecondTrail();
     }
 
     /**
@@ -160,11 +159,11 @@ public class TrailRenderHandler {
      * @return
      */
     private static Color getTrailColor(EntityPlayer player, TrailType trailType) {
-        return Color.RED;
+        return CapabilitySpeedster.get(player).getPrimaryTrailColor();
     }
 
     private static Color getSecondTrailColor(EntityPlayer player, TrailType trailType) {
-        return Color.GREEN;
+        return CapabilitySpeedster.get(player).getSecondaryTrailColor();
     }
 
     private static LinkedList<EntityTrail> getTrailEntities(EntityPlayer player) {
@@ -492,9 +491,9 @@ public class TrailRenderHandler {
                             .add((player.getPositionEyes(partialRenderTicks).add(0.0D, -1.62F * (player.height / 1.8F), 0.0D)));
                     Vec3d firstEnd = trailEntities.getLast().getLightningPosVector(j);
                     float a = 1F - (trailEntities.getLast().ticksExisted + partialRenderTicks) / 10F;
-                  drawLine(firstStart.add(add).add(0, player.height, 0),
-                          firstEnd.add(add.add(0, trailEntities.getLast().lightningFactor[j] * differ, 0)), lineWidth, innerLineWidth,
-                           getTrailColor(player, trail), a);
+                    drawLine(firstStart.add(add).add(0, player.height, 0),
+                            firstEnd.add(add.add(0, trailEntities.getLast().lightningFactor[j] * differ, 0)), lineWidth, innerLineWidth,
+                            getTrailColor(player, trail), a);
 
                     for (int i = 0; i < trailEntities.size(); i++) {
                         if (i < (trailEntities.size() - 1)) {
@@ -573,7 +572,7 @@ public class TrailRenderHandler {
         }
 
         private float getOffsetFunctionSpeed(int level) {
-            switch(level) {
+            switch (level) {
                 case 1:
                     return 1.0f;
                 case 2:
@@ -597,7 +596,8 @@ public class TrailRenderHandler {
                 case 17:
                     return 0.91f;
             }
-            return 0.94f;        }
+            return 0.94f;
+        }
     }
 
     public static class TrailRendererNormal extends TrailRenderer {
@@ -627,17 +627,17 @@ public class TrailRenderHandler {
 
         @Override
         public boolean preRenderSecondSpeedMirage(EntityTrailSecond entity, TrailType trail, float partialRenderTicks) {
-                Color c = getSecondTrailColor(entity.owner, trail);
-                float progress = MathHelper.clamp(1F - (entity.ticksExisted + partialRenderTicks) / 10F, 0F, 0.5F);
-                float translate = -MathHelper.clamp(1F - (entity.ticksExisted) / 10F, 0F, 0.5F) / 15F;
-                GlStateManager.translate(0F, translate * (entity.height / 1.8F), 0F);
-                GL11.glBlendFunc(770, 771);
-                GL11.glAlphaFunc(516, 0.003921569F);
-                GlStateManager.color((float) c.getRed() / 255F, (float) c.getGreen() / 255F, (float) c.getBlue() / 255F, progress);
-                entity.alpha = progress;
-                return true;
-            }
+            Color c = getSecondTrailColor(entity.owner, trail);
+            float progress = MathHelper.clamp(1F - (entity.ticksExisted + partialRenderTicks) / 10F, 0F, 0.5F);
+            float translate = -MathHelper.clamp(1F - (entity.ticksExisted) / 10F, 0F, 0.5F) / 15F;
+            GlStateManager.translate(0F, translate * (entity.height / 1.8F), 0F);
+            GL11.glBlendFunc(770, 771);
+            GL11.glAlphaFunc(516, 0.003921569F);
+            GlStateManager.color((float) c.getRed() / 255F, (float) c.getGreen() / 255F, (float) c.getBlue() / 255F, progress);
+            entity.alpha = progress;
+            return true;
         }
+    }
 
     public static class TrailRendererParticles extends TrailRenderer {
 

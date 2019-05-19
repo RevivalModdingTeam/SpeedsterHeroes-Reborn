@@ -3,6 +3,8 @@ package com.speedstersreborn.common.capabilities;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
+import java.awt.*;
+
 public interface ISpeedsterCap extends INBTSerializable<NBTTagCompound> {
 
     void update();
@@ -33,5 +35,16 @@ public interface ISpeedsterCap extends INBTSerializable<NBTTagCompound> {
 
     double getXP();
 
+    void setSecondTrail(boolean secondTrail);
+
+    boolean hasSecondTrail();
+
+    void setSecondaryTrailColor(int r, int g, int b);
+
+    Color getSecondaryTrailColor();
+
+    void setPrimaryTrailColor(int r, int g, int b);
+
+    Color getPrimaryTrailColor();
 
 }

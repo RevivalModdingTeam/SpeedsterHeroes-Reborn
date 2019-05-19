@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
+import java.awt.*;
 
 public class CapabilitySpeedster implements ISpeedsterCap {
 
@@ -27,10 +28,14 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private int level = 0;
     private double xp = 0.0;
     private boolean isWallRunning = false;
+    private boolean hasSecondTrail = false;
+    private int pr = Color.ORANGE.getRed(),pg = Color.ORANGE.getGreen(), pb = Color.ORANGE.getBlue();
+    private int sr = Color.YELLOW.getRed(), sg = Color.YELLOW.getGreen(), sb = Color.YELLOW.getBlue();
 
     public CapabilitySpeedster() {
 
     }
+
 
     public CapabilitySpeedster(EntityPlayer player) {
         this.player = player;
@@ -117,6 +122,40 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         return xp;
     }
 
+    @Override
+    public void setSecondTrail(boolean secondTrail) {
+        this.hasSecondTrail = secondTrail;
+    }
+
+    @Override
+    public boolean hasSecondTrail() {
+        return this.hasSecondTrail;
+    }
+
+    @Override
+    public void setSecondaryTrailColor(int r, int g, int b) {
+        this.sr = r;
+        this.sg = g;
+        this.sb = b;
+    }
+
+    @Override
+    public Color getSecondaryTrailColor() {
+        return new Color(sr, sg, sb);
+    }
+
+    @Override
+    public void setPrimaryTrailColor(int r, int g, int b) {
+        this.pr = r;
+        this.pg = g;
+        this.pb = b;
+    }
+
+    @Override
+    public Color getPrimaryTrailColor() {
+        return new Color(pr, pg, pb);
+    }
+
 
     @Override
     public NBTTagCompound serializeNBT() {
@@ -127,6 +166,13 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         nbt.setDouble("xp_level", xp);
         nbt.setInteger("level", level);
         nbt.setBoolean("is_wall_run", isWallRunning);
+        nbt.setBoolean("has_second_trail", hasSecondTrail);
+        nbt.setInteger("pr", pr);
+        nbt.setInteger("pg", pg);
+        nbt.setInteger("pb", pb);
+        nbt.setInteger("sr", sr);
+        nbt.setInteger("sg", sg);
+        nbt.setInteger("sb", sb);
         return nbt;
     }
 
@@ -138,6 +184,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         xp = nbt.getDouble("xp_level");
         level = nbt.getInteger("level");
         isWallRunning = nbt.getBoolean("is_wall_run");
+        hasSecondTrail = nbt.getBoolean("has_second_trail");
+        pr = nbt.getInteger("pr"); pg = nbt.getInteger("pg"); pb = nbt.getInteger("pb");
+        sr = nbt.getInteger("sr"); sg = nbt.getInteger("sg"); sb = nbt.getInteger("sb");
     }
 
 
