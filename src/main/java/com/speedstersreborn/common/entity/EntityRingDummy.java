@@ -1,6 +1,7 @@
 package com.speedstersreborn.common.entity;
 
 import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
+import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -16,6 +17,7 @@ public class EntityRingDummy extends EntityLivingBase {
 
     public float dirX;
     public float dirZ;
+    public EntityPlayer owner;
     public AbstractSuit suit;
 
     public NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
@@ -24,9 +26,11 @@ public class EntityRingDummy extends EntityLivingBase {
         super(worldIn);
     }
 
-    public EntityRingDummy(World world, AbstractSuit suit) {
+    public EntityRingDummy(World world, EntityPlayer player, AbstractSuit suit) {
         super(world);
         this.suit = suit;
+        this.owner = player;
+        this.setSize(owner.width, owner.height);
         this.inventory.set(3, new ItemStack(suit.getHelmet()));
         this.inventory.set(2, new ItemStack(suit.getChest()));
         this.inventory.set(1, new ItemStack(suit.getLeggings()));
@@ -37,7 +41,6 @@ public class EntityRingDummy extends EntityLivingBase {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         this.rotationYawHead = rotationYaw;
-
 
         if (ticksExisted < 20) {
             this.motionX = dirX / 10F;
@@ -50,35 +53,41 @@ public class EntityRingDummy extends EntityLivingBase {
     public void onCollideWithPlayer(EntityPlayer player) {
         super.onCollideWithPlayer(player);
 
+
         if (ticksExisted < 30 || player.world.isRemote)
             return;
 
-        double distance = player.getDistanceSq(this);
-        if (distance > 0.5D)
-            return;
+        if (player == owner) {
 
-        if (player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
-            player.setItemStackToSlot(EntityEquipmentSlot.HEAD, getItemStackFromSlot(EntityEquipmentSlot.HEAD));
-        else
-            player.inventory.addItemStackToInventory(getItemStackFromSlot(EntityEquipmentSlot.HEAD));
+            double distance = player.getDistanceSq(this);
+            if (distance > 0.5D)
+                return;
 
-        if (player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty())
-            player.setItemStackToSlot(EntityEquipmentSlot.CHEST, getItemStackFromSlot(EntityEquipmentSlot.CHEST));
-        else
-            player.inventory.addItemStackToInventory(getItemStackFromSlot(EntityEquipmentSlot.CHEST));
+            if (player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
+                player.setItemStackToSlot(EntityEquipmentSlot.HEAD, getItemStackFromSlot(EntityEquipmentSlot.HEAD));
+            else
+                player.inventory.addItemStackToInventory(getItemStackFromSlot(EntityEquipmentSlot.HEAD));
 
-        if (player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).isEmpty())
-            player.setItemStackToSlot(EntityEquipmentSlot.LEGS, getItemStackFromSlot(EntityEquipmentSlot.LEGS));
-        else
-            player.inventory.addItemStackToInventory(getItemStackFromSlot(EntityEquipmentSlot.LEGS));
+            if (player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty())
+                player.setItemStackToSlot(EntityEquipmentSlot.CHEST, getItemStackFromSlot(EntityEquipmentSlot.CHEST));
+            else
+                player.inventory.addItemStackToInventory(getItemStackFromSlot(EntityEquipmentSlot.CHEST));
 
-        if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).isEmpty())
-            player.setItemStackToSlot(EntityEquipmentSlot.FEET, getItemStackFromSlot(EntityEquipmentSlot.FEET));
-        else
-            player.inventory.addItemStackToInventory(getItemStackFromSlot(EntityEquipmentSlot.FEET));
+            if (player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).isEmpty())
+                player.setItemStackToSlot(EntityEquipmentSlot.LEGS, getItemStackFromSlot(EntityEquipmentSlot.LEGS));
+            else
+                player.inventory.addItemStackToInventory(getItemStackFromSlot(EntityEquipmentSlot.LEGS));
 
-        this.inventory.clear();
-        this.setDead();
+            if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).isEmpty())
+                player.setItemStackToSlot(EntityEquipmentSlot.FEET, getItemStackFromSlot(EntityEquipmentSlot.FEET));
+            else
+                player.inventory.addItemStackToInventory(getItemStackFromSlot(EntityEquipmentSlot.FEET));
+
+            this.inventory.clear();
+            this.setDead();
+        } else {
+            PlayerHelper.sendMessage(player, "This suit is from" + player.getDisplayNameString(), true);
+        }
     }
 
     @Override
