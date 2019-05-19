@@ -29,10 +29,11 @@ public class PacketSetPhasing implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
                 EntityPlayer player = ctx.getServerHandler().player;
                 ISpeedsterCap data = CapabilitySpeedster.get(player);
-                if(!data.isPhasing())
+                if (!data.isPhasing()) {
                     data.setPhasing(true);
-                else
+                } else {
                     data.setPhasing(false);
+                }
                 data.sync();
             });
             return null;
