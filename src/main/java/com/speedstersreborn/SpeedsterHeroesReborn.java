@@ -29,8 +29,8 @@ public class SpeedsterHeroesReborn
 
     public static final String MODID = "shr";
     public static final String NAME = "Speedsters Heroes Reborn";
-    public static final String VERSION = "0.0.4";
-    public static final String UPDATEURL = "https://raw.githubusercontent.com/RevivalModdingTeam/RevivalModding-ModBugs/master/updatespeedster.json";
+    public static final String VERSION = "0.0.5";
+    public static final String UPDATEURL = "https://raw.githubusercontent.com/RevivalModdingTeam/RevivalModding-ModBugs/master/update/updatespeedster.json";
 
 
     @EventHandler
