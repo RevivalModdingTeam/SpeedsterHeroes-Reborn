@@ -109,6 +109,10 @@ public class TrailRenderHandler {
         return CapabilitySpeedster.get(player).isSpeedster();
     }
 
+    private static boolean renderSecondTrail(EntityPlayer player) {
+        return true;
+    }
+
     /**
      * Determines the trail type of the player
      *
@@ -128,6 +132,10 @@ public class TrailRenderHandler {
      */
     private static Color getTrailColor(EntityPlayer player, TrailType trailType) {
         return Color.RED;
+    }
+
+    private static Color getSecondTrailColor(EntityPlayer player, TrailType trailType) {
+        return Color.PINK;
     }
 
     private static LinkedList<EntityTrail> getTrailEntities(EntityPlayer player) {
