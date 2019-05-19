@@ -29,7 +29,8 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private double xp = 0.0;
     private boolean isWallRunning = false;
     private boolean hasSecondTrail = false;
-    private int pr = Color.ORANGE.getRed(),pg = Color.ORANGE.getGreen(), pb = Color.ORANGE.getBlue();
+    private int pr = Color.ORANGE.getRed(), pg = Color.ORANGE.getGreen(), pb = Color.ORANGE.getBlue();
+    private int lpr = pr, lpg = pg, lpb = pb;
     private int sr = Color.RED.getRed(), sg = Color.RED.getGreen(), sb = Color.RED.getBlue();
 
     public CapabilitySpeedster() {
@@ -133,10 +134,10 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     }
 
     @Override
-    public void setSecondaryTrailColor(int r, int g, int b) {
-        this.sr = r;
-        this.sg = g;
-        this.sb = b;
+    public void setSecondaryTrailColor(Color color) {
+        this.sr = color.getRed();
+        this.sg = color.getGreen();
+        this.sb = color.getBlue();
     }
 
     @Override
@@ -145,10 +146,10 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     }
 
     @Override
-    public void setPrimaryTrailColor(int r, int g, int b) {
-        this.pr = r;
-        this.pg = g;
-        this.pb = b;
+    public void setPrimaryTrailColor(Color color) {
+        this.pr = color.getRed();
+        this.pg = color.getGreen();
+        this.pb = color.getBlue();
     }
 
     @Override
@@ -156,6 +157,17 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         return new Color(pr, pg, pb);
     }
 
+    @Override
+    public Color getLastTrailColor() {
+        return new Color(lpr, lpg, lpb);
+    }
+
+    @Override
+    public void setLastTrailColor(Color color) {
+        this.lpr = color.getRed();
+        this.lpg = color.getGreen();
+        this.lpb = color.getBlue();
+    }
 
     @Override
     public NBTTagCompound serializeNBT() {
@@ -170,6 +182,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         nbt.setInteger("pr", pr);
         nbt.setInteger("pg", pg);
         nbt.setInteger("pb", pb);
+        nbt.setInteger("lpr", lpr);
+        nbt.setInteger("lpg", lpg);
+        nbt.setInteger("lpb", lpb);
         nbt.setInteger("sr", sr);
         nbt.setInteger("sg", sg);
         nbt.setInteger("sb", sb);
@@ -185,8 +200,15 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         level = nbt.getInteger("level");
         isWallRunning = nbt.getBoolean("is_wall_run");
         hasSecondTrail = nbt.getBoolean("has_second_trail");
-        pr = nbt.getInteger("pr"); pg = nbt.getInteger("pg"); pb = nbt.getInteger("pb");
-        sr = nbt.getInteger("sr"); sg = nbt.getInteger("sg"); sb = nbt.getInteger("sb");
+        pr = nbt.getInteger("pr");
+        pg = nbt.getInteger("pg");
+        pb = nbt.getInteger("pb");
+        lpr = nbt.getInteger("lpr");
+        lpg = nbt.getInteger("lpg");
+        lpb = nbt.getInteger("lpb");
+        sr = nbt.getInteger("sr");
+        sg = nbt.getInteger("sg");
+        sb = nbt.getInteger("sb");
     }
 
 

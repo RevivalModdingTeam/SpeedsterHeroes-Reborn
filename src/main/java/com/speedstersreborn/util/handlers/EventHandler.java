@@ -1,5 +1,6 @@
 package com.speedstersreborn.util.handlers;
 
+import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.SHRConfig;
@@ -36,14 +37,35 @@ public class EventHandler {
 
     @SubscribeEvent
     public static void MakeFire(LivingEvent.LivingUpdateEvent e) {
-        if(e.getEntity() instanceof EntityPlayer) {
+        if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
-            if(EventHandlePower.isMoving(player) && cap.isSpeedster() && cap.getSpeedLevel() >= 6) {
+            if (EventHandlePower.isMoving(player) && cap.isSpeedster() && cap.getSpeedLevel() >= 6) {
                 BlockPos blockPos = new BlockPos(player.posX, player.posY - 1, player.posZ);
-                if(player.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN) {
+                if (player.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN) {
                     player.world.setBlockState(player.getPosition(), Blocks.FIRE.getDefaultState());
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void setTrailsFromSuit(LivingEvent.LivingUpdateEvent e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            if (CapabilitySpeedster.get(player).isSpeedster()) {
+                AbstractSuit suit = AbstractSuit.getSuit(player);
+                if (suit != null) {
+                    if (cap.getPrimaryTrailColor().getRGB() != suit.getTrailRGB().getRGB()) {
+                        System.out.println("ssss");
+                        cap.setLastTrailColor(cap.getPrimaryTrailColor());
+                        cap.setPrimaryTrailColor(suit.getTrailRGB());
+                    }
+                } else {
+                    cap.setPrimaryTrailColor(cap.getLastTrailColor());
+                }
+                cap.sync();
             }
         }
     }
