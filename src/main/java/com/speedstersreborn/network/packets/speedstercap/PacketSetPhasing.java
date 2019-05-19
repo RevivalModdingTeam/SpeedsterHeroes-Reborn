@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class PacketSetPhasing implements IMessage {
 
 
-    public PacketSetPhasing(boolean enable) {
+    public PacketSetPhasing() {
     }
 
     @Override

@@ -40,8 +40,8 @@ public class ClientEventHandlers {
                 NetworkHandler.INSTANCE.sendToServer(new PacketSetWallRunning());
             }
 
-            if (ClientEventHandler.POWER3.isKeyDown()) {
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetPhasing(true));
+            if (ClientEventHandler.POWER3.isPressed()) {
+                NetworkHandler.INSTANCE.sendToServer(new PacketSetPhasing());
             }
         }
     }
