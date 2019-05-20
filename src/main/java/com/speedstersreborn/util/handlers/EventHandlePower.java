@@ -106,19 +106,18 @@ public class EventHandlePower {
                 player.extinguish();
             }
             FoodStats food = player.getFoodStats();
-            food.setFoodSaturationLevel(food.getSaturationLevel() - 0.05f * cap.getSpeedLevel());
-            if (food.getSaturationLevel() < 0f && food.getFoodLevel() > 0) {
-                food.setFoodSaturationLevel(20.0F);
-            }
             if (food.getFoodLevel() <= 1) {
                 player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 2, false, true));
             }
+
+            if(food.getFoodLevel() != 20) {
+                double exhaustion = (((food.getFoodLevel() - 20.5) * -1) * Math.max(cap.getSpeedLevel(), 0)) / 255;
+                capmeta.setExhaustionLevel(capmeta.getexhaustionLevel() + exhaustion);
+            }
         }
         if (player.getHealth() > player.getMaxHealth()) {
-            if (!player.getFoodStats().needFood()) {
-                player.shouldHeal();
-                player.setHealth(player.getHealth() + 1.0f);
-            }
+            player.shouldHeal();
+            player.setHealth(player.getHealth() + Math.max(1.0f, 0.4f));
         }
     }
 

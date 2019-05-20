@@ -67,7 +67,7 @@ dependencies {
 
     // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
     // except that these dependencies get remapped to your current MCP mappings
-    deobfCompile 'com.github.revivalmoddingteam:RevivalCore:0.1.8'
+    deobfCompile 'com.github.revivalmoddingteam:RevivalCore:0.1.9'
     //deobfCompile 'com.github.revivalmodding:RevivalCore:master-SNAPSHOT'
     //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 

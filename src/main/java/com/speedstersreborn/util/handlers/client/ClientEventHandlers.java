@@ -1,14 +1,11 @@
 package com.speedstersreborn.util.handlers.client;
 
-import com.revivalmodding.revivalcore.meta.capability.CapMetaStorage;
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.handlers.client.ClientEventHandler;
 import com.revivalmodding.revivalcore.util.helper.ImageHelper;
-import com.revivalmodding.revivalcore.util.helper.ModHelper;
-import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.network.NetworkHandler;
@@ -18,15 +15,9 @@ import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeedster;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetWallRunning;
 import com.speedstersreborn.util.config.CFGOverlayPosition;
 import com.speedstersreborn.util.config.SHRConfig;
-import com.speedstersreborn.util.helper.MathHelper;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.fml.common.Mod;
@@ -93,7 +84,6 @@ public class ClientEventHandlers {
 	
 	private static void doSpeedRender(Minecraft mc, int pixHeight) {
 		CFGOverlayPosition pos = SHRConfig.speedstersHeroesReborn.speedIndicator;
-		System.out.println(pos.y);
 		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, pos.x, pixHeight-pos.y, 64, 10, 0, 0, 1, 0.3125D, false);
 		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, pos.x, pixHeight-pos.y, 8, 16, 0, 0.34375, 0.1875, 0.6875, true);
 		
