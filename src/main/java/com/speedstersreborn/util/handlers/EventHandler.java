@@ -3,7 +3,7 @@ package com.speedstersreborn.util.handlers;
 import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
-import com.speedstersreborn.util.SHRConfig;
+import com.speedstersreborn.util.config.SHRConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
