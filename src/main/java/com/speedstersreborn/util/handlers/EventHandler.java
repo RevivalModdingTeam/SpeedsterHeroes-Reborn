@@ -58,15 +58,18 @@ public class EventHandler {
                 AbstractSuit suit = AbstractSuit.getSuit(player);
                 if (suit != null) {
                     if (cap.getPrimaryTrailColor().getRGB() != suit.getTrailRGB().getRGB()) {
-                        System.out.println("ssss");
                         cap.setLastTrailColor(cap.getPrimaryTrailColor());
                         cap.setPrimaryTrailColor(suit.getTrailRGB());
                     }
                 } else {
+                    if(cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB())
                     cap.setPrimaryTrailColor(cap.getLastTrailColor());
                 }
                 cap.sync();
             }
         }
     }
+
+    @SubscribeEvent
+    public static void setRainBowTrails() {}
 }
