@@ -49,5 +49,9 @@ public interface ISpeedsterCap extends INBTSerializable<NBTTagCompound> {
 
     Color getLastTrailColor();
 
-    public void setLastTrailColor(Color color);
+    void setLastTrailColor(Color color);
+
+    void setRainbowTrail(boolean rainbowTrail);
+
+    boolean hasRainbowTrail();
 }

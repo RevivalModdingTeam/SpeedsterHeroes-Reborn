@@ -18,6 +18,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 
 @Mod.EventBusSubscriber
 public class EventHandler {
@@ -62,14 +67,31 @@ public class EventHandler {
                         cap.setPrimaryTrailColor(suit.getTrailRGB());
                     }
                 } else {
-                    if(cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB())
-                    cap.setPrimaryTrailColor(cap.getLastTrailColor());
+                    if (cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB())
+                        cap.setPrimaryTrailColor(cap.getLastTrailColor());
                 }
                 cap.sync();
             }
         }
     }
 
+
     @SubscribeEvent
-    public static void setRainBowTrails() {}
+    public static void setRainBowTrails(LivingEvent.LivingUpdateEvent e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            List<Color> list = new ArrayList<>();
+            Random r = new Random();
+            list.add(Color.red);list.add(Color.green);list.add(Color.orange);list.add(Color.magenta);
+
+            if (cap.hasRainbowTrail()) {
+                cap.setPrimaryTrailColor(list.get(r.nextInt(list.size())));
+                cap.sync();
+            } else {
+                if (cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB())
+                    cap.setPrimaryTrailColor(cap.getLastTrailColor());
+            }
+        }
+    }
 }

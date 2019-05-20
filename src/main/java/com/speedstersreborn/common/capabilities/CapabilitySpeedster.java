@@ -29,6 +29,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private double xp = 0.0;
     private boolean isWallRunning = false;
     private boolean hasSecondTrail = false;
+    private boolean hasRainbowTrail = false;
     private int pr = Color.ORANGE.getRed(), pg = Color.ORANGE.getGreen(), pb = Color.ORANGE.getBlue();
     private int lpr = pr, lpg = pg, lpb = pb;
     private int sr = Color.RED.getRed(), sg = Color.RED.getGreen(), sb = Color.RED.getBlue();
@@ -167,6 +168,16 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         this.lpr = color.getRed();
         this.lpg = color.getGreen();
         this.lpb = color.getBlue();
+    }
+
+    @Override
+    public void setRainbowTrail(boolean rainbowTrail) {
+        this.hasRainbowTrail = rainbowTrail;
+    }
+
+    @Override
+    public boolean hasRainbowTrail() {
+        return hasRainbowTrail;
     }
 
     @Override

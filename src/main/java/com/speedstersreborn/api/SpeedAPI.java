@@ -30,9 +30,7 @@ public class SpeedAPI {
             player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(mod);
             if (!player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(mod))
                 player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(mod);
-        }else{
-            player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(mod);
-        }
+        }else{ player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(mod); }
     }
 
     public static void setSpeedFromCap(EntityPlayer player) {

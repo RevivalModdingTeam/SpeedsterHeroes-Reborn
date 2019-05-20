@@ -15,8 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
-
 public class RenderEntityTrail extends RenderLivingBase<TrailRenderHandler.EntityTrail> {
 
     public float alpha;
@@ -61,7 +59,6 @@ public class RenderEntityTrail extends RenderLivingBase<TrailRenderHandler.Entit
         model.bipedRightArmwear.showModel = player.isWearing(EnumPlayerModelParts.RIGHT_SLEEVE);
         model.bipedRightLegwear.showModel = player.isWearing(EnumPlayerModelParts.RIGHT_PANTS_LEG);
         model.bipedLeftLegwear.showModel = player.isWearing(EnumPlayerModelParts.LEFT_PANTS_LEG);
-
         this.alpha = entity.alpha;
 
         try {
