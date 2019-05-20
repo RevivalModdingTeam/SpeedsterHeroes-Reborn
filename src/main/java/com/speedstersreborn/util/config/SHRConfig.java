@@ -1,4 +1,4 @@
-package com.speedstersreborn.util;
+package com.speedstersreborn.util.config;
 
 import com.revivalmodding.revivalcore.RevivalCore;
 import com.speedstersreborn.SpeedsterHeroesReborn;
@@ -24,12 +24,16 @@ public class SHRConfig {
         @Config.Comment({"Modify the speed which is additionally added per speed level","Final speed is = level * speedMultiplier"})
         public float speedIncreaseOverLevel = 0.125f;
         
+        @Config.LangKey("config.shr.speedindicator")
+        @Config.Comment("Modify rendering position of the speed indicators")
+        public CFGOverlayPosition speedIndicator = new CFGOverlayPosition(10, 10);
+        
         @Mod.EventBusSubscriber
         public static class Event {
             @SubscribeEvent
-            public void onConfigChanged(ConfigChangedEvent e) {
-                if (e.getModID().equals(RevivalCore.MODID))
-                    ConfigManager.sync(RevivalCore.MODID, Config.Type.INSTANCE);
+            public static void onConfigChanged(ConfigChangedEvent e) {
+                if (e.getModID().equals(SpeedsterHeroesReborn.MODID))
+                    ConfigManager.sync(SpeedsterHeroesReborn.MODID, Config.Type.INSTANCE);
             }
         }
     }
