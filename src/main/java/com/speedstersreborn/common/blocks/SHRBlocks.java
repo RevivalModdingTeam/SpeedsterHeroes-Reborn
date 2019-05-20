@@ -18,10 +18,10 @@ public class SHRBlocks {
 
     public static final List<Block> BLOCK_LIST = new ArrayList<>();
 
-    public static Block treadmill = RegisterBlock(new BlockTreadMill(Material.ROCK), "treadmill", true);
-    public static Block particleaccelerator = RegisterBlock(new BlockParticleAccelerator(Material.IRON), "small_particle_accelerator", true);
+    public static BlockTreadMill treadmill = registerBlock(new BlockTreadMill(Material.ROCK), "treadmill", true);
+    public static BlockParticleAccelerator particleaccelerator = registerBlock(new BlockParticleAccelerator(Material.IRON), "small_particle_accelerator", true);
 
-    public static Block RegisterBlock(Block block, String name, boolean tab) {
+    public static <T extends Block> T registerBlock(T block, String name, boolean tab) {
         block.setRegistryName(name);
         block.setTranslationKey(name);
         SHRBlocks.BLOCK_LIST.add(block);

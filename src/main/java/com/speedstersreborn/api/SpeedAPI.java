@@ -1,16 +1,19 @@
 package com.speedstersreborn.api;
 
+import java.util.UUID;
+
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
-import com.speedstersreborn.util.SHRConfig;
+import com.speedstersreborn.util.config.SHRConfig;
+import com.speedstersreborn.util.helper.MathHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-
-import java.util.UUID;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * Created by Josia50
@@ -60,13 +63,17 @@ public class SpeedAPI {
 
     // Slowmotion
 
-    public static void SlowOtherPlayers(EntityPlayer player, int range, float slow) {
+    public static void slowOtherPlayers(EntityPlayer player, int range, float slow) {
         for (EntityPlayer player1 : player.world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(range, range, range))) {
             player1.setAIMoveSpeed(slow);
         }
     }
 
-    public static void Sync(EntityPlayer player) {
+    public static void sync(EntityPlayer player) {
         player.sendPlayerAbilities();
+    }
+    
+    public static boolean isPlayerMoving(EntityPlayer player) {
+    	return player.motionX != 0 && player.motionZ != 0;
     }
 }
