@@ -15,6 +15,7 @@ import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeedster;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetWallRunning;
 import com.speedstersreborn.util.config.CFGOverlayPosition;
 import com.speedstersreborn.util.config.SHRConfig;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -97,8 +98,6 @@ public class ClientEventHandlers {
 	}
 	
 	public static class IndicatorAnimation {
-		
-		public static int x;
 		
 		public static int interpolate(float base) {
 			return (int)(base * 60 / Minecraft.getDebugFPS());
