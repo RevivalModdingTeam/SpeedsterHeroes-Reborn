@@ -13,7 +13,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
 
 /**
  * Created by Josia50
@@ -71,6 +70,10 @@ public class SpeedAPI {
 
     public static void sync(EntityPlayer player) {
         player.sendPlayerAbilities();
+    }
+    
+    public static double getPlayerMovementSpeed(EntityPlayer player) {
+    	return Math.sqrt(MathHelper.sqr(player.motionX) + MathHelper.sqr(player.motionZ));
     }
     
     public static boolean isPlayerMoving(EntityPlayer player) {

@@ -1,5 +1,7 @@
 package com.speedstersreborn.util.handlers.client;
 
+import java.text.DecimalFormat;
+
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
@@ -16,6 +18,7 @@ import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeed;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeedster;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetWallRunning;
 import com.speedstersreborn.util.config.CFGOverlayPosition;
+import com.speedstersreborn.util.config.CFGSpeedIndicatorUnit;
 import com.speedstersreborn.util.config.SHRConfig;
 
 import net.minecraft.client.Minecraft;
@@ -39,8 +42,8 @@ import net.minecraftforge.fml.relauncher.Side;
 public class ClientEventHandlers {
 
 	static final ResourceLocation SPEED_INDICATOR = new ResourceLocation(SpeedsterHeroesReborn.MODID + ":textures/overlay/speedbar.png");
+	static final DecimalFormat FORMAT = new DecimalFormat("####,##0.00");
 	
-	static float speed;
 	static double x;
 	
 	@SubscribeEvent
@@ -67,18 +70,6 @@ public class ClientEventHandlers {
         }
 	}
 	
-    @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent e) {
-    	EntityPlayer player = Minecraft.getMinecraft().player;
-    	if(player == null) {
-    		return;
-    	}
-    	ISpeedsterCap cap = CapabilitySpeedster.get(player);
-    	if(cap.isSpeedster()) {
-    		updateSpeed(SpeedAPI.isPlayerMoving(player) ? player.getAIMoveSpeed() : 0f);
-    	}
-    }
-	
 	@SubscribeEvent
 	public static void onRenderPost(RenderGameOverlayEvent.Post e) {
 		Minecraft mc = Minecraft.getMinecraft();
@@ -91,9 +82,10 @@ public class ClientEventHandlers {
 	}
 	
 	private static void doSpeedRender(Minecraft mc, ScaledResolution res, int level) {
-		if(level < 0)
+		if(level < 0 || mc.player.isCreative() || mc.player.isSpectator())
 			return;
 		CFGOverlayPosition pos = SHRConfig.speedstersHeroesReborn.speedIndicator;
+		CFGSpeedIndicatorUnit speedUnit = SHRConfig.speedstersHeroesReborn.speedUnit;
 		int width = res.getScaledWidth();
 		int height = res.getScaledHeight();
 		int left = width / 2 - 63;
@@ -101,11 +93,8 @@ public class ClientEventHandlers {
 		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, left + pos.x, top-pos.y, 128, 10, 0, 0, 1, 0.716D, false);
 		x = IndicatorAnimation.move(x, level*6.4f, 0.5f);
 		drawImageWithUV(mc, SPEED_INDICATOR, left-1 + pos.x + x, top+8-pos.y, 8, 4, 0, 0.733, 0.05197505197, 0.9333, true);
+		mc.fontRenderer.drawStringWithShadow(FORMAT.format((SpeedAPI.getPlayerMovementSpeed(mc.player)*20)*speedUnit.getMultiplier())+ " " + speedUnit.getName(), left + pos.x, top-pos.y - 9, 0xFFFFFF);
 		
-	}
-	
-	private static void updateSpeed(float newSpeed) {
-		speed = newSpeed;
 	}
 	
 	// TODO change the startX,Y to double inside ImageHelper
