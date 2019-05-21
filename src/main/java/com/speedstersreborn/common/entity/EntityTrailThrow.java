@@ -62,7 +62,12 @@ public class EntityTrailThrow extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
+        if(world.isRemote)
+            return;
 
+        if(result.typeOfHit == RayTraceResult.Type.ENTITY) {
+            this.setDead();
+        }
     }
 
 

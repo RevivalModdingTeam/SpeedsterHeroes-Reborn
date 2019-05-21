@@ -672,7 +672,7 @@ public class TrailRenderHandler {
             GL11.glBlendFunc(770, 771);
             GL11.glAlphaFunc(516, 0.003921569F);
             GlStateManager.color((float) c.getRed() / 255F, (float) c.getGreen() / 255F, (float) c.getBlue() / 255F, progress);
-           entity.alpha = progress;
+            entity.alpha = progress;
             return true;
         }
 
@@ -1014,7 +1014,7 @@ public class TrailRenderHandler {
         }
 
         if (innerLineWidth > 0) {
-           GlStateManager.color(color.getRed(), color.getGreen(), color.getBlue(), MathHelper.clamp(alpha - 0.2F, 0, 1));
+            GlStateManager.color(color.getRed(), color.getGreen(), color.getBlue(), MathHelper.clamp(alpha - 0.2F, 0, 1));
             GlStateManager.glLineWidth(innerLineWidth);
             wr.begin(GL11.GL_LINE_STRIP, DefaultVertexFormats.POSITION);
             wr.pos(start.x, start.y, start.z).endVertex();

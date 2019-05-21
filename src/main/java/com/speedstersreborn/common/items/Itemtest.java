@@ -20,7 +20,7 @@ public class Itemtest extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 
         if(!worldIn.isRemote) {
-            EntityTrailThrow r = new EntityTrailThrow(worldIn, playerIn, TrailRenderHandler.TrailType.ELECTRICITY);
+            EntityTrailThrow r = new EntityTrailThrow(worldIn, playerIn, TrailRenderHandler.TrailType.NORMAL);
             r.shoot(playerIn, playerIn.rotationPitch, playerIn.getRotationYawHead(), 0,1,0);
             worldIn.spawnEntity(r);
         }
