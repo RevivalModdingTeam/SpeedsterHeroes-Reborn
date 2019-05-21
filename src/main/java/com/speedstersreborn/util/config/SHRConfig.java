@@ -26,7 +26,7 @@ public class SHRConfig {
         
         @Config.LangKey("config.shr.speedindicator")
         @Config.Comment("Modify rendering position of the speed indicators")
-        public CFGOverlayPosition speedIndicator = new CFGOverlayPosition(10, 10);
+        public CFGOverlayPosition speedIndicator = new CFGOverlayPosition(0, 0);
         
         @Mod.EventBusSubscriber
         public static class Event {

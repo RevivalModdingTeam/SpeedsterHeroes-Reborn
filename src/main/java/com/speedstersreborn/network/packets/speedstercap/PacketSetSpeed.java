@@ -32,11 +32,11 @@ public class PacketSetSpeed implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
                 EntityPlayer player = ctx.getServerHandler().player;
                 ISpeedsterCap data = CapabilitySpeedster.get(player);
-                if (data.isSpeedster() && data.getSpeedLevel() < SpeedAPI.MaxSpeedLevel) {
-                    if (!player.isSneaking()) {
+                if (data.isSpeedster()) {
+                    if (!player.isSneaking() && data.getSpeedLevel() < SpeedAPI.MaxSpeedLevel) {
                         data.setSpeedLevel(data.getSpeedLevel() + 1);
                     } else {
-                        if (data.getSpeedLevel() != 0)
+                        if (data.getSpeedLevel() > 0)
                             data.setSpeedLevel(data.getSpeedLevel() - 1);
                     }
                     PlayerHelper.sendMessage(player, "Speed: " + data.getSpeedLevel(), true);

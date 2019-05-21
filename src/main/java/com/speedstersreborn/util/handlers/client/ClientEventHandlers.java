@@ -41,7 +41,7 @@ public class ClientEventHandlers {
 	static final ResourceLocation SPEED_INDICATOR = new ResourceLocation(SpeedsterHeroesReborn.MODID + ":textures/overlay/speedbar.png");
 	
 	static float speed;
-	static int x;
+	static double x;
 	
 	@SubscribeEvent
 	public static void keyPressed(InputEvent.KeyInputEvent e) {
@@ -91,16 +91,15 @@ public class ClientEventHandlers {
 	}
 	
 	private static void doSpeedRender(Minecraft mc, ScaledResolution res, int level) {
+		if(level < 0)
+			return;
 		CFGOverlayPosition pos = SHRConfig.speedstersHeroesReborn.speedIndicator;
 		int width = res.getScaledWidth();
 		int height = res.getScaledHeight();
 		int left = width / 2 - 63;
 		int top = height - 62;
-		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, left, top-pos.y, 128, 10, 0, 0, 1, 0.716D, false);
-		
-		if(level < 0)
-			return;
-		x = IndicatorAnimation.move(x, (int)(level*6.4), 0.5f);
+		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, left + pos.x, top-pos.y, 128, 10, 0, 0, 1, 0.716D, false);
+		x = IndicatorAnimation.move(x, level*6.4f, 0.5f);
 		drawImageWithUV(mc, SPEED_INDICATOR, left-1 + pos.x + x, top+8-pos.y, 8, 4, 0, 0.733, 0.05197505197, 0.9333, true);
 		
 	}
@@ -145,13 +144,13 @@ public class ClientEventHandlers {
 	
 	public static class IndicatorAnimation {
 		
-		public static int interpolate(float base) {
-			return (int)(base * 60 / Minecraft.getDebugFPS());
+		public static double interpolate(double base) {
+			return base * 60 / Minecraft.getDebugFPS();
 		}
 		
-		public static int move(int current, int target, float modifier) {
-			float f = Math.abs(current - target) < modifier ? target : current < target ? current + interpolate(modifier) : current - interpolate(modifier);
-			return (int)f;
+		public static double move(double current, float target, float modifier) {
+			double d = Math.abs(current - target) < modifier ? target : current < target ? current + interpolate(modifier) : current - interpolate(modifier);
+			return d;
 		}
 	}
 }

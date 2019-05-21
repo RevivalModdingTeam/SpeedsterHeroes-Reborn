@@ -2,6 +2,7 @@
 config.tab.speedsterheroesreborn=SpeedsterHeroes Reborn
 config.shr.updatechecker=Update Checker
 config.shr.speedlevelmultiplier=Speed Level Multiplier
+config.shr.speedindicator=Speed Indicator
 
 // Item
 item.ring_reverse.name=Reverse Ring
