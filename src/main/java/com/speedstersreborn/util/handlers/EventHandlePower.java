@@ -110,7 +110,7 @@ public class EventHandlePower {
                 player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 2, false, true));
             }
 
-            if(food.getFoodLevel() != 20) {
+            if (food.getFoodLevel() != 20) {
                 double exhaustion = (((food.getFoodLevel() - 20.5) * -1) * Math.max(cap.getSpeedLevel(), 0)) / 255;
                 capmeta.setExhaustionLevel(capmeta.getexhaustionLevel() + exhaustion);
             }
@@ -128,7 +128,9 @@ public class EventHandlePower {
     private static void updateLevel(ISpeedsterCap cap) {
         final double xp = cap.getXP();
         final double required = (cap.getLevel() + 1) * 100 + 100.0D;
-        if (xp >= required)
+        if (xp >= required) {
             cap.setLevel(cap.getLevel() + 1);
+            if (cap.getMaxspeedLevel() < 20) cap.setMaxSpeedLevel(cap.getMaxspeedLevel() + 5);
+        }
     }
 }

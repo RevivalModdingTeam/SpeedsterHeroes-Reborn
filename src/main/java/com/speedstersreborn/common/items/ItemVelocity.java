@@ -13,8 +13,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-import java.awt.*;
-
 public class ItemVelocity extends Item {
 
     VelocityTypes velocityTypes;
@@ -22,6 +20,8 @@ public class ItemVelocity extends Item {
     public ItemVelocity(String name, VelocityTypes types) {
         setTranslationKey(name);
         setRegistryName(name);
+        setMaxStackSize(1);
+        setFull3D();
         this.velocityTypes = types;
     }
 
@@ -37,9 +37,8 @@ public class ItemVelocity extends Item {
         if(stack.getTagCompound().getBoolean("has_drug")) {
             stack.getTagCompound().setBoolean("has_drug", false);
             ISpeedsterCap cap = CapabilitySpeedster.get(playerIn);
-            if(!MetaHelper.hasPower(playerIn, MetaPowerStrings.SPEEDSTER)) {
+            if(!MetaHelper.hasPower(playerIn, MetaPowerStrings.SPEEDSTER.toUpperCase())) {
                 cap.setVelocity(velocityTypes, true);
-                cap.setPrimaryTrailColor(Color.BLUE);
                 cap.setSpeedster(true);
                 cap.sync();
             }

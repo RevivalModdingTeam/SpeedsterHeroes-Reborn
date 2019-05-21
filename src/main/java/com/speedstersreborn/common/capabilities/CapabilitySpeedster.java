@@ -78,8 +78,6 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             setSpeedLevel(0);
         }
 
-        System.out.println(hasVelocity() + "   " + velocitycount);
-
         if(!isSpeedster)
         this.isSpeedster = CapabilityMeta.get(player).isPowerEnabled();
     }
