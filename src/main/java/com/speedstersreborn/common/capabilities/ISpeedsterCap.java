@@ -1,5 +1,6 @@
 package com.speedstersreborn.common.capabilities;
 
+import com.speedstersreborn.util.handlers.EnumHandler.VelocityTypes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
@@ -54,4 +55,12 @@ public interface ISpeedsterCap extends INBTSerializable<NBTTagCompound> {
     void setRainbowTrail(boolean rainbowTrail);
 
     boolean hasRainbowTrail();
+
+    void setMaxSpeedLevel(int level);
+
+    int getMaxspeedLevel();
+
+    void setVelocity(VelocityTypes types, boolean on);
+
+    boolean hasVelocity();
 }

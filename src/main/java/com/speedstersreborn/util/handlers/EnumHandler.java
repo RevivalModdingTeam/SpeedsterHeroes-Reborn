@@ -41,20 +41,36 @@ public class EnumHandler {
         }
     }
 
-    public enum PowerTypes implements IStringSerializable {
-        ;
+    public enum VelocityTypes implements IStringSerializable {
+        VELOCITY_NINE("v9", 60, 5, 1);
 
-        private int ID;
-        private String name;
+        private String names;
+        private int timeleft;
+        private int maxspeedlevels;
+        private int damages;
 
-        PowerTypes(String name, int ID) {
-            this.ID = ID;
-            this.name = name;
+        VelocityTypes(String name,int time, int maxspeedlevel, int damage) {
+            this.names = name;
+            this.timeleft = time;
+            this.maxspeedlevels = maxspeedlevel;
+            this.damages = damage;
+        }
+
+        public int getDamages() {
+            return damages;
+        }
+
+        public int getMaxspeedlevels() {
+            return maxspeedlevels;
+        }
+
+        public int getTimeleft() {
+            return timeleft;
         }
 
         @Override
         public String getName() {
-            return name;
+            return this.names;
         }
     }
 }

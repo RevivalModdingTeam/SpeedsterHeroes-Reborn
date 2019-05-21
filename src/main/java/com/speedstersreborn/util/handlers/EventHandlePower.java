@@ -35,7 +35,7 @@ public class EventHandlePower {
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IMetaCap capmeta = CapabilityMeta.get(player);
 
-            if (MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
+            if (MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER || cap.isSpeedster()) {
                 setXPAdd(player, cap);
                 runWater(player, cap);
                 runWall(player, cap);

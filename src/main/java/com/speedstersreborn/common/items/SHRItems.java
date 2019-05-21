@@ -3,6 +3,7 @@ package com.speedstersreborn.common.items;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.tabs.ModTabs;
 import com.speedstersreborn.util.handlers.EnumHandler.RingTypes;
+import com.speedstersreborn.util.handlers.EnumHandler.VelocityTypes;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -20,12 +21,14 @@ public class SHRItems {
 
     // Rings
     public static ItemRing ring_reverse_flash, ring_zoom, ring_god_speed, ring_kid_flash;
+    public static ItemVelocity velocity_nine;
 
     public static void init() {
         ring_reverse_flash = registerItem(new ItemRing("ring_reverse_flash", RingTypes.REVERSE), true);
         ring_zoom = registerItem(new ItemRing("ring_zoom", RingTypes.ZOOM), true);
         ring_god_speed = registerItem(new ItemRing("ring_god_speed", RingTypes.GOD_SPEED), true);
         ring_kid_flash = registerItem(new ItemRing("ring_kid_flash", RingTypes.KID_FLASH), true);
+        velocity_nine = registerItem(new ItemVelocity("velocity_nine", VelocityTypes.VELOCITY_NINE), true);
     }
 
     public static void registerRenders() {

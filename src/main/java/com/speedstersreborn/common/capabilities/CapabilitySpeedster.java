@@ -1,9 +1,11 @@
 package com.speedstersreborn.common.capabilities;
 
+import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.network.packets.speedstercap.PacketCapSync;
+import com.speedstersreborn.util.handlers.EnumHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,6 +32,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private boolean isWallRunning = false;
     private boolean hasSecondTrail = false;
     private boolean hasRainbowTrail = false;
+    private int maxSpeedLevel = 5;
+    private int velocitycount = 0;
+    private boolean velocity = false;
     private int pr = Color.ORANGE.getRed(), pg = Color.ORANGE.getGreen(), pb = Color.ORANGE.getBlue();
     private int lpr = pr, lpg = pg, lpb = pb;
     private int sr = Color.RED.getRed(), sg = Color.RED.getGreen(), sb = Color.RED.getBlue();
@@ -51,12 +56,32 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             setPhasing(false);
             SpeedAPI.setSpeedFromCap(player);
         } else {
-            SpeedAPI.setSpeedFromCap(player);
+            if (hasVelocity()) {
+                if (getSpeedLevel() < maxSpeedLevel) {
+                    SpeedAPI.setSpeedFromCap(player);
+                }
+            } else {
+                SpeedAPI.setSpeedFromCap(player);
+            }
         }
+
+        if (velocity) {
+            velocitycount--;
+            if (velocitycount == 0) {
+                isSpeedster = false;
+                velocity = false;
+            }
+        }
+
 
         if (getSpeedLevel() < 0) {
             setSpeedLevel(0);
         }
+
+        System.out.println(hasVelocity() + "   " + velocitycount);
+
+        if(!isSpeedster)
+        this.isSpeedster = CapabilityMeta.get(player).isPowerEnabled();
     }
 
     @Override
@@ -181,13 +206,38 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     }
 
     @Override
+    public void setMaxSpeedLevel(int level) {
+        maxSpeedLevel = level;
+    }
+
+    @Override
+    public int getMaxspeedLevel() {
+        return maxSpeedLevel;
+    }
+
+    @Override
+    public void setVelocity(EnumHandler.VelocityTypes types, boolean on) {
+        this.velocity = on;
+        this.maxSpeedLevel = types.getMaxspeedlevels();
+        this.velocitycount = types.getTimeleft() * 20;
+    }
+
+    @Override
+    public boolean hasVelocity() {
+        return velocity;
+    }
+
+    @Override
     public NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setInteger("speed_level", speed_level);
         nbt.setBoolean("is_speedster", isSpeedster);
+        nbt.setInteger("velocity_count", velocitycount);
         nbt.setBoolean("is_phasing", isPhasing);
+        nbt.setInteger("max_level", maxSpeedLevel);
         nbt.setDouble("xp_level", xp);
         nbt.setInteger("level", level);
+        nbt.setBoolean("velocity", velocity);
         nbt.setBoolean("is_wall_run", isWallRunning);
         nbt.setBoolean("has_second_trail", hasSecondTrail);
         nbt.setInteger("pr", pr);
@@ -211,6 +261,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         level = nbt.getInteger("level");
         isWallRunning = nbt.getBoolean("is_wall_run");
         hasSecondTrail = nbt.getBoolean("has_second_trail");
+        maxSpeedLevel = nbt.getInteger("max_level");
+        velocity = nbt.getBoolean("velocity");
+        velocitycount = nbt.getInteger("velocity_count");
         pr = nbt.getInteger("pr");
         pg = nbt.getInteger("pg");
         pb = nbt.getInteger("pb");

@@ -1,7 +1,5 @@
 package com.speedstersreborn.util.handlers.client;
 
-import java.text.DecimalFormat;
-
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
@@ -20,22 +18,21 @@ import com.speedstersreborn.network.packets.speedstercap.PacketSetWallRunning;
 import com.speedstersreborn.util.config.CFGOverlayPosition;
 import com.speedstersreborn.util.config.CFGSpeedIndicatorUnit;
 import com.speedstersreborn.util.config.SHRConfig;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.text.DecimalFormat;
 
 
 @Mod.EventBusSubscriber(Side.CLIENT)
@@ -50,7 +47,7 @@ public class ClientEventHandlers {
 	public static void keyPressed(InputEvent.KeyInputEvent e) {
         IMetaCap metaCap = CapabilityMeta.get(Minecraft.getMinecraft().player);
         
-        if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
+        if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER || CapabilitySpeedster.get(Minecraft.getMinecraft().player).isSpeedster()) {
 
             if (ClientEventHandler.ENABLE.isPressed()) {
                 NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeedster());
