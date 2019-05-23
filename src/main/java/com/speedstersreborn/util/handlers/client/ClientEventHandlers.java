@@ -44,30 +44,6 @@ public class ClientEventHandlers {
 	static double x;
 	
 	@SubscribeEvent
-	public static void keyPressed(InputEvent.KeyInputEvent e) {
-        IMetaCap metaCap = CapabilityMeta.get(Minecraft.getMinecraft().player);
-        
-        if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER || CapabilitySpeedster.get(Minecraft.getMinecraft().player).isSpeedster()) {
-
-            if (ClientEventHandler.ENABLE.isPressed()) {
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeedster());
-            }
-
-            else if (ClientEventHandler.POWER1.isPressed()) {
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeed());
-            }
-
-            else if (ClientEventHandler.POWER2.isPressed()) {
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetWallRunning());
-            }
-
-            else if (ClientEventHandler.POWER3.isPressed()) {
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetPhasing());
-            }
-        }
-	}
-	
-	@SubscribeEvent
 	public static void onRenderPost(RenderGameOverlayEvent.Post e) {
 		Minecraft mc = Minecraft.getMinecraft();
 		if(e.getType() == ElementType.ALL) {

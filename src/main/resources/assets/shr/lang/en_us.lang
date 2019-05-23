@@ -4,6 +4,13 @@ config.shr.updatechecker=Update Checker
 config.shr.speedlevelmultiplier=Speed Level Multiplier
 config.shr.speedindicator=Speed Indicator
 
+//Keybinds
+shr.keybinds.enable=Enable Power
+shr.keybinds.power1=Primary Power
+shr.keybinds.power2=Secondary Power
+shr.keybinds.power3=Third Power
+shr.keybinds.abilitygui=Ability GUI
+
 // Item
 item.ring_reverse.name=Reverse Ring
 item.ring_zoom.name=Zoom Ring
