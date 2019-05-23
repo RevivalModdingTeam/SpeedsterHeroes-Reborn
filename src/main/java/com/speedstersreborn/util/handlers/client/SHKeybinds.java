@@ -24,17 +24,9 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class SHKeybinds {
 	
-    public static KeyBinding ENABLE;
-    public static KeyBinding POWER1;
-    public static KeyBinding POWER2;
-    public static KeyBinding POWER3;
     public static KeyBinding ABILITY_GUI;
 
     public static void init() {
-    	ENABLE = init("enable", Keyboard.KEY_X);
-    	POWER1 = init("power1", Keyboard.KEY_N);
-    	POWER2 = init("power2", Keyboard.KEY_O);
-    	POWER3 = init("power3", Keyboard.KEY_C);
     	ABILITY_GUI = init("abilitygui", Keyboard.KEY_Y);
     }
     
@@ -53,19 +45,19 @@ public class SHKeybinds {
             
             if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
 
-                if (SHKeybinds.ENABLE.isPressed()) {
+                if (ClientEventHandler.ENABLE.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeedster());
                 }
 
-                else if (SHKeybinds.POWER1.isPressed()) {
+                else if (ClientEventHandler.POWER1.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeed());
                 }
 
-                else if (SHKeybinds.POWER2.isPressed()) {
+                else if (ClientEventHandler.POWER2.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetWallRunning());
                 }
 
-                else if (SHKeybinds.POWER3.isPressed()) {
+                else if (ClientEventHandler.POWER3.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetPhasing());
                 }
             }
