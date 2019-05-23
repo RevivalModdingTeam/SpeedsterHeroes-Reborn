@@ -31,6 +31,7 @@ public class PacketSetSpeedster implements IMessage {
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> {
                 EntityPlayer player = ctx.getServerHandler().player;
                 ISpeedsterCap data = CapabilitySpeedster.get(player);
+                
                 if (data.isSpeedster()) {
                     data.setSpeedster(false);
                     PlayerHelper.sendMessage(player, "Disabled Speedster Power", true);

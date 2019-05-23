@@ -20,7 +20,7 @@ public class ClientProxy implements IProxy {
 
     @Override
     public void init() {
-    	SHKeybinds.init();
+    	// SHKeybinds.init();
     }
 
     @Override

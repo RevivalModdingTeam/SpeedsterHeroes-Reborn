@@ -1,7 +1,5 @@
 package com.speedstersreborn.util.handlers.client;
 
-import org.lwjgl.input.Keyboard;
-
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
@@ -23,11 +21,8 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class SHKeybinds {
-	
-    public static KeyBinding ABILITY_GUI;
 
     public static void init() {
-    	ABILITY_GUI = init("abilitygui", Keyboard.KEY_Y);
     }
     
     private static KeyBinding init(String langKey, int key) {
@@ -42,7 +37,7 @@ public class SHKeybinds {
     	@SubscribeEvent
     	public static void keyPressed(InputEvent.KeyInputEvent e) {
             IMetaCap metaCap = CapabilityMeta.get(Minecraft.getMinecraft().player);
-            
+
             if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER) {
 
                 if (ClientEventHandler.ENABLE.isPressed()) {
