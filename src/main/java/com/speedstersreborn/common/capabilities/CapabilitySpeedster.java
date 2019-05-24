@@ -288,8 +288,10 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         @SubscribeEvent
         public static void update(LivingEvent.LivingUpdateEvent event) {
             CapabilitySpeedster cap = event.getEntityLiving().getCapability(CapSpeedstersStorage.CAPABILITY, null);
-            if (cap != null)
+            if (cap != null) {
                 cap.update();
+                cap.sync();
+            }
         }
 
         @SubscribeEvent

@@ -56,25 +56,24 @@ public class EventHandler {
 
     @SubscribeEvent
     public static void setTrailsFromSuit(LivingEvent.LivingUpdateEvent e) {
-        if (e.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) e.getEntity();
-                ISpeedsterCap cap = CapabilitySpeedster.get(player);
-                if (CapabilitySpeedster.get(player).isSpeedster()) {
-                    AbstractSuit suit = AbstractSuit.getSuit(player);
-                    if (suit != null) {
-                        if (cap.getPrimaryTrailColor().getRGB() != suit.getTrailRGB().getRGB()) {
-                            cap.setLastTrailColor(cap.getPrimaryTrailColor());
-                            cap.setPrimaryTrailColor(suit.getTrailRGB());
-                            cap.sync();
-                        }
-                    } else {
-                        if (cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB()) {
-                            cap.setPrimaryTrailColor(cap.getLastTrailColor());
-                            cap.sync();
-                        }
+        if (e.getEntityLiving() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntityLiving();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            if (CapabilitySpeedster.get(player).isSpeedster()) {
+                AbstractSuit suit = AbstractSuit.getSuit(player);
+                if (suit != null) {
+                    if (cap.getPrimaryTrailColor().getRGB() != suit.getTrailRGB().getRGB()) {
+                        cap.setLastTrailColor(cap.getPrimaryTrailColor());
+                        cap.setPrimaryTrailColor(suit.getTrailRGB());
+                    }
+                } else {
+                    if (cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB()) {
+                        cap.setPrimaryTrailColor(cap.getLastTrailColor());
                     }
                 }
+                cap.sync();
             }
+        }
     }
 
 
@@ -85,7 +84,10 @@ public class EventHandler {
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             List<Color> list = new ArrayList<>();
             Random r = new Random();
-            list.add(Color.red);list.add(Color.green);list.add(Color.orange);list.add(Color.magenta);
+            list.add(Color.red);
+            list.add(Color.green);
+            list.add(Color.orange);
+            list.add(Color.magenta);
 
             if (cap.hasRainbowTrail()) {
                 cap.setPrimaryTrailColor(list.get(r.nextInt(list.size())));
@@ -96,4 +98,9 @@ public class EventHandler {
             }
         }
     }
+
+     @SubscribeEvent
+    public static void SyncOnleave(PlayerEvent.PlayerLoggedInEvent e) {
+        CapabilitySpeedster.get(e.player).sync();
+     }
 }
