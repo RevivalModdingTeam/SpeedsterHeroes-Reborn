@@ -37,6 +37,7 @@ public class SpeedsterHeroesReborn
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        logger = event.getModLog();
         proxy.preInit();
         NetworkHandler.init();
         SHRItems.init();
