@@ -240,15 +240,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         nbt.setBoolean("velocity", velocity);
         nbt.setBoolean("is_wall_run", isWallRunning);
         nbt.setBoolean("has_second_trail", hasSecondTrail);
-        nbt.setInteger("pr", pr);
-        nbt.setInteger("pg", pg);
-        nbt.setInteger("pb", pb);
-        nbt.setInteger("lpr", lpr);
-        nbt.setInteger("lpg", lpg);
-        nbt.setInteger("lpb", lpb);
-        nbt.setInteger("sr", sr);
-        nbt.setInteger("sg", sg);
-        nbt.setInteger("sb", sb);
+        nbt.setInteger("pr", pr);nbt.setInteger("pg", pg);nbt.setInteger("pb", pb);
+        nbt.setInteger("lpr", lpr);nbt.setInteger("lpg", lpg);nbt.setInteger("lpb", lpb);
+        nbt.setInteger("sr", sr);nbt.setInteger("sg", sg);nbt.setInteger("sb", sb);
         return nbt;
     }
 
@@ -264,15 +258,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         maxSpeedLevel = nbt.getInteger("max_level");
         velocity = nbt.getBoolean("velocity");
         velocitycount = nbt.getInteger("velocity_count");
-        pr = nbt.getInteger("pr");
-        pg = nbt.getInteger("pg");
-        pb = nbt.getInteger("pb");
-        lpr = nbt.getInteger("lpr");
-        lpg = nbt.getInteger("lpg");
-        lpb = nbt.getInteger("lpb");
-        sr = nbt.getInteger("sr");
-        sg = nbt.getInteger("sg");
-        sb = nbt.getInteger("sb");
+        pr = nbt.getInteger("pr");pg = nbt.getInteger("pg");pb = nbt.getInteger("pb");
+        lpr = nbt.getInteger("lpr");lpg = nbt.getInteger("lpg");lpb = nbt.getInteger("lpb");
+        sr = nbt.getInteger("sr");sg = nbt.getInteger("sg");sb = nbt.getInteger("sb");
     }
 
 
