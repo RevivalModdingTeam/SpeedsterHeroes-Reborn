@@ -1,20 +1,10 @@
 package com.speedstersreborn.util.handlers.client;
 
-import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
-import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
-import com.revivalmodding.revivalcore.meta.util.MetaHelper;
-import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
-import com.revivalmodding.revivalcore.util.handlers.client.ClientEventHandler;
 import com.revivalmodding.revivalcore.util.helper.ImageHelper;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
-import com.speedstersreborn.network.NetworkHandler;
-import com.speedstersreborn.network.packets.speedstercap.PacketSetPhasing;
-import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeed;
-import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeedster;
-import com.speedstersreborn.network.packets.speedstercap.PacketSetWallRunning;
 import com.speedstersreborn.util.config.CFGOverlayPosition;
 import com.speedstersreborn.util.config.CFGSpeedIndicatorUnit;
 import com.speedstersreborn.util.config.SHRConfig;
@@ -29,7 +19,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.text.DecimalFormat;

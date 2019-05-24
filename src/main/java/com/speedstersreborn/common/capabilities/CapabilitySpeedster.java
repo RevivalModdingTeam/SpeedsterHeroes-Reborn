@@ -84,7 +84,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
 
     @Override
     public void sync() {
-        NetworkHandler.INSTANCE.sendToAll(new PacketCapSync(player, serializeNBT()));
+        if(player.world.isRemote) return;
+        NBTTagCompound data = serializeNBT();
+        NetworkHandler.INSTANCE.sendToAll(new PacketCapSync(player, data));
     }
 
     @Override

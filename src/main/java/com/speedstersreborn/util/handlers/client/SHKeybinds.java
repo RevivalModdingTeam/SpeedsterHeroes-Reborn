@@ -4,7 +4,7 @@ import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
-import com.revivalmodding.revivalcore.util.handlers.client.ClientEventHandler;
+import com.revivalmodding.revivalcore.util.handlers.client.Keybinds;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.network.NetworkHandler;
@@ -39,19 +39,19 @@ public class SHKeybinds {
 
             if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER || CapabilitySpeedster.get(Minecraft.getMinecraft().player).isSpeedster()) {
 
-                if (ClientEventHandler.ENABLE.isPressed()) {
+                if (Keybinds.ENABLE.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeedster());
                 }
 
-                if (ClientEventHandler.POWER1.isPressed()) {
+                if (Keybinds.POWER1.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeed());
                 }
 
-                if (ClientEventHandler.POWER2.isPressed()) {
+                if (Keybinds.POWER2.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetWallRunning());
                 }
 
-                if (ClientEventHandler.POWER3.isPressed())
+                if (Keybinds.POWER3.isPressed())
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetPhasing());
             }
         }

@@ -4,7 +4,7 @@
 		"0": "shr:items/white",
 		"1": "shr:items/gray",
 		"2": "shr:items/yellow",
-		"particle": "Godspeed/white"
+		"particle": "shr:items/white"
 	},
 	"elements": [
 		{

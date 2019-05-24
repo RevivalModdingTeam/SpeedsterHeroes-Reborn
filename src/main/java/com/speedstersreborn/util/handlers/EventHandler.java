@@ -58,21 +58,21 @@ public class EventHandler {
     public static void setTrailsFromSuit(LivingEvent.LivingUpdateEvent e) {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
-            ISpeedsterCap cap = CapabilitySpeedster.get(player);
-            if (CapabilitySpeedster.get(player).isSpeedster()) {
-                AbstractSuit suit = AbstractSuit.getSuit(player);
-                if (suit != null) {
-                    if (cap.getPrimaryTrailColor().getRGB() != suit.getTrailRGB().getRGB()) {
-                        cap.setLastTrailColor(cap.getPrimaryTrailColor());
-                        cap.setPrimaryTrailColor(suit.getTrailRGB());
+                ISpeedsterCap cap = CapabilitySpeedster.get(player);
+                if (CapabilitySpeedster.get(player).isSpeedster()) {
+                    AbstractSuit suit = AbstractSuit.getSuit(player);
+                    if (suit != null) {
+                        if (cap.getPrimaryTrailColor().getRGB() != suit.getTrailRGB().getRGB()) {
+                            cap.setLastTrailColor(cap.getPrimaryTrailColor());
+                            cap.setPrimaryTrailColor(suit.getTrailRGB());
+                        }
+                    } else {
+                        if (cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB())
+                            cap.setPrimaryTrailColor(cap.getLastTrailColor());
                     }
-                } else {
-                    if (cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB())
-                        cap.setPrimaryTrailColor(cap.getLastTrailColor());
+                    cap.sync();
                 }
-                cap.sync();
             }
-        }
     }
 
 

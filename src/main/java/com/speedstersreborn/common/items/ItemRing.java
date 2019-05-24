@@ -55,9 +55,9 @@ public class ItemRing extends Item {
                                 playerIn.getItemStackFromSlot(EntityEquipmentSlot.values()[i]).setCount(0);
                             }
                         }
-                    } // TODO Fix why this doesn't set the boolean
+                    }
+                    // TODO Fix why this doesn't set the boolean
                     stack.getTagCompound().setBoolean("has_suit", true);
-                    System.out.println("aa");
                 }
             }
         }

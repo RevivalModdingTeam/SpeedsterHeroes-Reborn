@@ -2,6 +2,7 @@ package com.speedstersreborn.common.blocks;
 
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
+import com.revivalmodding.revivalcore.meta.util.PEnumHandler;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.helper.IHaveItem;
@@ -29,7 +30,7 @@ public class BlockParticleAccelerator extends Block implements IHaveItem {
                 capa.setSpeedster(false);
                 cap.clear();
             } else { // TODO make real stuff
-                cap.setMetaPower(0); // TODO Change to MetaHelper once pushed
+                cap.setMetaPower(PEnumHandler.MetaPower.SPEEDSTER.getID()); // TODO Change to MetaHelper once pushed final
                 if(cap.getMetaPower() == 0) {
                     capa.setSpeedster(true);
                 }
