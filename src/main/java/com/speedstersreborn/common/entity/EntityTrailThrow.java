@@ -10,6 +10,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -17,6 +18,7 @@ public class EntityTrailThrow extends EntityThrowable {
 
     public EntityPlayer owner;
     public TrailRenderHandler.TrailType trailType;
+    public Color colors;
     public float[] lightningFactor;
     public float alpha = 1F;
 
@@ -26,10 +28,11 @@ public class EntityTrailThrow extends EntityThrowable {
         ignoreFrustumCheck = true;
     }
 
-    public EntityTrailThrow(World world, EntityPlayer owner, TrailRenderHandler.TrailType trailType) {
+    public EntityTrailThrow(World world, EntityPlayer owner, Color color, TrailRenderHandler.TrailType trailType) {
         this(world);
         this.owner = owner;
         this.trailType = trailType;
+        this.colors = color;
         this.setLocationAndAngles(owner.posX, owner.posY, owner.posZ, owner.rotationYaw, owner.rotationPitch);
         this.setSize(owner.width, owner.height);
 
@@ -62,10 +65,10 @@ public class EntityTrailThrow extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(world.isRemote)
+        if (world.isRemote)
             return;
 
-        if(result.typeOfHit == RayTraceResult.Type.ENTITY) {
+        if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
             this.setDead();
         }
     }

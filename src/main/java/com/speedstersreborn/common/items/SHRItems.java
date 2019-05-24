@@ -20,11 +20,12 @@ public class SHRItems {
     public static final List<Item> ITEM_LIST = new ArrayList<>();
 
     // Rings
-    public static ItemRing ring_reverse_flash, ring_zoom, ring_god_speed, ring_kid_flash;
+    public static ItemRing ring_reverse_flash, ring_zoom, ring_god_speed, ring_kid_flash, ring_flash;
     public static ItemVelocity velocity_nine;
     public static Item test;
 
     public static void init() {
+        ring_flash = registerItem(new ItemRing("ring_flash", RingTypes.FLASH), true);
         ring_reverse_flash = registerItem(new ItemRing("ring_reverse_flash", RingTypes.REVERSE), true);
         ring_zoom = registerItem(new ItemRing("ring_zoom", RingTypes.ZOOM), true);
         ring_god_speed = registerItem(new ItemRing("ring_god_speed", RingTypes.GOD_SPEED), true);
