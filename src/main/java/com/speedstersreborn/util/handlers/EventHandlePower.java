@@ -115,7 +115,7 @@ public class EventHandlePower {
                 capmeta.setExhaustionLevel(capmeta.getexhaustionLevel() + exhaustion);
             }
         }
-        if (player.getHealth() > player.getMaxHealth()) {
+        if (player.getHealth() < player.getMaxHealth()) {
             player.shouldHeal();
             player.setHealth(player.getHealth() + Math.max(1.0f, 0.4f));
         }
