@@ -15,6 +15,11 @@ public class CommonProxy implements IProxy {
     }
 
     @Override
+    public void postInit() {
+
+    }
+
+    @Override
     public void registerModelBakeryVariants() {
 
     }
