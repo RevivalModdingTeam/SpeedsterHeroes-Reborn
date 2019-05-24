@@ -31,7 +31,7 @@ public class SHRItems {
         ring_god_speed = registerItem(new ItemRing("ring_god_speed", RingTypes.GOD_SPEED), true);
         ring_kid_flash = registerItem(new ItemRing("ring_kid_flash", RingTypes.KID_FLASH), true);
         velocity_nine = registerItem(new ItemVelocity("velocity_nine", VelocityTypes.VELOCITY_NINE), true);
-        test = registerItem(new Itemtest("test"), true);
+     //   test = registerItem(new Itemtest("test"), true);
     }
 
     public static void registerRenders() {
