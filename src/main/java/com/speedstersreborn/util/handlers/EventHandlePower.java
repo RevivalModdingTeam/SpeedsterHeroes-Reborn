@@ -4,6 +4,7 @@ import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
+import com.revivalmodding.revivalcore.meta.util.PEnumHandler;
 import com.revivalmodding.revivalcore.util.helper.ModHelper;
 import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
@@ -111,8 +112,8 @@ public class EventHandlePower {
             }
 
             if (food.getFoodLevel() != 20) {
-                double exhaustion = (((food.getFoodLevel() - 20.5) * -1) * Math.max(cap.getSpeedLevel(), 0)) / 255;
-                capmeta.setExhaustionLevel(capmeta.getexhaustionLevel() + exhaustion);
+                double exhaustion = (((food.getFoodLevel() - 20.5) * -1) * Math.max(cap.getSpeedLevel(), 0)) / 968;
+                capmeta.setExhaustionLevel(capmeta.getexhaustionLevel() + exhaustion); // TODO Higher the exhaustion number in core cap for meta
             }
         }
         if (player.getHealth() < player.getMaxHealth()) {
@@ -123,6 +124,20 @@ public class EventHandlePower {
 
     public static boolean isMoving(EntityLivingBase entity) {
         return (entity.distanceWalkedModified != entity.prevDistanceWalkedModified);
+    }
+
+    @SubscribeEvent
+    public static void setSpeedsterPowerEnabled(LivingEvent.LivingUpdateEvent e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            IMetaCap capa = CapabilityMeta.get(player);
+
+            if (MetaHelper.hasPower(player, PEnumHandler.MetaPower.SPEEDSTER.getName())) {
+                if (capa.isPowerEnabled() != cap.isSpeedster())
+                    cap.setSpeedster(capa.isPowerEnabled());
+            }
+        }
     }
 
     private static void updateLevel(ISpeedsterCap cap) {
