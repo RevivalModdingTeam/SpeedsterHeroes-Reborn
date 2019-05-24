@@ -30,6 +30,7 @@ public class EntityRingDummy extends EntityLivingBase {
         super(world);
         this.suit = suit;
         this.owner = player;
+        this.setEntityInvulnerable(true);
         this.setSize(owner.width, owner.height);
         this.inventory.set(3, new ItemStack(suit.getHelmet()));
         this.inventory.set(2, new ItemStack(suit.getChest()));
