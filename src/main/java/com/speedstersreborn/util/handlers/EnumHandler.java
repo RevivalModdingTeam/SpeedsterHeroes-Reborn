@@ -47,13 +47,13 @@ public class EnumHandler {
 
         private String names;
         private int timeleft;
-        private int maxspeedlevels;
+        private int addspeedlevels;
         private int damages;
 
-        VelocityTypes(String name,int time, int maxspeedlevel, int damage) {
+        VelocityTypes(String name,int time, int addedspeed, int damage) {
             this.names = name;
             this.timeleft = time;
-            this.maxspeedlevels = maxspeedlevel;
+            this.addspeedlevels = addedspeed;
             this.damages = damage;
         }
 
@@ -61,8 +61,8 @@ public class EnumHandler {
             return damages;
         }
 
-        public int getMaxspeedlevels() {
-            return maxspeedlevels;
+        public int getMaxAddedSpeedLevels() {
+            return addspeedlevels;
         }
 
         public int getTimeleft() {

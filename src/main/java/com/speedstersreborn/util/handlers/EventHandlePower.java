@@ -130,7 +130,8 @@ public class EventHandlePower {
         final double required = (cap.getLevel() + 1) * 100 + 100.0D;
         if (xp >= required) {
             cap.setLevel(cap.getLevel() + 1);
-            if (cap.getMaxspeedLevel() < 20) cap.setMaxSpeedLevel(cap.getMaxspeedLevel() + 5);
+            if (cap.getMaxspeedLevel() < 20)
+                cap.setMaxSpeedLevel(cap.getMaxspeedLevel() + 5);
         }
     }
 }

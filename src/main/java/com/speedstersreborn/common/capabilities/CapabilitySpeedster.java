@@ -33,6 +33,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private boolean hasSecondTrail = false;
     private boolean hasRainbowTrail = false;
     private int maxSpeedLevel = 5;
+    private int velocityaddedspeed = 0;
     private int velocitycount = 0;
     private boolean velocity = false;
     private int pr = Color.ORANGE.getRed(), pg = Color.ORANGE.getGreen(), pb = Color.ORANGE.getBlue();
@@ -69,6 +70,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             velocitycount--;
             if (velocitycount == 0) {
                 isSpeedster = false;
+                maxSpeedLevel = maxSpeedLevel - velocityaddedspeed;
                 velocity = false;
             }
         }
@@ -218,8 +220,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     @Override
     public void setVelocity(EnumHandler.VelocityTypes types, boolean on) {
         this.velocity = on;
-        this.maxSpeedLevel = types.getMaxspeedlevels();
+        this.maxSpeedLevel = maxSpeedLevel + types.getMaxAddedSpeedLevels();
         this.velocitycount = types.getTimeleft() * 20;
+        this.velocityaddedspeed = types.getMaxAddedSpeedLevels();
     }
 
     @Override
@@ -240,6 +243,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         nbt.setBoolean("velocity", velocity);
         nbt.setBoolean("is_wall_run", isWallRunning);
         nbt.setBoolean("has_second_trail", hasSecondTrail);
+        nbt.setInteger("added_speed_velocity", velocityaddedspeed);
         nbt.setInteger("pr", pr);nbt.setInteger("pg", pg);nbt.setInteger("pb", pb);
         nbt.setInteger("lpr", lpr);nbt.setInteger("lpg", lpg);nbt.setInteger("lpb", lpb);
         nbt.setInteger("sr", sr);nbt.setInteger("sg", sg);nbt.setInteger("sb", sb);
@@ -258,6 +262,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         maxSpeedLevel = nbt.getInteger("max_level");
         velocity = nbt.getBoolean("velocity");
         velocitycount = nbt.getInteger("velocity_count");
+        velocityaddedspeed = nbt.getInteger("added_speed_velocity");
         pr = nbt.getInteger("pr");pg = nbt.getInteger("pg");pb = nbt.getInteger("pb");
         lpr = nbt.getInteger("lpr");lpg = nbt.getInteger("lpg");lpb = nbt.getInteger("lpb");
         sr = nbt.getInteger("sr");sg = nbt.getInteger("sg");sb = nbt.getInteger("sb");
