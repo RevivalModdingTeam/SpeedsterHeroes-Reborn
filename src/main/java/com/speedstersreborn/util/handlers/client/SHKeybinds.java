@@ -10,7 +10,6 @@ import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetPhasing;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeed;
-import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeedster;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetWallRunning;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -38,10 +37,6 @@ public class SHKeybinds {
             IMetaCap metaCap = CapabilityMeta.get(Minecraft.getMinecraft().player);
 
             if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER || CapabilitySpeedster.get(Minecraft.getMinecraft().player).isSpeedster()) {
-
-                if (Keybinds.ENABLE.isPressed()) {
-                    NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeedster());
-                }
 
                 if (Keybinds.POWER1.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeed());

@@ -52,6 +52,5 @@ public class SpeedsterHeroesReborn
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-
     }
 }

@@ -1,6 +1,5 @@
 package com.speedstersreborn.common.capabilities;
 
-import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.network.NetworkHandler;
@@ -79,9 +78,6 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         if (getSpeedLevel() < 0) {
             setSpeedLevel(0);
         }
-
-        if(!isSpeedster)
-        this.isSpeedster = CapabilityMeta.get(player).isPowerEnabled();
     }
 
     @Override

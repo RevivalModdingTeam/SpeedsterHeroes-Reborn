@@ -1,6 +1,8 @@
 package com.speedstersreborn.util.handlers;
 
 import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
+import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
+import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.config.SHRConfig;
@@ -96,6 +98,18 @@ public class EventHandler {
                 if (cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB())
                     cap.setPrimaryTrailColor(cap.getLastTrailColor());
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void setPowerEnabled(LivingEvent.LivingUpdateEvent e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            ISpeedsterCap cap = CapabilitySpeedster.get(player);
+            IMetaCap capa = CapabilityMeta.get(player);
+
+            if(capa.isPowerEnabled() != cap.isSpeedster())
+                cap.setSpeedster(capa.isPowerEnabled());
         }
     }
 
