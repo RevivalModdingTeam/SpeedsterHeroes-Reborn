@@ -3,8 +3,6 @@ package com.speedstersreborn.common.blocks;
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.PEnumHandler;
-import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
-import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.helper.IHaveItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -24,15 +22,14 @@ public class BlockParticleAccelerator extends Block implements IHaveItem {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         IMetaCap cap = CapabilityMeta.get(playerIn);
-        ISpeedsterCap capa = CapabilitySpeedster.get(playerIn);
 
             if (playerIn.isSneaking()) {
-                capa.setSpeedster(false);
+                cap.setPowerEnabled(false);
                 cap.clear();
             } else { // TODO make real stuff
                 cap.setMetaPower(PEnumHandler.MetaPower.SPEEDSTER.getID()); // TODO Change to MetaHelper once pushed final
                 if(cap.getMetaPower() == 0) {
-                    capa.setSpeedster(true);
+                    cap.setPowerEnabled(true);
                 }
             }
         return true;
