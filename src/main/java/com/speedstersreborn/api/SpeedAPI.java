@@ -1,18 +1,17 @@
 package com.speedstersreborn.api;
 
-import java.util.UUID;
-
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.config.SHRConfig;
 import com.speedstersreborn.util.helper.MathHelper;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.UUID;
 
 /**
  * Created by Josia50
@@ -45,7 +44,6 @@ public class SpeedAPI {
         cap.setSpeedLevel(level);
         setSpeed(player, level);
         cap.sync();
-
     }
 
     public static void invertProjectilesAroundPlayer(EntityPlayer player, int range) {

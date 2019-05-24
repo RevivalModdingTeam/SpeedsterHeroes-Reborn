@@ -65,12 +65,14 @@ public class EventHandler {
                         if (cap.getPrimaryTrailColor().getRGB() != suit.getTrailRGB().getRGB()) {
                             cap.setLastTrailColor(cap.getPrimaryTrailColor());
                             cap.setPrimaryTrailColor(suit.getTrailRGB());
+                            cap.sync();
                         }
                     } else {
-                        if (cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB())
+                        if (cap.getPrimaryTrailColor().getRGB() != cap.getLastTrailColor().getRGB()) {
                             cap.setPrimaryTrailColor(cap.getLastTrailColor());
+                            cap.sync();
+                        }
                     }
-                    cap.sync();
                 }
             }
     }
