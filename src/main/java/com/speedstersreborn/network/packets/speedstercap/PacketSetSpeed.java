@@ -32,9 +32,10 @@ public class PacketSetSpeed implements IMessage {
                 EntityPlayer player = ctx.getServerHandler().player;
                 ISpeedsterCap data = CapabilitySpeedster.get(player);
                 if (data.isSpeedster()) {
-                	/** this part after && is the source of problem, because data.getMaxspeedLevel and .getSpeedLevel == 0*/
-                    if (!player.isSneaking() && data.getSpeedLevel() < data.getMaxspeedLevel()) {
-                        data.setSpeedLevel(data.getSpeedLevel() + 1);
+                    /** this part after && is the source of problem, because data.getMaxspeedLevel and .getSpeedLevel == 0*/
+                    if (!player.isSneaking()) {
+                        if (data.getSpeedLevel() < data.getMaxspeedLevel())
+                            data.setSpeedLevel(data.getSpeedLevel() + 1);
                     } else {
                         if (data.getSpeedLevel() > 0)
                             data.setSpeedLevel(data.getSpeedLevel() - 1);
