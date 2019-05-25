@@ -22,6 +22,7 @@ public class SHRConfig {
         
         @Config.LangKey("config.shr.speedlevelmultiplier")
         @Config.Comment({"Modify the speed which is additionally added per speed level","Final speed is = level * speedMultiplier"})
+        @Config.RangeDouble(min = 0.05, max = 0.25)
         public float speedIncreaseOverLevel = 0.125f;
         
         @Config.LangKey("config.shr.speedindicator")
