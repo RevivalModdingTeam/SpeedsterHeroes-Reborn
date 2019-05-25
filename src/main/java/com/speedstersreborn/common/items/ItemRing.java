@@ -37,7 +37,7 @@ public class ItemRing extends Item {
         ItemStack stack = playerIn.getHeldItem(handIn);
         AbstractSuit suit = AbstractSuit.getSuit(playerIn);
 
-        if(!worldIn.isRemote) {
+        if (!worldIn.isRemote) {
             if (stack.getTagCompound().getBoolean("has_suit")) {
                 stack.getTagCompound().setBoolean("has_suit", false);
 
@@ -49,11 +49,10 @@ public class ItemRing extends Item {
                 worldIn.spawnEntity(rd);
             } else {
                 if (suit != null && suit.isSuitComplete(playerIn)) {
-                    if (ringType.getBsuit() == suit) {
-                        for (int i = 1; i < 4; ++i) {
-                            if (playerIn.getItemStackFromSlot(EntityEquipmentSlot.values()[i]).getItem() instanceof ItemSuit) {
-                                playerIn.getItemStackFromSlot(EntityEquipmentSlot.values()[i]).setCount(0);
-                            }
+                    if (ringType.getBsuit().getName().equals(suit.getName())) {
+                        for (int i = 2; i < 6; ++i) {
+                            if (playerIn.getItemStackFromSlot(EntityEquipmentSlot.values()[i]).getItem() instanceof ItemSuit)
+                                playerIn.getItemStackFromSlot(EntityEquipmentSlot.values()[i]).shrink(1);
                         }
                     }
                     // TODO Fix why this doesn't set the boolean
