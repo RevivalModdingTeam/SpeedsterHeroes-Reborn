@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 /**
  * Created by Josia50
@@ -119,7 +120,7 @@ public class EventHandlePower {
         }
         if (player.getHealth() < player.getMaxHealth()) {
             //player.shouldHeal();
-           // player.setHealth(player.getHealth() + Math.max(0.00002f, 0.00001f)); // TODO You can't die with this pls fix :)
+            // player.setHealth(player.getHealth() + Math.max(0.00002f, 0.00001f)); // TODO You can't die with this pls fix :)
         }
 
         if (cap.getHungerTimer() > 1) {
@@ -161,14 +162,36 @@ public class EventHandlePower {
             cap.setVelocityTime(cap.getVelocityTime() - 1);
             if (cap.getVelocityTime() <= 0) {
                 cap.setMaxSpeedLevel(cap.getMaxspeedLevel() - cap.getAddedSpeed());
+                if (cap.getSpeedLevel() > cap.getMaxspeedLevel()) {
+                    int remove = cap.getSpeedLevel() - cap.getMaxspeedLevel();
+                    cap.setSpeedLevel(cap.getSpeedLevel() - remove);
+                }
                 if (!MetaHelper.getMetaPowerName(capa.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER)) {
-                   capa.setPowerEnabled(false); // TODO Make render & cap work when velocity enabled. Not trough main core cap
+                    capa.setPowerEnabled(false); // TODO Make render & cap work when velocity enabled. Not trough main core cap
                 }
                 cap.setVelocity(false);
             }
         }
-        if(player.isDead) {
+        if (player.isDead) {
             cap.clearV9();
         }
     }
+    /*
+ System.out.println("Max Speed: " + cap.getMaxspeedLevel());
+        System.out.println("IsSpeedster: " + cap.isSpeedster());
+        System.out.println("isPowerenabled: " + capa.isPowerEnabled());
+        System.out.println("velocity: " + cap.hasVelocity());
+        System.out.println("Speedlevel: " + cap.getSpeedLevel());
+ */
+
+    @SubscribeEvent
+    public static void SyncOnLogout(PlayerEvent.PlayerLoggedOutEvent e) {
+        CapabilitySpeedster.get(e.player).sync();
+    }
+
+    @SubscribeEvent
+    public static void SyncOnLogIN(PlayerEvent.PlayerLoggedInEvent e) {
+        CapabilitySpeedster.get(e.player).sync();
+    }
 }
+

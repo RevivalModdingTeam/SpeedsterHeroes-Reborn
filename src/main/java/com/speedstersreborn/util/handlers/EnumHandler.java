@@ -42,6 +42,7 @@ public class EnumHandler {
         }
     }
 
+
     public enum VelocityTypes implements IStringSerializable {
         VELOCITY_NINE("v9", 60, 5, 1);
 
@@ -50,7 +51,7 @@ public class EnumHandler {
         private int addspeedlevels;
         private int damages;
 
-        VelocityTypes(String name,int time, int addedspeed, int damage) {
+        VelocityTypes(String name, int time, int addedspeed, int damage) {
             this.names = name;
             this.timeleft = time;
             this.addspeedlevels = addedspeed;

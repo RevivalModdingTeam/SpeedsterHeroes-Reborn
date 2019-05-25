@@ -38,7 +38,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private boolean velocity = false;
     private boolean hasTakenVelocityBefore = false;
     private int velocityUses = 0;
-    private int pr = Color.ORANGE.getRed(), pg = Color.ORANGE.getGreen(), pb = Color.ORANGE.getBlue();
+    private Color mainColor = new Color(249, 172, 53);
+    private Color VColor = new Color(112, 145, 225);
+    private int pr = mainColor.getRed(), pg = mainColor.getGreen(), pb = mainColor.getBlue();
     private int lpr = pr, lpg = pg, lpb = pb;
     private int sr = Color.RED.getRed(), sg = Color.RED.getGreen(), sb = Color.RED.getBlue();
 
@@ -77,7 +79,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
 
         if (hasTakenVelocityBefore && velocityUses >= 4) {
             if (getPrimaryTrailColor().getRGB() != Color.BLUE.getRGB())
-                setPrimaryTrailColor(Color.BLUE);
+                setPrimaryTrailColor(VColor);
         }
 
         if (getSpeedLevel() < 0) {
@@ -272,30 +274,28 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         return hungerTimer;
     }
 
+
     @Override
     public void clear() {
-        this.setPrimaryTrailColor(Color.YELLOW);
+        this.setPrimaryTrailColor(mainColor);
         this.setLevel(0);
         this.setMaxSpeedLevel(5);
-        this.setLastTrailColor(Color.YELLOW);
+        this.setLastTrailColor(mainColor);
         this.clearV9();
     }
 
     @Override
     public void clearV9() {
         if (hasTakenVelocityBefore) {
-            System.out.println("haha");
             this.velocityUses = 0;
             this.velocity = false;
             this.velocitycount = 0;
             this.velocityaddedspeed = 0;
-            if (getPrimaryTrailColor().getRGB() != Color.YELLOW.getRGB())
-                this.setPrimaryTrailColor(Color.YELLOW);
-
-            if (getLastTrailColor().getRGB() != Color.YELLOW.getRGB())
-                this.setLastTrailColor(Color.YELLOW);
+            this.setPrimaryTrailColor(mainColor);
+            this.setLastTrailColor(mainColor);
             this.isSpeedster = false;
             this.hasTakenVelocityBefore = false;
+            this.setMaxSpeedLevel(getLevel() * 5);
         }
     }
 

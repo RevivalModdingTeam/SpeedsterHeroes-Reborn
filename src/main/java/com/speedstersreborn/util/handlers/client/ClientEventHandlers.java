@@ -1,7 +1,5 @@
 package com.speedstersreborn.util.handlers.client;
 
-import java.text.DecimalFormat;
-
 import com.revivalmodding.revivalcore.util.helper.ImageHelper;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.api.SpeedAPI;
@@ -10,7 +8,6 @@ import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.config.CFGOverlayPosition;
 import com.speedstersreborn.util.config.CFGSpeedIndicatorUnit;
 import com.speedstersreborn.util.config.SHRConfig;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
@@ -19,6 +16,8 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.text.DecimalFormat;
 
 
 @Mod.EventBusSubscriber(Side.CLIENT)
@@ -34,7 +33,7 @@ public class ClientEventHandlers {
 		Minecraft mc = Minecraft.getMinecraft();
 		if(e.getType() == ElementType.ALL) {
 			ISpeedsterCap cap = CapabilitySpeedster.get(mc.player);
-			if(cap.isSpeedster()) {
+			if(cap.isSpeedster() || cap.hasVelocity()) {
 				doSpeedRender(mc, e.getResolution(), cap.getSpeedLevel() - 1);
 			} else if(x != 0) {
 				x = 0;
@@ -43,8 +42,7 @@ public class ClientEventHandlers {
 	}
 	
 	private static void doSpeedRender(Minecraft mc, ScaledResolution res, int level) {
-		if(level < 0 || mc.player.isCreative() || mc.player.isSpectator())
-			return;
+		if(level < 0 || mc.player.isCreative() || mc.player.isSpectator()) return;
 		CFGOverlayPosition pos = SHRConfig.speedstersHeroesReborn.speedIndicator;
 		CFGSpeedIndicatorUnit speedUnit = SHRConfig.speedstersHeroesReborn.speedUnit;
 		int width = res.getScaledWidth();
