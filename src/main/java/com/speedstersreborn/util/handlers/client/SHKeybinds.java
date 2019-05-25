@@ -38,7 +38,7 @@ public class SHKeybinds {
         public static void keyPressed(InputEvent.KeyInputEvent e) {
             IMetaCap metaCap = CapabilityMeta.get(Minecraft.getMinecraft().player);
 
-            if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER  && metaCap.isPowerEnabled()|| CapabilitySpeedster.get(Minecraft.getMinecraft().player).hasVelocity()) {
+            if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER)  && metaCap.isPowerEnabled() || CapabilitySpeedster.get(Minecraft.getMinecraft().player).hasVelocity()) {
 
                 // Velocity Compatibility
                 if(Keybinds.ENABLE.isPressed()) {

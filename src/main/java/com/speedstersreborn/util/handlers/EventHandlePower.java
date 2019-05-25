@@ -43,8 +43,8 @@ public class EventHandlePower {
                 runAbilities(player, cap);
                 phasing(player, cap);
                 whileRunning(player, cap, capmeta);
-                updateVelocity(cap, capmeta);
             }
+            updateVelocity(player, cap, capmeta);
         }
     }
 
@@ -103,11 +103,11 @@ public class EventHandlePower {
     }
 
     public static void whileRunning(EntityPlayer player, ISpeedsterCap cap, IMetaCap capmeta) {
+        FoodStats food = player.getFoodStats();
         if (!player.world.isRemote && cap.isSpeedster() && cap.getSpeedLevel() > 1 && isMoving(player) && !player.isCreative()) {
             if (player.isBurning()) {
                 player.extinguish();
             }
-            FoodStats food = player.getFoodStats();
             if (food.getFoodLevel() <= 1) {
                 player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 2, false, true));
             }
@@ -120,6 +120,11 @@ public class EventHandlePower {
         if (player.getHealth() < player.getMaxHealth()) {
             player.shouldHeal();
             player.setHealth(player.getHealth() + Math.max(1.0f, 0.4f));
+        }
+
+        if (cap.getHungerTimer() > 1) {
+            if (food.getFoodLevel() < 20)
+                food.setFoodLevel(20);
         }
     }
 
@@ -151,13 +156,14 @@ public class EventHandlePower {
         }
     }
 
-    private static void updateVelocity(ISpeedsterCap cap, IMetaCap capa) {
+    private static void updateVelocity(EntityPlayer player, ISpeedsterCap cap, IMetaCap capa) {
         if (cap.hasVelocity()) {
             cap.setVelocityTime(cap.getVelocityTime() - 1);
-            if (cap.getVelocityTime() == 0) {
-                cap.setSpeedster(false);
-                capa.setPowerEnabled(false);
+            if (cap.getVelocityTime() <= 0) {
                 cap.setMaxSpeedLevel(cap.getMaxspeedLevel() - cap.getAddedSpeed());
+                if (!MetaHelper.getMetaPowerName(capa.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER)) {
+                   capa.setPowerEnabled(false); // TODO Make render & cap work when velocity enabled. Not trough main core cap
+                }
                 cap.setVelocity(false);
             }
         }

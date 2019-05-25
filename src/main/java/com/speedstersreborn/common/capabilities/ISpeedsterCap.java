@@ -60,7 +60,7 @@ public interface ISpeedsterCap extends INBTSerializable<NBTTagCompound> {
 
     int getMaxspeedLevel();
 
-    void setVelocity(VelocityTypes types, boolean on);
+    void setVelocity(VelocityTypes types);
 
     void setVelocity(boolean on);
 
@@ -68,7 +68,19 @@ public interface ISpeedsterCap extends INBTSerializable<NBTTagCompound> {
 
     int getVelocityTime();
 
+    boolean hasTakenVelocityBefore();
+
+    int velocityUses();
+
     int getAddedSpeed();
 
     boolean hasVelocity();
+
+    void setHungerTimer(int hungerTimer);
+
+    int getHungerTimer();
+
+    void clear();
+
+    void clearV9();
 }

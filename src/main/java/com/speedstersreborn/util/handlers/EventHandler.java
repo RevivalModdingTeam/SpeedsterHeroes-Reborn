@@ -98,9 +98,4 @@ public class EventHandler {
             }
         }
     }
-
-     @SubscribeEvent
-    public static void SyncOnleave(PlayerEvent.PlayerLoggedInEvent e) {
-        CapabilitySpeedster.get(e.player).sync();
-     }
 }

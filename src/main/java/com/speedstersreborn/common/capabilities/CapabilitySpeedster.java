@@ -34,7 +34,10 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private int maxSpeedLevel = 5;
     private int velocityaddedspeed = 0;
     private int velocitycount = 0;
+    private int hungerTimer = 0;
     private boolean velocity = false;
+    private boolean hasTakenVelocityBefore = false;
+    private int velocityUses = 0;
     private int pr = Color.ORANGE.getRed(), pg = Color.ORANGE.getGreen(), pb = Color.ORANGE.getBlue();
     private int lpr = pr, lpg = pg, lpb = pb;
     private int sr = Color.RED.getRed(), sg = Color.RED.getGreen(), sb = Color.RED.getBlue();
@@ -57,6 +60,9 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             SpeedAPI.setSpeedFromCap(player);
         } else {
             if (hasVelocity()) {
+                if (!hasTakenVelocityBefore)
+                    hasTakenVelocityBefore = true;
+
                 if (getSpeedLevel() < maxSpeedLevel) {
                     SpeedAPI.setSpeedFromCap(player);
                 }
@@ -65,6 +71,14 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             }
         }
 
+        if (hungerTimer > 0) {
+            hungerTimer--;
+        }
+
+        if (hasTakenVelocityBefore && velocityUses > 4) {
+            if (getPrimaryTrailColor().getRGB() != Color.BLUE.getRGB())
+                setPrimaryTrailColor(Color.BLUE);
+        }
 
         if (getSpeedLevel() < 0) {
             setSpeedLevel(0);
@@ -73,7 +87,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
 
     @Override
     public void sync() {
-        if(player.world.isRemote) return;
+        if (player.world.isRemote) return;
         NBTTagCompound data = serializeNBT();
         NetworkHandler.INSTANCE.sendToAll(new PacketCapSync(player, data));
     }
@@ -205,11 +219,12 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     }
 
     @Override
-    public void setVelocity(EnumHandler.VelocityTypes types, boolean on) {
-        this.velocity = on;
+    public void setVelocity(EnumHandler.VelocityTypes types) {
+        this.velocity = true;
         this.maxSpeedLevel = maxSpeedLevel + types.getMaxAddedSpeedLevels();
         this.velocitycount = types.getTimeleft() * 20;
         this.velocityaddedspeed = types.getMaxAddedSpeedLevels();
+        this.velocityUses = velocityUses++;
     }
 
     @Override
@@ -228,6 +243,16 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     }
 
     @Override
+    public boolean hasTakenVelocityBefore() {
+        return hasTakenVelocityBefore;
+    }
+
+    @Override
+    public int velocityUses() {
+        return velocityUses;
+    }
+
+    @Override
     public int getAddedSpeed() {
         return velocityaddedspeed;
     }
@@ -235,6 +260,42 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     @Override
     public boolean hasVelocity() {
         return velocity;
+    }
+
+    @Override
+    public void setHungerTimer(int hungerTimer) {
+        this.hungerTimer = hungerTimer;
+    }
+
+    @Override
+    public int getHungerTimer() {
+        return hungerTimer;
+    }
+
+    @Override
+    public void clear() {
+        this.setPrimaryTrailColor(Color.YELLOW);
+        this.setLevel(0);
+        this.setMaxSpeedLevel(5);
+        this.setLastTrailColor(Color.YELLOW);
+        this.clearV9();
+    }
+
+    @Override
+    public void clearV9() {
+        if (hasTakenVelocityBefore) {
+            this.hasTakenVelocityBefore = false;
+            this.velocityUses = 0;
+            this.velocity = false;
+            this.velocitycount = 0;
+            this.velocityaddedspeed = 0;
+            if (getPrimaryTrailColor().getRGB() != Color.YELLOW.getRGB())
+                this.setPrimaryTrailColor(Color.YELLOW);
+
+            if (getLastTrailColor().getRGB() != Color.YELLOW.getRGB())
+                this.setLastTrailColor(Color.YELLOW);
+            this.isSpeedster = false;
+        }
     }
 
     @Override
@@ -251,9 +312,18 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         nbt.setBoolean("is_wall_run", isWallRunning);
         nbt.setBoolean("has_second_trail", hasSecondTrail);
         nbt.setInteger("added_speed_velocity", velocityaddedspeed);
-        nbt.setInteger("pr", pr);nbt.setInteger("pg", pg);nbt.setInteger("pb", pb);
-        nbt.setInteger("lpr", lpr);nbt.setInteger("lpg", lpg);nbt.setInteger("lpb", lpb);
-        nbt.setInteger("sr", sr);nbt.setInteger("sg", sg);nbt.setInteger("sb", sb);
+        nbt.setInteger("hunger_timer", hungerTimer);
+        nbt.setBoolean("has_taken_velocity", hasTakenVelocityBefore);
+        nbt.setInteger("velocity_uses", velocityUses);
+        nbt.setInteger("pr", pr);
+        nbt.setInteger("pg", pg);
+        nbt.setInteger("pb", pb);
+        nbt.setInteger("lpr", lpr);
+        nbt.setInteger("lpg", lpg);
+        nbt.setInteger("lpb", lpb);
+        nbt.setInteger("sr", sr);
+        nbt.setInteger("sg", sg);
+        nbt.setInteger("sb", sb);
         return nbt;
     }
 
@@ -270,9 +340,18 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         velocity = nbt.getBoolean("velocity");
         velocitycount = nbt.getInteger("velocity_count");
         velocityaddedspeed = nbt.getInteger("added_speed_velocity");
-        pr = nbt.getInteger("pr");pg = nbt.getInteger("pg");pb = nbt.getInteger("pb");
-        lpr = nbt.getInteger("lpr");lpg = nbt.getInteger("lpg");lpb = nbt.getInteger("lpb");
-        sr = nbt.getInteger("sr");sg = nbt.getInteger("sg");sb = nbt.getInteger("sb");
+        hungerTimer = nbt.getInteger("hunger_timer");
+        hasTakenVelocityBefore = nbt.getBoolean("has_taken_velocity");
+        velocityUses = nbt.getInteger("velocity_uses");
+        pr = nbt.getInteger("pr");
+        pg = nbt.getInteger("pg");
+        pb = nbt.getInteger("pb");
+        lpr = nbt.getInteger("lpr");
+        lpg = nbt.getInteger("lpg");
+        lpb = nbt.getInteger("lpb");
+        sr = nbt.getInteger("sr");
+        sg = nbt.getInteger("sg");
+        sb = nbt.getInteger("sb");
     }
 
 
@@ -326,6 +405,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     public static void onDeathEvent(LivingDeathEvent e) {
         if (e.getEntityLiving() instanceof EntityPlayer) {
             get((EntityPlayer) e.getEntityLiving()).sync();
+            get((EntityPlayer) e.getEntityLiving()).clearV9();
         }
     }
 

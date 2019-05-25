@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class ItemVelocity extends Item {
@@ -29,6 +30,8 @@ public class ItemVelocity extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
+        ISpeedsterCap cap = CapabilitySpeedster.get(playerIn);
+        IMetaCap metaCap = CapabilityMeta.get(playerIn);
 
         if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
@@ -36,15 +39,17 @@ public class ItemVelocity extends Item {
         }
 
         if (stack.getTagCompound().getBoolean("has_velocity")) {
-            setDamage(stack, getMaxDamage(stack) - 1);
-            stack.getTagCompound().setBoolean("has_velocity", false);
-            ISpeedsterCap cap = CapabilitySpeedster.get(playerIn);
-            IMetaCap metaCap = CapabilityMeta.get(playerIn);
-            if (!cap.hasVelocity()) {
-                cap.setVelocity(velocityTypes, true);
-                cap.setSpeedster(true);
-                metaCap.setPowerEnabled(true);
-                cap.sync();
+            setDamage(stack, 1);
+            if(!cap.hasVelocity()) {
+                stack.getTagCompound().setBoolean("has_velocity", false);
+                if (!cap.hasVelocity()) {
+                    cap.setVelocity(velocityTypes);
+                    cap.setSpeedster(true);
+                    metaCap.setPowerEnabled(true);
+                    cap.sync();
+                }
+            }else{
+                playerIn.sendStatusMessage(new TextComponentString("You still have " + cap.getVelocityTime()+ " seconds left"), true);
             }
         }
 
