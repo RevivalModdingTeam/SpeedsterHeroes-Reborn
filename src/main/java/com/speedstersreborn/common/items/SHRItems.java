@@ -1,5 +1,6 @@
 package com.speedstersreborn.common.items;
 
+import com.revivalmodding.revivalcore.core.common.items.ItemEatable;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.tabs.ModTabs;
 import com.speedstersreborn.util.handlers.EnumHandler.RingTypes;
@@ -22,6 +23,7 @@ public class SHRItems {
     // Rings
     public static ItemRing ring_reverse_flash, ring_zoom, ring_god_speed, ring_kid_flash, ring_flash;
     public static ItemVelocity velocity_nine;
+    public static ItemEatable energy_bar;
     public static Item test;
 
     public static void init() {
@@ -31,7 +33,8 @@ public class SHRItems {
         ring_god_speed = registerItem(new ItemRing("ring_god_speed", RingTypes.GOD_SPEED), true);
         ring_kid_flash = registerItem(new ItemRing("ring_kid_flash", RingTypes.KID_FLASH), true);
         velocity_nine = registerItem(new ItemVelocity("velocity_nine", VelocityTypes.VELOCITY_NINE), true);
-     //   test = registerItem(new Itemtest("test"), true);
+        energy_bar = registerItem(new ItemEnergyBar("energy_bar", 20, 0, false));
+        //   test = registerItem(new Itemtest("test"), true);
     }
 
     public static void registerRenders() {

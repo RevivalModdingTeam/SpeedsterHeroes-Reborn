@@ -119,7 +119,7 @@ public class EventHandlePower {
         }
         if (player.getHealth() < player.getMaxHealth()) {
             player.shouldHeal();
-            player.setHealth(player.getHealth() + Math.max(1.0f, 0.4f));
+            player.setHealth(player.getHealth() + Math.max(0.2f, 0.3f));
         }
 
         if (cap.getHungerTimer() > 1) {
