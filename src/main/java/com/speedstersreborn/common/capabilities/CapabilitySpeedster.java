@@ -284,7 +284,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     @Override
     public void clearV9() {
         if (hasTakenVelocityBefore) {
-            this.hasTakenVelocityBefore = false;
+            System.out.println("haha");
             this.velocityUses = 0;
             this.velocity = false;
             this.velocitycount = 0;
@@ -295,6 +295,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             if (getLastTrailColor().getRGB() != Color.YELLOW.getRGB())
                 this.setLastTrailColor(Color.YELLOW);
             this.isSpeedster = false;
+            this.hasTakenVelocityBefore = false;
         }
     }
 
@@ -405,7 +406,6 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     public static void onDeathEvent(LivingDeathEvent e) {
         if (e.getEntityLiving() instanceof EntityPlayer) {
             get((EntityPlayer) e.getEntityLiving()).sync();
-            get((EntityPlayer) e.getEntityLiving()).clearV9();
         }
     }
 

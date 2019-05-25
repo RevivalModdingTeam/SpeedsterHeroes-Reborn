@@ -118,8 +118,8 @@ public class EventHandlePower {
             }
         }
         if (player.getHealth() < player.getMaxHealth()) {
-            player.shouldHeal();
-            player.setHealth(player.getHealth() + Math.max(0.2f, 0.3f));
+            //player.shouldHeal();
+           // player.setHealth(player.getHealth() + Math.max(0.00002f, 0.00001f)); // TODO You can't die with this pls fix :)
         }
 
         if (cap.getHungerTimer() > 1) {
@@ -166,6 +166,9 @@ public class EventHandlePower {
                 }
                 cap.setVelocity(false);
             }
+        }
+        if(player.isDead) {
+            cap.clearV9();
         }
     }
 }
