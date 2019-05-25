@@ -75,7 +75,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             hungerTimer--;
         }
 
-        if (hasTakenVelocityBefore && velocityUses > 4) {
+        if (hasTakenVelocityBefore && velocityUses >= 4) {
             if (getPrimaryTrailColor().getRGB() != Color.BLUE.getRGB())
                 setPrimaryTrailColor(Color.BLUE);
         }
@@ -224,7 +224,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         this.maxSpeedLevel = maxSpeedLevel + types.getMaxAddedSpeedLevels();
         this.velocitycount = types.getTimeleft() * 20;
         this.velocityaddedspeed = types.getMaxAddedSpeedLevels();
-        this.velocityUses = velocityUses++;
+        velocityUses++;
     }
 
     @Override
