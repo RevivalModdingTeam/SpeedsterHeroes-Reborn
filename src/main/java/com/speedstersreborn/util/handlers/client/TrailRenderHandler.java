@@ -80,14 +80,14 @@ public class TrailRenderHandler {
             List<EntityTrailSecond> toSecondDelete = new LinkedList<>();
 
             for (EntityTrail trail : trails) {
-                if (trail.isDead || trail.dimension != e.player.dimension || trail.getDistance(e.player) >= 20 * cap.getSpeedLevel()) {
+                if (trail.isDead || trail.dimension != e.player.dimension || trail.getDistance(e.player) >= 20 * cap.getSpeedLevel() || trail.ticksExisted > 60) {
                     toDelete.add(trail);
                 }
             }
             toDelete.forEach(t -> trails.remove(t));
 
             for (EntityTrailSecond trailSecond : trailsS) {
-                if (trailSecond.isDead || trailSecond.dimension != e.player.dimension || trailSecond.getDistance(e.player) >= 20 * cap.getSpeedLevel()) {
+                if (trailSecond.isDead || trailSecond.dimension != e.player.dimension || trailSecond.getDistance(e.player) >= 20 * cap.getSpeedLevel() || trailSecond.ticksExisted > 60) {
                     toSecondDelete.add(trailSecond);
                 }
             }

@@ -1,7 +1,7 @@
 package com.speedstersreborn.common.items;
 
-import com.revivalmodding.revivalcore.meta.util.MetaHelper;
-import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
+import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
+import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.handlers.EnumHandler.VelocityTypes;
@@ -22,6 +22,7 @@ public class ItemVelocity extends Item {
         setRegistryName(name);
         setMaxStackSize(1);
         setFull3D();
+        setMaxDamage(1);
         this.velocityTypes = types;
     }
 
@@ -29,17 +30,20 @@ public class ItemVelocity extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
 
-        if(stack.getTagCompound() == null) {
+        if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
-            stack.getTagCompound().setBoolean("has_drug", true);
+            stack.getTagCompound().setBoolean("has_velocity", true);
         }
 
-        if(stack.getTagCompound().getBoolean("has_drug")) {
-            stack.getTagCompound().setBoolean("has_drug", false);
+        if (stack.getTagCompound().getBoolean("has_velocity")) {
+            setDamage(stack, getMaxDamage(stack) - 1);
+            stack.getTagCompound().setBoolean("has_velocity", false);
             ISpeedsterCap cap = CapabilitySpeedster.get(playerIn);
-            if(!MetaHelper.hasPower(playerIn, MetaPowerStrings.SPEEDSTER.toUpperCase())) {
+            IMetaCap metaCap = CapabilityMeta.get(playerIn);
+            if (!cap.hasVelocity()) {
                 cap.setVelocity(velocityTypes, true);
                 cap.setSpeedster(true);
+                metaCap.setPowerEnabled(true);
                 cap.sync();
             }
         }

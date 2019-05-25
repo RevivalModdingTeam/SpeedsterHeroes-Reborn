@@ -43,6 +43,7 @@ public class EventHandlePower {
                 runAbilities(player, cap);
                 phasing(player, cap);
                 whileRunning(player, cap, capmeta);
+                updateVelocity(cap, capmeta);
             }
         }
     }
@@ -147,6 +148,18 @@ public class EventHandlePower {
             cap.setLevel(cap.getLevel() + 1);
             if (cap.getMaxspeedLevel() < 20)
                 cap.setMaxSpeedLevel(cap.getMaxspeedLevel() + 5);
+        }
+    }
+
+    private static void updateVelocity(ISpeedsterCap cap, IMetaCap capa) {
+        if (cap.hasVelocity()) {
+            cap.setVelocityTime(cap.getVelocityTime() - 1);
+            if (cap.getVelocityTime() == 0) {
+                cap.setSpeedster(false);
+                capa.setPowerEnabled(false);
+                cap.setMaxSpeedLevel(cap.getMaxspeedLevel() - cap.getAddedSpeed());
+                cap.setVelocity(false);
+            }
         }
     }
 }

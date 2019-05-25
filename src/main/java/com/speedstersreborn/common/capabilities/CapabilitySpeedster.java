@@ -65,15 +65,6 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             }
         }
 
-        if (velocity) {
-            velocitycount--;
-            if (velocitycount == 0) {
-                isSpeedster = false;
-                maxSpeedLevel = maxSpeedLevel - velocityaddedspeed;
-                velocity = false;
-            }
-        }
-
 
         if (getSpeedLevel() < 0) {
             setSpeedLevel(0);
@@ -219,6 +210,26 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         this.maxSpeedLevel = maxSpeedLevel + types.getMaxAddedSpeedLevels();
         this.velocitycount = types.getTimeleft() * 20;
         this.velocityaddedspeed = types.getMaxAddedSpeedLevels();
+    }
+
+    @Override
+    public void setVelocity(boolean on) {
+        this.velocity = on;
+    }
+
+    @Override
+    public void setVelocityTime(int time) {
+        this.velocitycount = time;
+    }
+
+    @Override
+    public int getVelocityTime() {
+        return velocitycount;
+    }
+
+    @Override
+    public int getAddedSpeed() {
+        return velocityaddedspeed;
     }
 
     @Override

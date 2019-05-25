@@ -4,6 +4,8 @@ import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
+import com.revivalmodding.revivalcore.network.NetworkManager;
+import com.revivalmodding.revivalcore.network.packets.PacketSetPower;
 import com.revivalmodding.revivalcore.util.handlers.client.Keybinds;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
@@ -36,7 +38,12 @@ public class SHKeybinds {
         public static void keyPressed(InputEvent.KeyInputEvent e) {
             IMetaCap metaCap = CapabilityMeta.get(Minecraft.getMinecraft().player);
 
-            if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER || CapabilitySpeedster.get(Minecraft.getMinecraft().player).isSpeedster()) {
+            if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()) == MetaPowerStrings.SPEEDSTER  && metaCap.isPowerEnabled()|| CapabilitySpeedster.get(Minecraft.getMinecraft().player).hasVelocity()) {
+
+                // Velocity Compatibility
+                if(Keybinds.ENABLE.isPressed()) {
+                    NetworkManager.INSTANCE.sendToServer(new PacketSetPower());
+                }
 
                 if (Keybinds.POWER1.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetSpeed());
