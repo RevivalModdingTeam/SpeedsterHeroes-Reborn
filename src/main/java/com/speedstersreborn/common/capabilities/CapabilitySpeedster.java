@@ -82,6 +82,10 @@ public class CapabilitySpeedster implements ISpeedsterCap {
                 setPrimaryTrailColor(VColor);
         }
 
+        if(getMaxspeedLevel() < 5) {
+            this.setMaxSpeedLevel(getLevel() * 5);
+        }
+
         if (getSpeedLevel() < 0) {
             setSpeedLevel(0);
         }
