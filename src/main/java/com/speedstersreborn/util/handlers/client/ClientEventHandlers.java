@@ -36,6 +36,8 @@ public class ClientEventHandlers {
 			ISpeedsterCap cap = CapabilitySpeedster.get(mc.player);
 			if(cap.isSpeedster()) {
 				doSpeedRender(mc, e.getResolution(), cap.getSpeedLevel() - 1);
+			} else if(x != 0) {
+				x = 0;
 			}
 		}
 	}
@@ -50,9 +52,6 @@ public class ClientEventHandlers {
 		int left = width / 2 - 63;
 		int top = height - 62;
 		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, left + pos.x, top-pos.y, 128, 10, 0, 0, 1, 0.716D, false);
-		if(Math.abs(x - level*6.4) > 12.8) {
-			x = level*6.4;
-		}
 		x = IndicatorAnimation.move(x, level*6.4f, 0.5f);
 		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, left-1 + pos.x + x, top+8-pos.y, 8, 4, 0, 0.733, 0.05197505197, 0.9333, true);
 		mc.fontRenderer.drawStringWithShadow(FORMAT.format((SpeedAPI.getPlayerMovementSpeed(mc.player)*20)*speedUnit.getMultiplier())+ " " + speedUnit.getName(), left + pos.x, top-pos.y - 9, 0xFFFFFF);
