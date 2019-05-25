@@ -13,6 +13,7 @@ import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetPhasing;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetSpeed;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetWallRunning;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
