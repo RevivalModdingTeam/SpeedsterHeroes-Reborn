@@ -59,7 +59,7 @@ public class EventHandler {
         if (e.getEntityLiving() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntityLiving();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
-            if (CapabilitySpeedster.get(player).isSpeedster()) {
+            if (cap.isSpeedster() || cap.hasVelocity()) {
                 AbstractSuit suit = AbstractSuit.getSuit(player);
                 if (suit != null) {
                     if (cap.getPrimaryTrailColor().getRGB() != suit.getTrailRGB().getRGB()) {

@@ -135,11 +135,16 @@ public class TrailRenderHandler {
      * @return
      */
     private static boolean renderTrail(EntityPlayer player) {
-        return CapabilitySpeedster.get(player).isSpeedster();
+        ISpeedsterCap cap = CapabilitySpeedster.get(player);
+        return cap.isSpeedster() || cap.hasVelocity();
     }
 
     private static boolean renderSecondTrail(EntityPlayer player) {
-        return CapabilitySpeedster.get(player).hasSecondTrail();
+        ISpeedsterCap cap = CapabilitySpeedster.get(player);
+        if (cap.isSpeedster() || cap.hasVelocity()) {
+            return cap.hasSecondTrail();
+        }
+        return false;
     }
 
     /**
@@ -624,7 +629,7 @@ public class TrailRenderHandler {
             Color c = getTrailColor(entity.owner, trail);
             float progress = MathHelper.clamp(1F - (entity.ticksExisted + partialRenderTicks) / 10F, 0F, 0.5F);
             float translate = -MathHelper.clamp(1F - (entity.ticksExisted) / 10F, 0F, 0.5F) / 15F;
-            GlStateManager.translate(0F, translate * (entity.height /1.8F), 0F);
+            GlStateManager.translate(0F, translate * (entity.height / 1.8F), 0F);
             GL11.glBlendFunc(770, 771);
             GL11.glAlphaFunc(516, 0.003921569F);
             GlStateManager.color((float) c.getRed() / 255F, (float) c.getGreen() / 255F, (float) c.getBlue() / 255F, progress);
@@ -1004,7 +1009,7 @@ public class TrailRenderHandler {
         BufferBuilder wr = tes.getBuffer();
 
         if (lineWidth > 0) {
-            GlStateManager.color(color.getRed() / 255F , color.getGreen() / 255F , color.getBlue() / 255F , alpha);
+            GlStateManager.color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, alpha);
             GlStateManager.glLineWidth(lineWidth);
             wr.begin(GL11.GL_LINE_STRIP, DefaultVertexFormats.POSITION);
             wr.pos(start.x, start.y, start.z).endVertex();

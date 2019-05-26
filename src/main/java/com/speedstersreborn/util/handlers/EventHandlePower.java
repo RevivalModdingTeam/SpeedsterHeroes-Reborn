@@ -3,7 +3,6 @@ package com.speedstersreborn.util.handlers;
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
-import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.meta.util.PEnumHandler;
 import com.revivalmodding.revivalcore.util.helper.ModHelper;
 import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
@@ -37,7 +36,7 @@ public class EventHandlePower {
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IMetaCap capmeta = CapabilityMeta.get(player);
 
-            if (MetaHelper.getMetaPowerName(capmeta.getMetaPower()) == MetaPowerStrings.SPEEDSTER || cap.isSpeedster()) {
+            if (cap.isSpeedster() || cap.hasVelocity()) {
                 setXPAdd(player, cap);
                 runWater(player, cap);
                 runWall(player, cap);
@@ -51,7 +50,7 @@ public class EventHandlePower {
 
     public static void setXPAdd(EntityPlayer player, ISpeedsterCap cap) {
         if (!player.world.isRemote) {
-            if (cap.isSpeedster() && !player.capabilities.isCreativeMode) {
+            if (!player.capabilities.isCreativeMode) {
                 if (isMoving(player)) {
                     cap.setXP(cap.getXP() + 0.01 * cap.getSpeedLevel());
                     player.spawnRunningParticles();
@@ -64,7 +63,7 @@ public class EventHandlePower {
     }
 
     public static void runWater(EntityPlayer player, ISpeedsterCap cap) {
-        if (player.isSprinting() && cap.isSpeedster() && cap.getSpeedLevel() >= 1 && player.world.getBlockState(player.getPosition().add(0, -1, 0)).getBlock() instanceof BlockLiquid) {
+        if (player.isSprinting() && cap.getSpeedLevel() >= 1 && player.world.getBlockState(player.getPosition().add(0, -1, 0)).getBlock() instanceof BlockLiquid) {
             player.posY -= player.motionY;
             player.motionY = 0D;
             player.fallDistance = 0.0F;
@@ -73,15 +72,13 @@ public class EventHandlePower {
     }
 
     public static void runWall(EntityPlayer player, ISpeedsterCap cap) {
-        if (cap.isSpeedster()) {
-            if (player.collidedHorizontally) {
-                if (cap.isWallRunning()) {
-                    if (cap.getSpeedLevel() >= 3) {
-                        player.motionY = 0.8D;
-                        player.fallDistance = 0F;
-                        cap.setWallRunning(true);
-                        player.sendPlayerAbilities();
-                    }
+        if (player.collidedHorizontally) {
+            if (cap.isWallRunning()) {
+                if (cap.getSpeedLevel() >= 3) {
+                    player.motionY = 0.8D;
+                    player.fallDistance = 0F;
+                    cap.setWallRunning(true);
+                    player.sendPlayerAbilities();
                 }
             }
         }
@@ -97,7 +94,7 @@ public class EventHandlePower {
     }
 
     public static void runAbilities(EntityPlayer player, ISpeedsterCap cap) {
-        if (cap.isSpeedster() && cap.getSpeedLevel() >= 1) {
+        if (cap.getSpeedLevel() >= 1) {
             player.stepHeight = 1.3f;
             player.sendPlayerAbilities();
         }
@@ -105,7 +102,7 @@ public class EventHandlePower {
 
     public static void whileRunning(EntityPlayer player, ISpeedsterCap cap, IMetaCap capmeta) {
         FoodStats food = player.getFoodStats();
-        if (!player.world.isRemote && cap.isSpeedster() && cap.getSpeedLevel() > 1 && isMoving(player) && !player.isCreative()) {
+        if (!player.world.isRemote && cap.getSpeedLevel() > 1 && isMoving(player) && !player.isCreative()) {
             if (player.isBurning()) {
                 player.extinguish();
             }
@@ -114,8 +111,8 @@ public class EventHandlePower {
             }
 
             if (food.getFoodLevel() != 20) {
-                double exhaustion = (((food.getFoodLevel() - 20.5) * -1) * Math.max(cap.getSpeedLevel(), 0)) / 968;
-                capmeta.setExhaustionLevel(capmeta.getexhaustionLevel() + exhaustion); // TODO Higher the exhaustion number in core cap for meta
+             //   double exhaustion = (((food.getFoodLevel() - 20.5) * -1) * Math.max(cap.getSpeedLevel(), 0)) / 968;
+           //     capmeta.setExhaustionLevel(capmeta.getexhaustionLevel() + exhaustion); // TODO Higher the exhaustion number in core cap for meta
             }
         }
         if (player.getHealth() < player.getMaxHealth()) {
@@ -158,16 +155,13 @@ public class EventHandlePower {
     }
 
     private static void updateVelocity(EntityPlayer player, ISpeedsterCap cap, IMetaCap capa) {
-        if (cap.hasVelocity()) {
+        if (cap.getVelocityTime() >= 1) {
             cap.setVelocityTime(cap.getVelocityTime() - 1);
             if (cap.getVelocityTime() <= 0) {
                 cap.setMaxSpeedLevel(cap.getMaxspeedLevel() - cap.getAddedSpeed());
                 if (cap.getSpeedLevel() > cap.getMaxspeedLevel()) {
                     int remove = cap.getSpeedLevel() - cap.getMaxspeedLevel();
                     cap.setSpeedLevel(cap.getSpeedLevel() - remove);
-                }
-                if (!MetaHelper.getMetaPowerName(capa.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER)) {
-                    capa.setPowerEnabled(false); // TODO Make render & cap work when velocity enabled. Not trough main core cap
                 }
                 cap.setVelocity(false);
             }
