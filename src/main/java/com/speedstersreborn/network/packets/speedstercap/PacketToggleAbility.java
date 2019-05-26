@@ -41,9 +41,18 @@ public class PacketToggleAbility implements IMessage {
 			EntityPlayerMP player = ctx.getServerHandler().player;
 			player.getServer().addScheduledTask(() -> {
 				IAbilityCap cap = IAbilityCap.Impl.get(player);
-				// TODO: make compatible for gui, not hardcoded abilities
-				cap.setAbilities(new AbilityBase[] {SHRAbilities.SPEED, SHRAbilities.WALL_RUNNING, SHRAbilities.PHASE});
-				cap.getAbilities(player)[message.id].toggleAbility();
+				//TODO: temporary, delete later
+				if(cap.getAbilities(player).size() < 3) {
+					cap.getAbilities(player).clear();
+					cap.addAbility(SHRAbilities.SPEED, player);
+					cap.addAbility(SHRAbilities.WALL_RUNNING, player);
+					cap.addAbility(SHRAbilities.PHASE, player);
+				}
+				
+				AbilityBase ability = cap.getAbilities(player).size() > message.id ? cap.getAbilities(player).get(message.id) : null;
+				if(ability != null) {
+					ability.toggleAbility();
+				}
 			});
 			return null;
 		}

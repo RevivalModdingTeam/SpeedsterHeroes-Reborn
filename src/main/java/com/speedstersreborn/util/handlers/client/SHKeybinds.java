@@ -53,9 +53,13 @@ public class SHKeybinds {
             
             if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER) && metaCap.isPowerEnabled() || cap.hasVelocity()) {
 
-            	if(abilityCap.getAbilities(player).length < 3) {
-            		abilityCap.setAbilities(new AbilityBase[] {SHRAbilities.SPEED, SHRAbilities.WALL_RUNNING, SHRAbilities.PHASE});
+            	//TODO: temporary, delete later
+            	if(abilityCap.getAbilities(player).size() < 3) {
+            		abilityCap.addAbility(SHRAbilities.SPEED, player);
+            		abilityCap.addAbility(SHRAbilities.WALL_RUNNING, player);
+            		abilityCap.addAbility(SHRAbilities.PHASE, player);
             	}
+
                 // Velocity Compatibility
                 if(Keybinds.ENABLE.isPressed() && cap.hasVelocity()) {
                     NetworkManager.INSTANCE.sendToServer(new PacketSetPower());
@@ -63,8 +67,8 @@ public class SHKeybinds {
 
                 if (Keybinds.POWER1.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketToggleAbility(0));
-                    if(abilityCap.getAbilities(player)[0] instanceof AbilitySpeed) {
-                    	abilityCap.getAbilities(player)[0].toggleAbility();
+                    if(abilityCap.getAbilities(player).get(0) instanceof AbilitySpeed) {
+                    	abilityCap.getAbilities(player).get(0).toggleAbility();
                     }
                 }
 
