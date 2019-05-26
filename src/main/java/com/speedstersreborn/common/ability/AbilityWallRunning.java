@@ -15,10 +15,21 @@ public class AbilityWallRunning extends AbilityBase {
 	@Override
 	public void update(EntityPlayer player) {
 		ISpeedsterCap cap = CapabilitySpeedster.get(player);
-		if(isActive() && !cap.isWallRunning()) {
-			cap.setWallRunning(true);
+		if(isActive()) {
+			if(player.collidedHorizontally) {
+				currentCooldown = 150;
+			}
+			
+			if(!cap.isWallRunning()) {
+				cap.setWallRunning(true);
+			}
+			if(hasCooldown()) {
+				player.fallDistance = 0f;
+			}
 		} else if(!isActive() && cap.isWallRunning()) {
 			cap.setWallRunning(false);
 		}
+		
+		super.update(player);
 	}
 }
