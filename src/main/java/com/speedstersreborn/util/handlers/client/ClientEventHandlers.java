@@ -47,11 +47,11 @@ public class ClientEventHandlers {
 		CFGSpeedIndicatorUnit speedUnit = SHRConfig.speedstersHeroesReborn.speedUnit;
 		int width = res.getScaledWidth();
 		int height = res.getScaledHeight();
-		int left = width / 2 - 63;
+		int left = width / 2 - 64;
 		int top = height - 62;
-		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, left + pos.x, top-pos.y, 128, 10, 0, 0, 1, 0.716D, false);
+		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, left + pos.x, top-pos.y, 128, 10, 0, 0, 1, 0.71428571428D, true);
 		x = IndicatorAnimation.move(x, level*6.4f, 0.5f);
-		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, left-1 + pos.x + x, top+8-pos.y, 8, 4, 0, 0.733, 0.05197505197, 0.9333, true);
+		ImageHelper.drawImageWithUV(mc, SPEED_INDICATOR, left + pos.x + x, top+8-pos.y, 6, 3, 0, 0.73, 0.05, 1, true);
 		mc.fontRenderer.drawStringWithShadow(FORMAT.format((SpeedAPI.getPlayerMovementSpeed(mc.player)*20)*speedUnit.getMultiplier())+ " " + speedUnit.getName(), left + pos.x, top-pos.y - 9, 0xFFFFFF);
 		
 	}
