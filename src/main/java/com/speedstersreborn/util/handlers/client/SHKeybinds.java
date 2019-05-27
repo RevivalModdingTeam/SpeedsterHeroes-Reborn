@@ -7,6 +7,7 @@ import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.handlers.client.Keybinds;
 import com.speedstersreborn.SpeedsterHeroesReborn;
+import com.speedstersreborn.common.ability.AbilitySpeed;
 import com.speedstersreborn.common.ability.SHRAbilities;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
@@ -54,9 +55,9 @@ public class SHKeybinds {
 
                 if (Keybinds.POWER1.isPressed()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketToggleAbility(0));
-                    //if(abilityCap.getAbilities(player).get(0) instanceof AbilitySpeed) {
-                      //  abilityCap.getAbilities(player).get(0).toggleAbility();
-                    //}
+                    if(abilityCap.getAbilities(player).get(0) instanceof AbilitySpeed) {
+                        abilityCap.getAbilities(player).get(0).toggleAbility();
+                    }
                 }
 
                 if (Keybinds.POWER2.isPressed()) {

@@ -141,6 +141,9 @@ public class EventHandlePower {
                 if (capa.isPowerEnabled() != cap.isSpeedster())
                     cap.setSpeedster(capa.isPowerEnabled());
             }
+                cap.setSpeedster(cap.hasVelocity());
+            // TODO i doubt it's best way , might make speedster handler which checks all possibilities to set power
+
         }
     }
 
@@ -164,7 +167,7 @@ public class EventHandlePower {
                     cap.setSpeedLevel(cap.getSpeedLevel() - remove);
                 }
                 cap.setVelocity(false);
-            }
+                }
         }
         if (player.isDead) {
             cap.clearV9();
