@@ -1,5 +1,10 @@
 {
   "variants": {
-    "normal": { "model": "shr:treadmill" }
+    "normal": { "model": "shr:treadmill" },
+    "facing=up":  { "model": "shr:treadmill" },
+    "facing=east":  { "model": "shr:treadmill", "y": 180 },
+    "facing=south":  { "model": "shr:treadmill", "y": 270},
+    "facing=west":  { "model": "shr:treadmill", "y": 0},
+    "facing=north":  { "model": "shr:treadmill", "y": 90 }
   }
 }
