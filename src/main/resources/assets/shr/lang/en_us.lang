@@ -19,8 +19,8 @@ item.ring_kid_flash.name=Kid Flash Ring
 item.ring_reverse_flash.name=Reverse Flash Ring
 item.ring_flash.name=Flash Ring
 item.velocity_nine.name=Velocity Nine
-item.velocity=Velocity
 
+// Creative Tab
 itemGroup.shrtab=SpeedsterHeroes Reborn
 
 //Block
