@@ -44,7 +44,7 @@ public class ItemVelocity extends Item {
                     stack.getTagCompound().setBoolean("has_velocity", false);
                 }
                 cap.setVelocity(velocityTypes);
-                cap.setSpeedster(true);
+                cap.setVelocity(true);
                 metaCap.setPowerEnabled(true);
                 cap.sync();
             } else {
