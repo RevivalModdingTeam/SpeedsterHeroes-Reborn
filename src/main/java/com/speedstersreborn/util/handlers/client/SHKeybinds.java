@@ -70,9 +70,13 @@ public class SHKeybinds {
             }
 
             // Velocity Compatibility
-            if (Keybinds.ENABLE.isPressed() && cap.getVelocityTime() >= 1) {
+            if (Keybinds.ENABLE.isPressed() && cap.getVelocityTime() >= 1) { // TODO Fix that this also disables velocity once activated . But core overrides action ;/
+                System.out.println("Speedster: " + cap.isSpeedster());
+                System.out.println("Velocity: " + cap.hasVelocity());
+                System.out.println("Speedlevel: " + cap.getSpeedLevel());
                 NetworkHandler.INSTANCE.sendToServer(new PacketSetVelocity());
             }
+
         }
     }
 }

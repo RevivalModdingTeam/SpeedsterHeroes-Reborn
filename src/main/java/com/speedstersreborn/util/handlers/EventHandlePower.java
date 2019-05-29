@@ -141,9 +141,6 @@ public class EventHandlePower {
                 if (capa.isPowerEnabled() != cap.isSpeedster())
                     cap.setSpeedster(capa.isPowerEnabled());
             }
-                cap.setSpeedster(cap.hasVelocity());
-            // TODO i doubt it's best way , might make speedster handler which checks all possibilities to set power
-
         }
     }
 

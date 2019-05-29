@@ -55,22 +55,15 @@ public class CapabilitySpeedster implements ISpeedsterCap {
 
     @Override
     public void update() {
-        if (!isSpeedster()) {
-            setSpeedLevel(0);
-            setWallRunning(false);
-            setPhasing(false);
-            SpeedAPI.setSpeedFromCap(player);
-        } else {
-            if (hasVelocity()) {
-                if (!hasTakenVelocityBefore)
-                    hasTakenVelocityBefore = true;
 
-                if (getSpeedLevel() < maxSpeedLevel) {
-                    SpeedAPI.setSpeedFromCap(player);
-                }
-            } else {
-                SpeedAPI.setSpeedFromCap(player);
-            }
+        if(!isSpeedster && !hasVelocity()) {
+            setSpeedLevel(0);
+        }
+        SpeedAPI.setSpeedFromCap(player);
+
+        if (hasVelocity()) {
+            if (!hasTakenVelocityBefore)
+                hasTakenVelocityBefore = true;
         }
 
         if (hungerTimer > 0) {
