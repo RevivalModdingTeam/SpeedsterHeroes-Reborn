@@ -18,6 +18,5 @@ public class SHRAbilities {
 		e.register(SPEED);
 		e.register(WALL_RUNNING);
 		e.register(PHASE);
-		System.out.println(Registries.ABILITIES);
 	}
 }

@@ -44,39 +44,14 @@ public class SHKeybinds {
             IAbilityCap abilityCap = IAbilityCap.Impl.get(player);
             
             if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER) && metaCap.isPowerEnabled() || cap.hasVelocity()) {
-
-
-                //TODO: temporary, delete later
-                if(abilityCap.getAbilities(player).size() < 3) {
-                    abilityCap.addAbility(SHRAbilities.SPEED, player);
-                    abilityCap.addAbility(SHRAbilities.WALL_RUNNING, player);
-                    abilityCap.addAbility(SHRAbilities.PHASE, player);
-                }
-
-                if (Keybinds.POWER1.isPressed()) {
-                    NetworkHandler.INSTANCE.sendToServer(new PacketToggleAbility(0));
-                    if(abilityCap.getAbilities(player).get(0) instanceof AbilitySpeed) {
-                        abilityCap.getAbilities(player).get(0).toggleAbility();
-                    }
-                }
-
-                if (Keybinds.POWER2.isPressed()) {
-                    NetworkHandler.INSTANCE.sendToServer(new PacketToggleAbility(1));
-                }
-
-                if (Keybinds.POWER3.isPressed()) {
-                    NetworkHandler.INSTANCE.sendToServer(new PacketToggleAbility(2));
+                // Velocity Compatibility
+                if (Keybinds.ENABLE.isPressed() && cap.getVelocityTime() >= 1) { // TODO Fix that this also disables velocity once activated . But core overrides action ;/
+                    System.out.println("Speedster: " + cap.isSpeedster());
+                    System.out.println("Velocity: " + cap.hasVelocity());
+                    System.out.println("Speedlevel: " + cap.getSpeedLevel());
+                    NetworkHandler.INSTANCE.sendToServer(new PacketSetVelocity());
                 }
             }
-
-            // Velocity Compatibility
-            if (Keybinds.ENABLE.isPressed() && cap.getVelocityTime() >= 1) { // TODO Fix that this also disables velocity once activated . But core overrides action ;/
-                System.out.println("Speedster: " + cap.isSpeedster());
-                System.out.println("Velocity: " + cap.hasVelocity());
-                System.out.println("Speedlevel: " + cap.getSpeedLevel());
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetVelocity());
-            }
-
         }
     }
 }

@@ -26,8 +26,6 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     private int speed_level = 0;
     private boolean isSpeedster = false;
     private boolean isPhasing = false;
-    private int level = 0;
-    private double xp = 0.0;
     private boolean isWallRunning = false;
     private boolean hasSecondTrail = false;
     private boolean hasRainbowTrail = false;
@@ -129,26 +127,6 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     @Override
     public boolean isWallRunning() {
         return isWallRunning;
-    }
-
-    @Override
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    @Override
-    public int getLevel() {
-        return level;
-    }
-
-    @Override
-    public void setXP(double xp) {
-        this.xp = xp;
-    }
-
-    @Override
-    public double getXP() {
-        return xp;
     }
 
     @Override
