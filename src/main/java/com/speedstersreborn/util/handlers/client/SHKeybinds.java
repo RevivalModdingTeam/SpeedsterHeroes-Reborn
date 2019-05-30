@@ -7,13 +7,11 @@ import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.handlers.client.Keybinds;
 import com.speedstersreborn.SpeedsterHeroesReborn;
-import com.speedstersreborn.common.ability.AbilitySpeed;
-import com.speedstersreborn.common.ability.SHRAbilities;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetVelocity;
-import com.speedstersreborn.network.packets.speedstercap.PacketToggleAbility;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;

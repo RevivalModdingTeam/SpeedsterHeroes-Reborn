@@ -1,5 +1,6 @@
 package com.speedstersreborn.util.handlers;
 
+import com.revivalmodding.revivalcore.core.abilities.IAbilityCap;
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
@@ -35,9 +36,10 @@ public class EventHandlePower {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IMetaCap capmeta = CapabilityMeta.get(player);
+            IAbilityCap capAbilities = IAbilityCap.Impl.get(player);
 
             if (cap.isSpeedster() || cap.hasVelocity()) {
-                setXPAdd(player, cap);
+                setXPAdd(player, cap, capAbilities);
                 runWater(player, cap);
                 runWall(player, cap);
                 runAbilities(player, cap);
@@ -48,16 +50,16 @@ public class EventHandlePower {
         }
     }
 
-    public static void setXPAdd(EntityPlayer player, ISpeedsterCap cap) {
+    public static void setXPAdd(EntityPlayer player, ISpeedsterCap cap, IAbilityCap abilityCap) {
         if (!player.world.isRemote) {
             if (!player.capabilities.isCreativeMode) {
                 if (isMoving(player)) {
-                    cap.setXP(cap.getXP() + 0.01 * cap.getSpeedLevel());
+                    abilityCap.setXP(abilityCap.getXP() + 0.01 * cap.getSpeedLevel());
                     player.spawnRunningParticles();
                     if (ModHelper.getIsDev())
-                        PlayerHelper.sendMessage(player, "XP: " + cap.getXP(), true);
+                        PlayerHelper.sendMessage(player, "XP: " + abilityCap.getXP(), true);
                 }
-                updateLevel(cap);
+                updateLevel(cap, abilityCap);
             }
         }
     }
@@ -144,11 +146,11 @@ public class EventHandlePower {
         }
     }
 
-    private static void updateLevel(ISpeedsterCap cap) {
-        final double xp = cap.getXP();
-        final double required = (cap.getLevel() + 1) * 100 + 100.0D;
+    private static void updateLevel(ISpeedsterCap cap, IAbilityCap aCap) {
+        final double xp = aCap.getXP();
+        final double required = (aCap.getLevel() + 1) * 100 + 100.0D;
         if (xp >= required) {
-            cap.setLevel(cap.getLevel() + 1);
+            aCap.setLevel(aCap.getLevel() + 1);
             if (cap.getMaxspeedLevel() < 20)
                 cap.setMaxSpeedLevel(cap.getMaxspeedLevel() + 5);
         }

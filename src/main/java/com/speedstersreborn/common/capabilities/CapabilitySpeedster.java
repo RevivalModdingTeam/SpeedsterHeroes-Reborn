@@ -1,5 +1,6 @@
 package com.speedstersreborn.common.capabilities;
 
+import com.revivalmodding.revivalcore.core.abilities.IAbilityCap;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.network.NetworkHandler;
@@ -58,7 +59,8 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             setSpeedLevel(0);
         }
         SpeedAPI.setSpeedFromCap(player);
-
+        IAbilityCap abilityCap = IAbilityCap.Impl.get(player);
+        
         if (hasVelocity()) {
             if (!hasTakenVelocityBefore)
                 hasTakenVelocityBefore = true;
@@ -74,7 +76,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         }
 
         if(getMaxspeedLevel() < 5) {
-            this.setMaxSpeedLevel(getLevel() * 5);
+            this.setMaxSpeedLevel(abilityCap.getLevel() * 5);
         }
 
         if (getSpeedLevel() < 0) {
@@ -253,7 +255,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     @Override
     public void clear() {
         this.setPrimaryTrailColor(mainColor);
-        this.setLevel(0);
+        IAbilityCap.Impl.get(player).setLevel(0);
         this.setMaxSpeedLevel(5);
         this.setLastTrailColor(mainColor);
         this.clearV9();
@@ -270,7 +272,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             this.setLastTrailColor(mainColor);
             this.isSpeedster = false;
             this.hasTakenVelocityBefore = false;
-            this.setMaxSpeedLevel(getLevel() * 5);
+            this.setMaxSpeedLevel(IAbilityCap.Impl.get(player).getLevel() * 5);
         }
     }
 
@@ -282,8 +284,6 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         nbt.setInteger("velocity_count", velocitycount);
         nbt.setBoolean("is_phasing", isPhasing);
         nbt.setInteger("max_level", maxSpeedLevel);
-        nbt.setDouble("xp_level", xp);
-        nbt.setInteger("level", level);
         nbt.setBoolean("velocity", velocity);
         nbt.setBoolean("is_wall_run", isWallRunning);
         nbt.setBoolean("has_second_trail", hasSecondTrail);
@@ -308,8 +308,6 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         speed_level = nbt.getInteger("speed_level");
         isSpeedster = nbt.getBoolean("is_speedster");
         isPhasing = nbt.getBoolean("is_phasing");
-        xp = nbt.getDouble("xp_level");
-        level = nbt.getInteger("level");
         isWallRunning = nbt.getBoolean("is_wall_run");
         hasSecondTrail = nbt.getBoolean("has_second_trail");
         maxSpeedLevel = nbt.getInteger("max_level");
