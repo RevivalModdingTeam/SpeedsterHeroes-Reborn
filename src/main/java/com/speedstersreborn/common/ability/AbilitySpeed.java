@@ -4,6 +4,7 @@ import com.revivalmodding.revivalcore.core.abilities.AbilityBase;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -11,8 +12,6 @@ public class AbilitySpeed extends AbilityBase {
 
 	// TODO
 	private static final ResourceLocation ICON = new ResourceLocation(SpeedsterHeroesReborn.MODID);
-	private ISpeedsterCap cap;
-	private EntityPlayer player;
 
 	public AbilitySpeed() {
 		super("speed");
@@ -20,27 +19,15 @@ public class AbilitySpeed extends AbilityBase {
 
 	@Override
 	public void update(EntityPlayer player) {
-		this.player = player;
-		cap = CapabilitySpeedster.get(player);
-	}
-
-	// TODO: fix
-	@Override
-	public void toggleAbility() {
-		if(player == null || cap == null) {
-			return;
-		}
-
-		int level = cap.getSpeedLevel();
-		if(player.isSneaking() && level > 0) {
-			level -= 1;
-		}
-		else if(!player.isSneaking()) {
-			if(level < cap.getMaxspeedLevel()) {
-				level += 1;
+		if(isActive()) {
+			ISpeedsterCap cap = CapabilitySpeedster.get(player);
+			if(player.isSneaking() && cap.getSpeedLevel() > 0) {
+				cap.setSpeedLevel(cap.getSpeedLevel()-1);
+			} else if(!player.isSneaking() && cap.getSpeedLevel() < cap.getMaxspeedLevel()) {
+				cap.setSpeedLevel(cap.getSpeedLevel()+1);
 			}
+			toggleAbility();
 		}
-		cap.setSpeedLevel(level);
 	}
 	
 	@Override
