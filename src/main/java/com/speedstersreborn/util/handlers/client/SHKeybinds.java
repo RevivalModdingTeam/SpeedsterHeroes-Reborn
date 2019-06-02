@@ -11,7 +11,6 @@ import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.network.packets.speedstercap.PacketSetVelocity;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
@@ -36,11 +35,11 @@ public class SHKeybinds {
     public static class Handler {
         @SubscribeEvent
         public static void keyPressed(InputEvent.KeyInputEvent e) {
-        	EntityPlayerSP player = Minecraft.getMinecraft().player;
+            EntityPlayerSP player = Minecraft.getMinecraft().player;
             IMetaCap metaCap = CapabilityMeta.get(player);
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IAbilityCap abilityCap = IAbilityCap.Impl.get(player);
-            
+
             if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER) && metaCap.isPowerEnabled() || cap.hasVelocity()) {
                 // Velocity Compatibility
                 if (Keybinds.ENABLE.isPressed() && cap.getVelocityTime() >= 1) { // TODO Fix that this also disables velocity once activated . But core overrides action ;/
