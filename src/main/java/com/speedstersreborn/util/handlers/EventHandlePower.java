@@ -45,6 +45,10 @@ public class EventHandlePower {
                 runAbilities(player, cap);
                 phasing(player, cap);
                 whileRunning(player, cap, capmeta);
+            } else if(!cap.isSpeedster()) {
+            	if(isMoving(player)) {
+            		capAbilities.addXP(0.005 * (player.isSprinting() ? 1.5 : 1));
+            	}
             }
             updateVelocity(player, cap, capmeta);
         }
@@ -54,12 +58,11 @@ public class EventHandlePower {
         if (!player.world.isRemote) {
             if (!player.capabilities.isCreativeMode) {
                 if (isMoving(player)) {
-                    abilityCap.setXP(abilityCap.getXP() + 0.01 * cap.getSpeedLevel());
                     player.spawnRunningParticles();
                     if (ModHelper.getIsDev())
                         PlayerHelper.sendMessage(player, "XP: " + abilityCap.getXP(), true);
                 }
-                updateLevel(cap, abilityCap);
+                //updateLevel(cap, abilityCap);
             }
         }
     }
@@ -147,13 +150,10 @@ public class EventHandlePower {
     }
 
     private static void updateLevel(ISpeedsterCap cap, IAbilityCap aCap) {
-        final double xp = aCap.getXP();
-        final double required = (aCap.getLevel() + 1) * 100 + 100.0D;
-        if (xp >= required) {
+    	// TODO: Create level up event and use it here (event must be in core)
             aCap.setLevel(aCap.getLevel() + 1);
             if (cap.getMaxspeedLevel() < 20)
                 cap.setMaxSpeedLevel(cap.getMaxspeedLevel() + 5);
-        }
     }
 
     private static void updateVelocity(EntityPlayer player, ISpeedsterCap cap, IMetaCap capa) {
