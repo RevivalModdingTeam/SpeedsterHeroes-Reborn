@@ -1,10 +1,11 @@
 package com.speedstersreborn.util.handlers;
 
 import com.revivalmodding.revivalcore.core.abilities.IAbilityCap;
+import com.revivalmodding.revivalcore.core.common.events.PowerToggleEvent;
 import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
-import com.revivalmodding.revivalcore.meta.util.PEnumHandler;
+import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.helper.ModHelper;
 import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
@@ -116,8 +117,8 @@ public class EventHandlePower {
             }
 
             if (food.getFoodLevel() != 20) {
-             //   double exhaustion = (((food.getFoodLevel() - 20.5) * -1) * Math.max(cap.getSpeedLevel(), 0)) / 968;
-           //     capmeta.setExhaustionLevel(capmeta.getexhaustionLevel() + exhaustion); // TODO Higher the exhaustion number in core cap for meta
+                //   double exhaustion = (((food.getFoodLevel() - 20.5) * -1) * Math.max(cap.getSpeedLevel(), 0)) / 968;
+                //     capmeta.setExhaustionLevel(capmeta.getexhaustionLevel() + exhaustion); // TODO Higher the exhaustion number in core cap for meta
             }
         }
         if (player.getHealth() < player.getMaxHealth()) {
@@ -142,11 +143,27 @@ public class EventHandlePower {
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IMetaCap capa = CapabilityMeta.get(player);
 
-            if (MetaHelper.hasPower(player, PEnumHandler.MetaPower.SPEEDSTER.getName())) {
-                if (capa.isPowerEnabled() != cap.isSpeedster())
-                    cap.setSpeedster(capa.isPowerEnabled());
+            if (capa.hasMetaPowers() && MetaHelper.getMetaPowerName(capa.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER)) {
+                cap.setSpeedster(capa.isPowerEnabled());
+
+                if (cap.getVelocityTime() > 1) {
+                    if (cap.isSpeedster()) {
+                        cap.setVelocity(true);
+                    }else{
+                        cap.setVelocity(false);
+                    }
+                }
+            } else {
+                cap.setSpeedster(capa.hasMetaPowers());
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void getTogglePowerEvent(PowerToggleEvent e) {
+        EntityPlayer player = e.player;
+        IMetaCap capa = CapabilityMeta.get(player);
+        ISpeedsterCap cap = CapabilitySpeedster.get(player);
     }
 
     private static void updateLevel(ISpeedsterCap cap, IAbilityCap aCap) {
@@ -154,6 +171,26 @@ public class EventHandlePower {
             aCap.setLevel(aCap.getLevel() + 1);
             if (cap.getMaxspeedLevel() < 20)
                 cap.setMaxSpeedLevel(cap.getMaxspeedLevel() + 5);
+    }
+
+    public static boolean shouldchange(ISpeedsterCap cap, IMetaCap capa) {
+
+        if (!cap.hasVelocity() && cap.getVelocityTime() > 0) {
+            return true;
+        }
+
+        if (cap.hasVelocity() && cap.getVelocityTime() > 0) {
+            return true;
+        }
+
+        if (cap.hasVelocity() && !(cap.getVelocityTime() > 0)) {
+            return true;
+        }
+
+        if (!cap.hasVelocity() && !(cap.getVelocityTime() > 0)) {
+            return false;
+        }
+        return false;
     }
 
     private static void updateVelocity(EntityPlayer player, ISpeedsterCap cap, IMetaCap capa) {
@@ -166,7 +203,7 @@ public class EventHandlePower {
                     cap.setSpeedLevel(cap.getSpeedLevel() - remove);
                 }
                 cap.setVelocity(false);
-                }
+            }
         }
         if (player.isDead) {
             cap.clearV9();

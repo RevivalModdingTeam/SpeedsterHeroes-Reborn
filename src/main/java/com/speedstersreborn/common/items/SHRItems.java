@@ -29,9 +29,9 @@ public class SHRItems {
     public static void init() {
         ring_flash = registerItem(new ItemRing("ring_flash", RingTypes.FLASH), true);
         ring_reverse_flash = registerItem(new ItemRing("ring_reverse_flash", RingTypes.REVERSE), true);
-        //  ring_zoom = registerItem(new ItemRing("ring_zoom", RingTypes.ZOOM), true);
-        //  ring_god_speed = registerItem(new ItemRing("ring_god_speed", RingTypes.GOD_SPEED), true);
-        //  ring_kid_flash = registerItem(new ItemRing("ring_kid_flash", RingTypes.KID_FLASH), true);
+        ring_zoom = registerItem(new ItemRing("ring_zoom", RingTypes.ZOOM), true);
+        ring_god_speed = registerItem(new ItemRing("ring_god_speed", RingTypes.GOD_SPEED), true);
+        ring_kid_flash = registerItem(new ItemRing("ring_kid_flash", RingTypes.KID_FLASH), true);
         velocity_nine = registerItem(new ItemVelocity("velocity_nine", VelocityTypes.VELOCITY_NINE), true);
         energy_bar = registerItem(new ItemEnergyBar("energy_bar", 20, 0, false));
         //   test = registerItem(new Itemtest("test"), true);

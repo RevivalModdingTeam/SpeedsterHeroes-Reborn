@@ -40,12 +40,10 @@ public class SHKeybinds {
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
             IAbilityCap abilityCap = IAbilityCap.Impl.get(player);
 
-            if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER) && metaCap.isPowerEnabled() || cap.hasVelocity()) {
+            if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER) && metaCap.isPowerEnabled()) {
+            }else {
                 // Velocity Compatibility
-                if (Keybinds.ENABLE.isPressed() && cap.getVelocityTime() >= 1) { // TODO Fix that this also disables velocity once activated . But core overrides action ;/
-                    System.out.println("Speedster: " + cap.isSpeedster());
-                    System.out.println("Velocity: " + cap.hasVelocity());
-                    System.out.println("Speedlevel: " + cap.getSpeedLevel());
+                if (Keybinds.ENABLE.isPressed() && cap.getVelocityTime() > 1) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSetVelocity());
                 }
             }
