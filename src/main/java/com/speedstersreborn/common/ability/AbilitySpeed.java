@@ -6,7 +6,6 @@ import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.handlers.EventHandlePower;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -41,7 +40,7 @@ public class AbilitySpeed extends AbilityBase {
 	
 	@Override
 	public int getAbilityPrice() {
-		return 1;
+		return 0;
 	}
 	
 	@Override
