@@ -11,8 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class AbilitySpeed extends AbilityBase {
 
-	// TODO
-	private static final ResourceLocation ICON = new ResourceLocation(SpeedsterHeroesReborn.MODID);
+	private static final ResourceLocation ICON = new ResourceLocation(SpeedsterHeroesReborn.MODID + ":textures/overlay/abilityspeed.png");
 
 	public AbilitySpeed() {
 		super("speed");
@@ -37,6 +36,8 @@ public class AbilitySpeed extends AbilityBase {
 			}
 		}
 	}
+	
+	// TODO on ability deactivated from core
 	
 	@Override
 	public int getAbilityPrice() {
