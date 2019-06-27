@@ -1,5 +1,6 @@
 package com.speedstersreborn.util.handlers;
 
+import com.revivalmodding.revivalcore.command.CommandSuperpowers.SuperpowersCommandExecuteEvent;
 import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
@@ -76,7 +77,6 @@ public class EventHandler {
         }
     }
 
-
     @SubscribeEvent
     public static void setRainBowTrails(LivingEvent.LivingUpdateEvent e) {
         if (e.getEntity() instanceof EntityPlayer) {
@@ -97,5 +97,12 @@ public class EventHandler {
                     cap.setPrimaryTrailColor(cap.getLastTrailColor());
             }
         }
+    }
+    
+    @SubscribeEvent
+    public static void superPowerCommandExecuted(SuperpowersCommandExecuteEvent e) {
+    	ISpeedsterCap cap = CapabilitySpeedster.get(e.player);
+    	cap.setMaxSpeedLevel(20);
+    	cap.sync();
     }
 }
