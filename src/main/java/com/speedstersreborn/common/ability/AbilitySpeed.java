@@ -20,7 +20,6 @@ public class AbilitySpeed extends AbilityBase {
 	@Override
 	public void update(EntityPlayer player) {
 		ISpeedsterCap cap = CapabilitySpeedster.get(player);
-		
 		if(isActive()) {
 			if(player.isSneaking() && cap.getSpeedLevel() > 0) {
 				cap.setSpeedLevel(cap.getSpeedLevel()-1);
@@ -37,7 +36,14 @@ public class AbilitySpeed extends AbilityBase {
 		}
 	}
 	
-	// TODO on ability deactivated from core
+	@Override
+	public void onAbilityDeactivated(EntityPlayer player) {
+		ISpeedsterCap cap = CapabilitySpeedster.get(player);
+		if(cap.getSpeedLevel() > 0) {
+			cap.setSpeedLevel(0);
+			cap.sync();
+		}
+	}
 	
 	@Override
 	public int getAbilityPrice() {
