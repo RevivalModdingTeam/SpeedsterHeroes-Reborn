@@ -10,8 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class AbilityPhase extends AbilityBase {
 	
-	// TODO
-	private static final ResourceLocation ICON = new ResourceLocation(SpeedsterHeroesReborn.MODID);
+	private static final ResourceLocation ICON = new ResourceLocation(SpeedsterHeroesReborn.MODID + ":textures/overlay/abilityphase.png");
 	
 	public AbilityPhase() {
 		super("phase");
