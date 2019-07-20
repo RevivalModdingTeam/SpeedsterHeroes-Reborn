@@ -1,6 +1,8 @@
 package com.speedstersreborn.util.handlers.client;
 
 import com.google.common.collect.Maps;
+import com.revivalmodding.revivalcore.util.helper.ModHelper;
+import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
@@ -136,15 +138,19 @@ public class TrailRenderHandler {
      */
     private static boolean renderTrail(EntityPlayer player) {
         ISpeedsterCap cap = CapabilitySpeedster.get(player);
-        return cap.isSpeedster() || cap.hasVelocity();
+        return ((cap.isSpeedster() && cap.getSpeedLevel() > 0) || cap.hasVelocity()) && shouldRenderTrails(player);
     }
 
     private static boolean renderSecondTrail(EntityPlayer player) {
         ISpeedsterCap cap = CapabilitySpeedster.get(player);
-        if (cap.isSpeedster() || cap.hasVelocity()) {
+        if (((cap.isSpeedster() && cap.getSpeedLevel() > 0) || cap.hasVelocity()) && shouldRenderTrails(player)) {
             return cap.hasSecondTrail();
         }
         return false;
+    }
+
+    private static boolean shouldRenderTrails(EntityPlayer player) {
+        return player.posX != player.prevPosX && player.posZ != player.prevPosZ;
     }
 
     /**
