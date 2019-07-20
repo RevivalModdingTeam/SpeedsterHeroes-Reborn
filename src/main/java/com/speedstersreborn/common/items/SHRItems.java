@@ -39,7 +39,7 @@ public class SHRItems {
         ring_kid_flash = registerItem(new ItemRing("ring_kid_flash", RingTypes.KID_FLASH), true);
         velocity_nine = registerItem(new ItemVelocity("velocity_nine", VelocityTypes.VELOCITY_NINE), true);
         energy_bar = registerItem(new ItemEnergyBar("energy_bar", 20, 0, false));
-        ArmorMaterial flash = EnumHelper.addArmorMaterial("flash", "", -1, new int[4], 0, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+        ArmorMaterial flash = EnumHelper.addArmorMaterial("flash", SpeedsterHeroesReborn.MODID+":flash", -1, new int[4], 0, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
         flash_helmet = registerItem(new ItemSuitFlash("flash_helmet", flash, 1, EntityEquipmentSlot.HEAD), true);
         flash_chestplate = registerItem(new ItemSuitFlash("flash_chestplate", flash, 1, EntityEquipmentSlot.CHEST), true);
         flash_leggings = registerItem(new ItemSuitFlash("flash_leggings", flash, 2, EntityEquipmentSlot.LEGS), true);
