@@ -1,8 +1,7 @@
 package com.speedstersreborn.proxy;
 
 
-public class CommonProxy implements IProxy {
-
+public class ServerProxy implements IProxy {
 
     @Override
     public void preInit() {

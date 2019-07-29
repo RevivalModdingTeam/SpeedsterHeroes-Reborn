@@ -35,7 +35,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
     	String pathToma = "D:/mcmods/1.12.2/SpeedsterHeroes-Reborn/src/main/resources/assets";
-    	ModHelper.jsonCreator().generateFiles(SpeedsterHeroesReborn.MODID, pathToma);
+    	ModHelper.jsonGenerator().generateFiles(SpeedsterHeroesReborn.MODID, pathToma);
         SHRItems.registerRenders();
         for (Block block : SHRBlocks.BLOCK_LIST) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));

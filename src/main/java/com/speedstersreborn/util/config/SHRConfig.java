@@ -31,6 +31,11 @@ public class SHRConfig {
         
         @Config.LangKey("config.shr.speedunit")
         public CFGSpeedIndicatorUnit speedUnit = CFGSpeedIndicatorUnit.BLOCKS_PER_SECOND;
+
+        @Config.LangKey("config.shr.simplesuits")
+        @Config.Comment("Self explanatory, isn't it?")
+        @Config.RequiresMcRestart
+        public boolean use2DSuits = false;
         
         @Mod.EventBusSubscriber
         public static class Event {

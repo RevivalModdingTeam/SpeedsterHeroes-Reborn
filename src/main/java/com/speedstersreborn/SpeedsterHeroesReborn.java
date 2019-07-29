@@ -23,7 +23,7 @@ public class SpeedsterHeroesReborn
     @Mod.Instance
     public static SpeedsterHeroesReborn instance;
 
-    @SidedProxy(clientSide = "com.speedstersreborn.proxy.ClientProxy", serverSide = "com.speedstersreborn.proxy.CommonProxy")
+    @SidedProxy(clientSide = "com.speedstersreborn.proxy.ClientProxy", serverSide = "com.speedstersreborn.proxy.ServerProxy")
     public static IProxy proxy;
     public static Logger logger;
 
