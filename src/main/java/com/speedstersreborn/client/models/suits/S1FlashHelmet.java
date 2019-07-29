@@ -2,6 +2,8 @@ package com.speedstersreborn.client.models.suits;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.Entity;
 
 public class S1FlashHelmet extends ModelBiped {
 
@@ -109,7 +111,15 @@ public class S1FlashHelmet extends ModelBiped {
         bipedHead.addChild(shape100);
         bipedHead.addChild(shape101);
         bipedHead.addChild(shape102);
-        System.out.println("Initialized");
+    }
+
+    @Override
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        GlStateManager.enableBlend();
+        GlStateManager.enableAlpha();
+        super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+        GlStateManager.disableBlend();
+        GlStateManager.disableAlpha();
     }
 
     /**
