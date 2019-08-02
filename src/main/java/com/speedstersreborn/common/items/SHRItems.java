@@ -2,7 +2,7 @@ package com.speedstersreborn.common.items;
 
 import com.revivalmodding.revivalcore.core.common.items.ItemEatable;
 import com.speedstersreborn.SpeedsterHeroesReborn;
-import com.speedstersreborn.common.suits.ItemSuitFlash;
+import com.speedstersreborn.common.suits.ItemFlashSuitS4;
 import com.speedstersreborn.tabs.ModTabs;
 import com.speedstersreborn.util.handlers.EnumHandler.RingTypes;
 import com.speedstersreborn.util.handlers.EnumHandler.VelocityTypes;
@@ -29,7 +29,8 @@ public class SHRItems {
     public static ItemRing ring_reverse_flash, ring_zoom, ring_god_speed, ring_kid_flash, ring_flash;
     public static ItemVelocity velocity_nine;
     public static ItemEatable energy_bar;
-    public static ItemSuitFlash flash_helmet, flash_chestplate, flash_leggings, flash_boots;
+    //public static ItemSuitFlash flash_helmet, flash_chestplate, flash_leggings, flash_boots;
+    public static ItemFlashSuitS4 s4_flash_helmet, s4_flash_chestplate, s4_flash_leggins, s4_flash_boots;
 
     public static void init() {
         ring_flash = registerItem(new ItemRing("ring_flash", RingTypes.FLASH), true);
@@ -40,10 +41,8 @@ public class SHRItems {
         velocity_nine = registerItem(new ItemVelocity("velocity_nine", VelocityTypes.VELOCITY_NINE), true);
         energy_bar = registerItem(new ItemEnergyBar("energy_bar", 20, 0, false));
         ArmorMaterial flash = EnumHelper.addArmorMaterial("flash", SpeedsterHeroesReborn.MODID+":flash", -1, new int[4], 0, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
-        flash_helmet = registerItem(new ItemSuitFlash("flash_helmet", flash, 1, EntityEquipmentSlot.HEAD), true);
-        flash_chestplate = registerItem(new ItemSuitFlash("flash_chestplate", flash, 1, EntityEquipmentSlot.CHEST), true);
-        flash_leggings = registerItem(new ItemSuitFlash("flash_leggings", flash, 2, EntityEquipmentSlot.LEGS), true);
-        flash_boots = registerItem(new ItemSuitFlash("flash_boots", flash, 1, EntityEquipmentSlot.FEET), true);
+        s4_flash_helmet = registerItem(new ItemFlashSuitS4("s4_flash_helmet", flash, 1, EntityEquipmentSlot.HEAD), true);
+        s4_flash_leggins = registerItem(new ItemFlashSuitS4("s4_flash_leggings", flash, 2, EntityEquipmentSlot.LEGS), true);
     }
 
     public static void registerRenders() {

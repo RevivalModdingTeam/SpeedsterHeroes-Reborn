@@ -8,30 +8,36 @@ import com.speedstersreborn.common.items.SHRItems;
 
 import net.minecraft.entity.player.EntityPlayer;
 
+/**
+ * Suit class for all flash suit variants
+ */
 public class FlashSuit extends AbstractSuit {
-	
-	public FlashSuit() {
+
+	public final EnumFlashSuitSeason suitSeason;
+
+	public FlashSuit(EnumFlashSuitSeason suitSeason) {
 		super("flash_suit", Color.RED);
+		this.suitSeason = suitSeason;
 	}
 	
 	@Override
 	public ItemSuit getHelmet() {
-		return SHRItems.flash_helmet;
+		return suitSeason.getHelmet();
 	}
 	
 	@Override
 	public ItemSuit getChest() {
-		return SHRItems.flash_chestplate;
+		return suitSeason.getChestplate();
 	}
 	
 	@Override
 	public ItemSuit getLeggings() {
-		return SHRItems.flash_leggings;
+		return suitSeason.getLeggings();
 	}
 	
 	@Override
 	public ItemSuit getBoots() {
-		return SHRItems.flash_boots;
+		return suitSeason.getBoots();
 	}
 	
 	@Override
@@ -42,5 +48,40 @@ public class FlashSuit extends AbstractSuit {
 	@Override
 	public double getXPBonus() {
 		return 0.01D;
+	}
+
+	public enum EnumFlashSuitSeason {
+		S1,
+		S2,
+		S3,
+		S4;
+
+		public ItemSuit getHelmet() {
+			switch(this) {
+				case S4: return SHRItems.s4_flash_helmet;
+				default: return null;
+			}
+		}
+
+		public ItemSuit getChestplate() {
+			switch(this) {
+				case S4: return SHRItems.s4_flash_chestplate;
+				default: return null;
+			}
+		}
+
+		public ItemSuit getLeggings() {
+			switch(this) {
+				case S4: return SHRItems.s4_flash_leggins;
+				default: return null;
+			}
+		}
+
+		public ItemSuit getBoots() {
+			switch(this) {
+				case S4: return SHRItems.s4_flash_boots;
+				default: return null;
+			}
+		}
 	}
 }
