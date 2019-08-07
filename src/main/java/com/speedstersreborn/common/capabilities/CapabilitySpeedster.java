@@ -70,9 +70,12 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             hungerTimer--;
         }
 
-        if (hasTakenVelocityBefore && velocityUses >= 4) {
+        if (hasTakenVelocityBefore && velocityUses >= 4 && hasVelocity()) {
             if (getPrimaryTrailColor().getRGB() != Color.BLUE.getRGB())
                 setPrimaryTrailColor(VColor);
+            //  TODO This shouldn't be here , it's overriding suit colors.
+            // TODO Unless we want velocity colors to be seen always?
+
         }
 
         if(getMaxspeedLevel() < 5) {
