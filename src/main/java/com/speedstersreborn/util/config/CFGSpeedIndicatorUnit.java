@@ -11,7 +11,7 @@ public enum CFGSpeedIndicatorUnit implements IStringSerializable
 	private final String name;
 	private final double multiplier;
 	
-	private CFGSpeedIndicatorUnit(String name, double multiplier) {
+	CFGSpeedIndicatorUnit(String name, double multiplier) {
 		this.name = name;
 		this.multiplier = multiplier;
 	}
