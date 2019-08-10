@@ -10,17 +10,14 @@ import com.speedstersreborn.util.config.CFGSpeedIndicatorUnit;
 import com.speedstersreborn.util.config.SHRConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.text.DecimalFormat;
-import java.util.Random;
 
 
 @Mod.EventBusSubscriber(Side.CLIENT)
@@ -68,30 +65,6 @@ public class ClientEventHandlers {
         public static double move(double current, float target, float modifier) {
             double d = Math.abs(current - target) < modifier ? target : current < target ? current + interpolate(modifier) : current - interpolate(modifier);
             return d;
-        }
-    }
-
-
-    public static boolean vibrating = false;
-
-    @SubscribeEvent
-    public static void renderPlayerVibratingPre(RenderPlayerEvent.Pre e) {
-        Random r = new Random();
-        if (vibrating) {
-            GlStateManager.pushMatrix();
-            for (int i = 0; i < 2; i++) {
-                GlStateManager.translate((r.nextFloat() - 0.5F) / 15, 0, (r.nextFloat() - 0.5F) / 15);
-                GlStateManager.color(1, 1, 1, 0.4F);
-            }
-            GlStateManager.enableBlend();
-        }
-    }
-
-    @SubscribeEvent
-    public static void renderPlayerVibratingPost(RenderPlayerEvent.Post e) {
-        if (vibrating) {
-            GlStateManager.disableBlend();
-            GlStateManager.popMatrix();
         }
     }
 }
