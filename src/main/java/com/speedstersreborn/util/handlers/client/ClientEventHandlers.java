@@ -10,9 +10,12 @@ import com.speedstersreborn.util.config.CFGSpeedIndicatorUnit;
 import com.speedstersreborn.util.config.SHRConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -66,5 +69,21 @@ public class ClientEventHandlers {
             double d = Math.abs(current - target) < modifier ? target : current < target ? current + interpolate(modifier) : current - interpolate(modifier);
             return d;
         }
+    }
+
+    @SubscribeEvent
+    public static void renderPlayerPre(RenderPlayerEvent.Pre e) {
+        GlStateManager.pushMatrix();
+        EntityPlayer player = e.getEntityPlayer();
+        ISpeedsterCap cap = CapabilitySpeedster.get(player);
+
+        if(cap.isWallRunning() && player.collidedHorizontally) {
+            // TODO Rotations here
+        }
+    }
+
+    @SubscribeEvent
+    public static void renderPlayerPost(RenderPlayerEvent.Post e) {
+        GlStateManager.popMatrix();
     }
 }
