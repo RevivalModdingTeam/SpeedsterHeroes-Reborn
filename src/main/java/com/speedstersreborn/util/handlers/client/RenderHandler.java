@@ -74,7 +74,7 @@ public class RenderHandler {
     }
 
     private static float interpolateRotation(float prevYawOffset, float yawOffset, float partialTicks) {
-        // stolen from vanilla
+        // Based on Vanilla code
         float f;
         for (f = yawOffset - prevYawOffset; f < -180.0F; f += 360.0F) {}
 
