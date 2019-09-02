@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO make this registry better, same applies for blocks
 @Mod.EventBusSubscriber
 public class SHRItems {
     public static final List<Item> ITEM_LIST = new ArrayList<>();
