@@ -36,11 +36,6 @@ public class FlashSuit extends AbstractSuit {
 	}
 	
 	@Override
-	public ItemSuit getBoots() {
-		return suitSeason.getBoots();
-	}
-	
-	@Override
 	public void handleEffects(EntityPlayer player) {
 		
 	}
@@ -53,33 +48,26 @@ public class FlashSuit extends AbstractSuit {
 	public enum EnumFlashSuitSeason {
 		S1,
 		S2,
-		S3,
-		S4;
+		S4,
+		S5;
 
-		public ItemSuit getHelmet() {
+		public ItemFlashSuit getHelmet() {
 			switch(this) {
 				case S4: return SHRItems.s4_flash_helmet;
 				default: return null;
 			}
 		}
 
-		public ItemSuit getChestplate() {
+		public ItemFlashSuit getChestplate() {
 			switch(this) {
 				case S4: return SHRItems.s4_flash_chestplate;
 				default: return null;
 			}
 		}
 
-		public ItemSuit getLeggings() {
+		public ItemFlashSuit getLeggings() {
 			switch(this) {
 				case S4: return SHRItems.s4_flash_leggins;
-				default: return null;
-			}
-		}
-
-		public ItemSuit getBoots() {
-			switch(this) {
-				case S4: return SHRItems.s4_flash_boots;
 				default: return null;
 			}
 		}
