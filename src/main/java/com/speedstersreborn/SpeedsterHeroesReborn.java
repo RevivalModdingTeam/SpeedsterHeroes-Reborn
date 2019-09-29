@@ -3,7 +3,7 @@ package com.speedstersreborn;
 import com.speedstersreborn.common.capabilities.CapSpeedstersStorage;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
-import com.speedstersreborn.common.items.SHRItems;
+import com.speedstersreborn.common.items.SHRItemRegistry;
 import com.speedstersreborn.common.tileentity.TileTreadMill;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.proxy.IProxy;
@@ -40,7 +40,6 @@ public class SpeedsterHeroesReborn
         logger = event.getModLog();
         proxy.preInit();
         NetworkHandler.init();
-        SHRItems.init();
         CapabilityManager.INSTANCE.register(ISpeedsterCap.class, new CapSpeedstersStorage(), CapabilitySpeedster::new);
         RegistryHandler.registerTileEntity(TileTreadMill.class, "tile_treadmill");
     }

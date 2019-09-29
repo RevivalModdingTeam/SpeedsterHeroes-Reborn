@@ -35,7 +35,7 @@ public class EntityRingDummy extends EntityLivingBase {
         this.inventory.set(3, new ItemStack(suit.getHelmet()));
         this.inventory.set(2, new ItemStack(suit.getChest()));
         this.inventory.set(1, new ItemStack(suit.getLeggings()));
-        this.inventory.set(0, new ItemStack(suit.getBoots()));
+        this.inventory.set(0, ItemStack.EMPTY);
     }
 
     @Override
