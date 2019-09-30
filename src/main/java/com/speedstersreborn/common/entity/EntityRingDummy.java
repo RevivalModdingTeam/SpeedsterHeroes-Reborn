@@ -1,7 +1,9 @@
 package com.speedstersreborn.common.entity;
 
 import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
+import com.revivalmodding.revivalcore.core.registry.Registries;
 import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -12,8 +14,10 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
-public class EntityRingDummy extends EntityLivingBase {
+public class EntityRingDummy extends EntityLivingBase implements IEntityAdditionalSpawnData {
 
     public float dirX;
     public float dirZ;
@@ -36,6 +40,21 @@ public class EntityRingDummy extends EntityLivingBase {
         this.inventory.set(2, new ItemStack(suit.getChest()));
         this.inventory.set(1, new ItemStack(suit.getLeggings()));
         this.inventory.set(0, ItemStack.EMPTY);
+    }
+
+    @Override
+    public void writeSpawnData(ByteBuf buf) {
+        ByteBufUtils.writeUTF8String(buf, suit.getName());
+    }
+
+    @Override
+    public void readSpawnData(ByteBuf buf) {
+        String name = ByteBufUtils.readUTF8String(buf);
+        for(AbstractSuit suit : Registries.SuitRegistry.instance().getRegistry()) {
+            if(suit.getName().equals(name)) {
+                this.suit = suit;
+            }
+        }
     }
 
     @Override
@@ -108,6 +127,7 @@ public class EntityRingDummy extends EntityLivingBase {
         }
 
         tagCompound.setTag("ItemInventory", nbtList);
+        tagCompound.setString("suitID", suit.getName());
     }
 
     @Override
@@ -127,6 +147,11 @@ public class EntityRingDummy extends EntityLivingBase {
         }
 
         this.inventory = armor;
+        for(AbstractSuit suit : Registries.SuitRegistry.instance().getRegistry()) {
+            if(suit.getName().equals(tagCompund.getString("suitID"))) {
+                this.suit = suit;
+            }
+        }
     }
 
     @Override

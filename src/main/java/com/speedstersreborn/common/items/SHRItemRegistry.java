@@ -9,6 +9,7 @@ import com.speedstersreborn.tabs.ModTabs;
 import com.speedstersreborn.util.handlers.EnumHandler.RingTypes;
 import com.speedstersreborn.util.handlers.EnumHandler.VelocityTypes;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -67,12 +68,12 @@ public class SHRItemRegistry {
         @SubscribeEvent
         public static void onItemRegistry(RegistryEvent.Register<Item> e) {
             e.getRegistry().registerAll(
-                    new ItemRing("ring_reverse_flash", RingTypes.REVERSE),
-                    new ItemRing("ring_zoom", RingTypes.ZOOM),
-                    new ItemRing("ring_god_speed", RingTypes.GOD_SPEED),
-                    new ItemRing("ring_flash", RingTypes.FLASH),
-                    new ItemRing("ring_kid_flash", RingTypes.KID_FLASH),
-                    new ItemVelocity("velocity_nine", VelocityTypes.VELOCITY_NINE),
+                    addItem(new ItemRing("ring_reverse_flash", RingTypes.REVERSE)),
+                    addItem(new ItemRing("ring_zoom", RingTypes.ZOOM)),
+                    addItem(new ItemRing("ring_god_speed", RingTypes.GOD_SPEED)),
+                    addItem(new ItemRing("ring_flash", RingTypes.FLASH)),
+                    addItem(new ItemRing("ring_kid_flash", RingTypes.KID_FLASH)),
+                    addItem(new ItemVelocity("velocity_nine", VelocityTypes.VELOCITY_NINE)),
                     new ItemEatable("energy_bar", 20, 0, false)
             );
 
@@ -96,6 +97,15 @@ public class SHRItemRegistry {
             ItemBlock itemBlock = new ItemBlock(block);
             itemBlock.setRegistryName(block.getRegistryName());
             blockItems.add(itemBlock);
+        }
+
+        private static <ITEM extends Item> ITEM addItem(ITEM item) {
+            return addItem(item, ModTabs.shrTab);
+        }
+
+        private static <ITEM extends Item> ITEM addItem(ITEM item, CreativeTabs tab) {
+            item.setCreativeTab(tab);
+            return item;
         }
     }
 }

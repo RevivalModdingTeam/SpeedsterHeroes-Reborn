@@ -1,10 +1,12 @@
 package com.speedstersreborn.util.handlers;
 
 import com.revivalmodding.revivalcore.core.common.events.RVRegistryEvent;
+import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
 import com.revivalmodding.revivalcore.util.helper.ModHelper;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.entity.EntityRingDummy;
 
+import com.speedstersreborn.common.suits.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -28,6 +30,19 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onSuitMakerRecipesRegister(RVRegistryEvent.SuitMakerRecipeRegistryEvent e) {
         //e.register(recipe);
+    }
+
+    @SubscribeEvent
+    public static void onSuitRegister(RVRegistryEvent.SuitRegistryEvent e) {
+        e.registerAll(new AbstractSuit[] {
+                new SuitKidFlash(),
+                new SuitGodSpeed(),
+                new SuitZoom(),
+                new SuitReverseFlash()
+        });
+        for(SuitFlash.EnumFlashSuitSeason season : SuitFlash.EnumFlashSuitSeason.values()) {
+            e.register(new SuitFlash(season));
+        }
     }
 
     @SubscribeEvent

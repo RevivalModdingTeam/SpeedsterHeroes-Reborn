@@ -1,7 +1,7 @@
 package com.speedstersreborn.util.handlers;
 
 import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
-import com.speedstersreborn.common.suits.SuitFlash;
+import com.speedstersreborn.common.suits.*;
 import net.minecraft.util.IStringSerializable;
 
 /**
@@ -13,12 +13,11 @@ public class EnumHandler {
 
     public enum RingTypes implements IStringSerializable {
 
-        // TODO proper suits
-        ZOOM("zoom", new SuitFlash(SuitFlash.EnumFlashSuitSeason.S1)),
-        FLASH("flash", new SuitFlash(SuitFlash.EnumFlashSuitSeason.S2)),
-        REVERSE("reverse_flash", new SuitFlash(SuitFlash.EnumFlashSuitSeason.S4)),
-        GOD_SPEED("god_speed", new SuitFlash(SuitFlash.EnumFlashSuitSeason.S4)),
-        KID_FLASH("kid_flash", new SuitFlash(SuitFlash.EnumFlashSuitSeason.S5));
+        ZOOM("zoom", new SuitZoom()),
+        FLASH("flash", new SuitFlash(SuitFlash.EnumFlashSuitSeason.S5)),
+        REVERSE("reverse_flash", new SuitReverseFlash()),
+        GOD_SPEED("god_speed", new SuitGodSpeed()),
+        KID_FLASH("kid_flash", new SuitKidFlash());
 
         private String name;
         private AbstractSuit bsuit;
