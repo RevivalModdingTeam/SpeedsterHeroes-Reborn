@@ -45,6 +45,18 @@ public class SHRItemRegistry {
         public static final ItemSuit S2_KIDFLASH_HEAD = null;
         public static final ItemSuit S2_KIDFLASH_CHEST = null;
         public static final ItemSuit S2_KIDFLASH_LEGS = null;
+        public static final ItemSuit S1_REVERSEFLASH_HEAD = null;
+        public static final ItemSuit S1_REVERSEFLASH_CHEST = null;
+        public static final ItemSuit S1_REVERSEFLASH_LEGS = null;
+        public static final ItemSuit S2_ZOOM_HEAD = null;
+        public static final ItemSuit S2_ZOOM_CHEST = null;
+        public static final ItemSuit S2_ZOOM_LEGS = null;
+        public static final ItemSuit S2_BLACK_FLASH_HEAD = null;
+        public static final ItemSuit S2_BLACK_FLASH_CHEST = null;
+        public static final ItemSuit S2_BLACK_FLASH_LEGS = null;
+        public static final ItemSuit S5_GODSPEED_HEAD = null;
+        public static final ItemSuit S5_GODSPEED_CHEST = null;
+        public static final ItemSuit S5_GODSPEED_LEGS = null;
     }
 
     @Mod.EventBusSubscriber
@@ -64,11 +76,17 @@ public class SHRItemRegistry {
                     new ItemEatable("energy_bar", 20, 0, false)
             );
 
-            ModHelper.registerMultiSeasonSuit(e, ModTabs.shrTab, "flash",
-                    new ItemSuitMultiSeason.Season("s1"),
-                    new ItemSuitMultiSeason.Season("s2"),
-                    new ItemSuitMultiSeason.Season("s4"),
-                    new ItemSuitMultiSeason.Season("s5"));
+            ItemSuitMultiSeason.Season s1 = new ItemSuitMultiSeason.Season("s1");
+            ItemSuitMultiSeason.Season s2 = new ItemSuitMultiSeason.Season("s2");
+            ItemSuitMultiSeason.Season s4 = new ItemSuitMultiSeason.Season("s4");
+            ItemSuitMultiSeason.Season s5 = new ItemSuitMultiSeason.Season("s5");
+
+            ModHelper.registerMultiSeasonSuit(e, ModTabs.shrTab, "flash", s1, s2, s4, s5);
+            ModHelper.registerMultiSeasonSuit(e, ModTabs.shrTab, "kidflash", s2);
+            ModHelper.registerMultiSeasonSuit(e, ModTabs.shrTab, "reverseflash", s1);
+            ModHelper.registerMultiSeasonSuit(e, ModTabs.shrTab, "zoom", s2);
+            ModHelper.registerMultiSeasonSuit(e, ModTabs.shrTab, "blackflash", s2);
+            ModHelper.registerMultiSeasonSuit(e, ModTabs.shrTab, "godspeed", s5);
 
             blockItems.forEach(blockItem -> e.getRegistry().register(blockItem));
             blockItems = null;
