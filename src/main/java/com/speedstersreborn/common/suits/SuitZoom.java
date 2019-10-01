@@ -5,10 +5,12 @@ import com.revivalmodding.revivalcore.core.common.suits.ItemSuit;
 import com.speedstersreborn.common.items.SHRItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 
+import java.awt.*;
+
 public class SuitZoom extends AbstractSuit {
 
     public SuitZoom() {
-        super("zoom");
+        super("zoom", Color.DARK_GRAY);
     }
 
     @Override

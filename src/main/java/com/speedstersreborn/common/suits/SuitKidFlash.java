@@ -5,10 +5,12 @@ import com.revivalmodding.revivalcore.core.common.suits.ItemSuit;
 import com.speedstersreborn.common.items.SHRItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 
+import java.awt.*;
+
 public class SuitKidFlash extends AbstractSuit {
 
     public SuitKidFlash() {
-        super("kid_flash");
+        super("kid_flash", Color.YELLOW);
     }
 
     @Override
