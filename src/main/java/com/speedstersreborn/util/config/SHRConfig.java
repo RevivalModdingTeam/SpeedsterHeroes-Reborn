@@ -1,8 +1,6 @@
 package com.speedstersreborn.util.config;
 
-import com.revivalmodding.revivalcore.RevivalCore;
 import com.speedstersreborn.SpeedsterHeroesReborn;
-
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -31,6 +29,9 @@ public class SHRConfig {
         
         @Config.LangKey("config.shr.speedunit")
         public CFGSpeedIndicatorUnit speedUnit = CFGSpeedIndicatorUnit.BLOCKS_PER_SECOND;
+
+        @Config.LangKey("config.shr.displaymode")
+        public CFGSpeedIndicatorDisplayMode displayMode = CFGSpeedIndicatorDisplayMode.SURVIVAL;
 
         @Config.LangKey("config.shr.simplesuits")
         @Config.Comment("Self explanatory, isn't it?")
