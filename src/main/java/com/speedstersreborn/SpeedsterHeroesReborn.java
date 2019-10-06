@@ -29,7 +29,7 @@ public class SpeedsterHeroesReborn
     public static final String MODID = "shr";
     public static final String NAME = "Speedsters Heroes Reborn";
     public static final String VERSION = "0.0.7";
-    public static final String REQUIRED = "required-after:revivalcore@[0.3.3,)";
+    public static final String REQUIRED = "required-after:revivalcore@[0.3.7,)";
     public static final String UPDATEURL = "https://raw.githubusercontent.com/RevivalModdingTeam/RevivalModding-ModBugs/master/update/updatespeedster.json";
 
 
