@@ -1,6 +1,5 @@
 package com.speedstersreborn.util.handlers.client;
 
-import com.revivalmodding.revivalcore.core.abilities.IAbilityCap;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,7 +18,7 @@ public class RenderHandler {
     public static void onPlayerRenderPre(RenderPlayerEvent.Pre e) {
         GlStateManager.pushMatrix();
         ISpeedsterCap cap = CapabilitySpeedster.get(e.getEntityPlayer());
-        IAbilityCap capA = IAbilityCap.Impl.get(e.getEntityPlayer());
+        //IAbilityCap capA = IAbilityCap.Impl.get(e.getEntityPlayer());
         if (cap != null) {
             EntityPlayer player = e.getEntityPlayer();
             Vec3d vec0 = new Vec3d(player.posX, player.posY + 1, player.posZ);

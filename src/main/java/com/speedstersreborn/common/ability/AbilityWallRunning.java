@@ -23,7 +23,6 @@ public class AbilityWallRunning extends AbilityBase {
 			if(player.collidedHorizontally) {
 				currentCooldown = 150;
 			}
-			
 			if(!cap.isWallRunning()) {
 				cap.setWallRunning(true);
 			}
@@ -33,10 +32,14 @@ public class AbilityWallRunning extends AbilityBase {
 		} else if(!isActive() && cap.isWallRunning()) {
 			cap.setWallRunning(false);
 		}
-		
 		super.update(player);
 	}
-	
+
+	@Override
+	public void onAbilityDeactivated(EntityPlayer player) {
+		CapabilitySpeedster.get(player).setWallRunning(false);
+	}
+
 	@Override
 	public int getAbilityPrice() {
 		return 3;

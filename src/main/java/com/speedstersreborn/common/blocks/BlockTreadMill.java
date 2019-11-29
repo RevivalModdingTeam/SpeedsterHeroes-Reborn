@@ -1,7 +1,6 @@
 package com.speedstersreborn.common.blocks;
 
 import com.speedstersreborn.common.tileentity.TileTreadMill;
-import com.speedstersreborn.util.helper.IHaveItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -19,7 +18,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockTreadMill extends Block implements IHaveItem {
+public class BlockTreadMill extends Block {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
@@ -72,11 +71,6 @@ public class BlockTreadMill extends Block implements IHaveItem {
     @Override
     public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
         return false;
-    }
-
-    @Override
-    public boolean hasItem() {
-        return true;
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.speedstersreborn;
 import com.speedstersreborn.common.capabilities.CapSpeedstersStorage;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
-import com.speedstersreborn.common.items.SHRItems;
 import com.speedstersreborn.common.tileentity.TileTreadMill;
 import com.speedstersreborn.network.NetworkHandler;
 import com.speedstersreborn.proxy.IProxy;
@@ -29,8 +28,8 @@ public class SpeedsterHeroesReborn
 
     public static final String MODID = "shr";
     public static final String NAME = "Speedsters Heroes Reborn";
-    public static final String VERSION = "0.0.6";
-    public static final String REQUIRED = "required-after:revivalcore@[0.3.3,)";
+    public static final String VERSION = "0.0.7";
+    public static final String REQUIRED = "required-after:revivalcore@[0.3.7,)";
     public static final String UPDATEURL = "https://raw.githubusercontent.com/RevivalModdingTeam/RevivalModding-ModBugs/master/update/updatespeedster.json";
 
 
@@ -40,7 +39,6 @@ public class SpeedsterHeroesReborn
         logger = event.getModLog();
         proxy.preInit();
         NetworkHandler.init();
-        SHRItems.init();
         CapabilityManager.INSTANCE.register(ISpeedsterCap.class, new CapSpeedstersStorage(), CapabilitySpeedster::new);
         RegistryHandler.registerTileEntity(TileTreadMill.class, "tile_treadmill");
     }

@@ -25,7 +25,12 @@ public class AbilityPhase extends AbilityBase {
 			cap.setPhasing(false);
 		}
 	}
-	
+
+	@Override
+	public void onAbilityDeactivated(EntityPlayer player) {
+		CapabilitySpeedster.get(player).setPhasing(false);
+	}
+
 	@Override
 	public int getAbilityPrice() {
 		return 2;

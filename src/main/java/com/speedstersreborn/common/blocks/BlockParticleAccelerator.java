@@ -4,17 +4,17 @@ import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
 import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.PEnumHandler;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
-import com.speedstersreborn.util.helper.IHaveItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockParticleAccelerator extends Block implements IHaveItem {
+public class BlockParticleAccelerator extends Block {
 
     public BlockParticleAccelerator(Material material) {
         super(material);
@@ -38,7 +38,17 @@ public class BlockParticleAccelerator extends Block implements IHaveItem {
     }
 
     @Override
-    public boolean hasItem() {
-        return true;
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
     }
 }

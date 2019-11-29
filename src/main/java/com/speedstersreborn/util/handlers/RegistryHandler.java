@@ -1,13 +1,12 @@
 package com.speedstersreborn.util.handlers;
 
 import com.revivalmodding.revivalcore.core.common.events.RVRegistryEvent;
+import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
 import com.revivalmodding.revivalcore.util.helper.ModHelper;
 import com.speedstersreborn.SpeedsterHeroesReborn;
-import com.speedstersreborn.common.blocks.SHRBlocks;
 import com.speedstersreborn.common.entity.EntityRingDummy;
-import com.speedstersreborn.common.items.SHRItems;
 
-import net.minecraft.block.Block;
+import com.speedstersreborn.common.suits.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -19,6 +18,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,13 +33,26 @@ public class RegistryHandler {
     }
 
     @SubscribeEvent
+    public static void onSuitRegister(RVRegistryEvent.SuitRegistryEvent e) {
+        e.registerAll(new AbstractSuit[] {
+                new SuitKidFlash(),
+                new SuitGodSpeed(),
+                new SuitZoom(),
+                new SuitReverseFlash()
+        });
+        for(SuitFlash.EnumFlashSuitSeason season : SuitFlash.EnumFlashSuitSeason.values()) {
+            e.register(new SuitFlash(season));
+        }
+    }
+
+    @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
     	String pathToma = "D:/mcmods/1.12.2/SpeedsterHeroes-Reborn/src/main/resources/assets";
     	ModHelper.jsonGenerator().generateFiles(SpeedsterHeroesReborn.MODID, pathToma);
-        SHRItems.registerRenders();
-        for (Block block : SHRBlocks.BLOCK_LIST) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
-        }
+        ForgeRegistries.ITEMS.getValuesCollection().stream().filter(p -> p.getRegistryName().getNamespace().equals(SpeedsterHeroesReborn.MODID))
+                .forEach(i -> ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), "inventory")));
+        ForgeRegistries.BLOCKS.getValuesCollection().stream().filter(p -> p.getRegistryName().getNamespace().equals(SpeedsterHeroesReborn.MODID))
+                .forEach(b -> ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), 0, new ModelResourceLocation(b.getRegistryName(), "normal")));
     }
 
     @SubscribeEvent

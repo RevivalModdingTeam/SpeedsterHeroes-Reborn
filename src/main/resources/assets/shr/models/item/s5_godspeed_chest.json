@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "shr:items/s5_godspeed_chest"
+	}
+}

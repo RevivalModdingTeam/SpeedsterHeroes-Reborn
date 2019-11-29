@@ -45,7 +45,14 @@ public class ClientEventHandlers {
     }
 
     private static void doSpeedRender(Minecraft mc, ScaledResolution res, int level) {
-        if (level < 0 || mc.player.isCreative() || mc.player.isSpectator()) return;
+        boolean render = true;
+        switch (SHRConfig.speedstersHeroesReborn.displayMode) {
+            case NEVER: render = false; break;
+            case CREATIVE: render = mc.player.isCreative() && !mc.player.isSpectator(); break;
+            case SURVIVAL: render = !mc.player.isCreative() && !mc.player.isSpectator(); break;
+            case ALWAYS: render = true; break;
+        }
+        if (level < 0 || !render) return;
         CFGOverlayPosition pos = SHRConfig.speedstersHeroesReborn.speedIndicator;
         CFGSpeedIndicatorUnit speedUnit = SHRConfig.speedstersHeroesReborn.speedUnit;
         int width = res.getScaledWidth();
