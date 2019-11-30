@@ -58,11 +58,23 @@ public class SpeedAPI {
         }
     }
 
+
     // Slowmotion
 
     public static void slowOtherPlayers(EntityPlayer player, int range, float slow) {
         for (EntityPlayer player1 : player.world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(range, range, range))) {
             player1.setAIMoveSpeed(slow);
+        }
+    }
+
+    public static void slowProjectilesAroundPlayer(EntityPlayer player, int range) {
+        for (Entity e : player.world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().grow(range))) {
+            if (e instanceof IProjectile) {
+                NBTTagCompound data = e.getEntityData();
+             //   if (!data.hasKey("edited") || !data.getBoolean("edited")) {
+               //     data.setBoolean("edited", true);
+                    e.setVelocity(e.motionX * 0.8499f, e.motionY / 2, e.motionZ * 0.8499f);
+            }
         }
     }
 
