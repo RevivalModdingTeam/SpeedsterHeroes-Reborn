@@ -1,8 +1,6 @@
 package com.speedstersreborn.util.handlers.client;
 
 import com.google.common.collect.Maps;
-import com.revivalmodding.revivalcore.util.helper.ModHelper;
-import com.revivalmodding.revivalcore.util.helper.PlayerHelper;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
@@ -125,6 +123,7 @@ public class TrailRenderHandler {
     public static void renderEntityPost(RenderPlayerEvent.Post e) {
         TrailType trailType = getTrailType(e.getEntityPlayer());
         if (trailType != null) {
+            TrailRenderer trailRenderer = trailType.getTrailRenderer();
             trailType.getTrailRenderer().renderTrail(e.getEntityPlayer(), trailType, getTrailEntities(e.getEntityPlayer()), e.getPartialRenderTick());
             trailType.getTrailRenderer().renderSecondTrail(e.getEntityPlayer(), trailType, getSecondTrailEntities(e.getEntityPlayer()), e.getPartialRenderTick());
         }
