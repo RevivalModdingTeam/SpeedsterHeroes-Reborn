@@ -9,6 +9,7 @@ import com.speedstersreborn.util.handlers.EventHandlePower;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+@Deprecated
 public class AbilitySpeed extends AbilityBase {
 
 	private static final ResourceLocation ICON = new ResourceLocation(SpeedsterHeroesReborn.MODID + ":textures/overlay/abilityspeed.png");

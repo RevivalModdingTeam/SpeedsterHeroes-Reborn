@@ -1,12 +1,11 @@
 package com.speedstersreborn.common.suits;
 
-import java.awt.Color;
-
 import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
 import com.revivalmodding.revivalcore.core.common.suits.ItemSuit;
 import com.speedstersreborn.common.items.SHRItemRegistry;
-
 import net.minecraft.entity.player.EntityPlayer;
+
+import java.awt.*;
 
 /**
  * Suit class for all flash suit variants
@@ -41,8 +40,8 @@ public class SuitFlash extends AbstractSuit {
 	}
 	
 	@Override
-	public double getXPBonus() {
-		return 0.01D;
+	public float getXPBonus() {
+		return 0.01F;
 	}
 
 	public enum EnumFlashSuitSeason {

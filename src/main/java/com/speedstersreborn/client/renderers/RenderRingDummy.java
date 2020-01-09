@@ -1,16 +1,14 @@
 package com.speedstersreborn.client.renderers;
 
 import com.revivalmodding.revivalcore.core.client.render.LayerSuitBase;
+import com.revivalmodding.revivalcore.core.common.items.ItemRegistry;
 import com.revivalmodding.revivalcore.core.common.suits.AbstractSuit;
 import com.revivalmodding.revivalcore.core.common.suits.ItemSuit;
-import com.revivalmodding.revivalcore.util.handlers.client.SuitRenderHandler;
 import com.speedstersreborn.common.entity.EntityRingDummy;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderRingDummy extends RenderLivingBase<EntityRingDummy> {
@@ -45,7 +43,7 @@ public class RenderRingDummy extends RenderLivingBase<EntityRingDummy> {
 
         @Override
         public void doRenderLayer(EntityRingDummy entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-            for(EntityEquipmentSlot slot : SuitRenderHandler.ARMOR) {
+            for(EntityEquipmentSlot slot : ItemRegistry.ARMOR) {
                 this.renderLayerPart(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, slot);
             }
         }

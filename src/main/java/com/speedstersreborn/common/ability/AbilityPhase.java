@@ -8,6 +8,7 @@ import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+@Deprecated
 public class AbilityPhase extends AbilityBase {
 	
 	private static final ResourceLocation ICON = new ResourceLocation(SpeedsterHeroesReborn.MODID + ":textures/overlay/abilityphase.png");

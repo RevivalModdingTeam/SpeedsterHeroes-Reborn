@@ -1,8 +1,8 @@
 package com.speedstersreborn.util.handlers.client;
 
-import com.revivalmodding.revivalcore.core.abilities.IAbilityCap;
-import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
-import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
+import com.revivalmodding.revivalcore.core.capability.CoreCapabilityImpl;
+import com.revivalmodding.revivalcore.core.capability.ICoreCapability;
+import com.revivalmodding.revivalcore.core.capability.data.PlayerMetaPowerData;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.handlers.client.Keybinds;
@@ -36,11 +36,11 @@ public class SHKeybinds {
         @SubscribeEvent
         public static void keyPressed(InputEvent.KeyInputEvent e) {
             EntityPlayerSP player = Minecraft.getMinecraft().player;
-            IMetaCap metaCap = CapabilityMeta.get(player);
+            ICoreCapability coreCap = CoreCapabilityImpl.getInstance(player);
+            PlayerMetaPowerData metaPowerData = coreCap.getMetaPowerData();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
-            IAbilityCap abilityCap = IAbilityCap.Impl.get(player);
 
-            if (metaCap.hasMetaPowers() && MetaHelper.getMetaPowerName(metaCap.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER) && metaCap.isPowerEnabled()) {
+            if (metaPowerData.hasMetaPowers() && MetaHelper.getMetaPowerName(metaPowerData.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER) && metaPowerData.isPowerActivated()) {
             }else {
                 // Velocity Compatibility
                 if (Keybinds.ENABLE.isPressed() && cap.getVelocityTime() > 1) {

@@ -1,7 +1,7 @@
 package com.speedstersreborn.common.items;
 
-import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
-import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
+import com.revivalmodding.revivalcore.core.capability.CoreCapabilityImpl;
+import com.revivalmodding.revivalcore.core.capability.data.PlayerMetaPowerData;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import com.speedstersreborn.common.capabilities.ISpeedsterCap;
 import com.speedstersreborn.util.handlers.EnumHandler.VelocityTypes;
@@ -30,7 +30,7 @@ public class ItemVelocity extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
         ISpeedsterCap cap = CapabilitySpeedster.get(playerIn);
-        IMetaCap metaCap = CapabilityMeta.get(playerIn);
+        PlayerMetaPowerData metaPowerData = CoreCapabilityImpl.getInstance(playerIn).getMetaPowerData();
 
         if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
@@ -45,7 +45,7 @@ public class ItemVelocity extends Item {
                 }
                 cap.setVelocity(velocityTypes);
                 cap.setVelocity(true);
-                metaCap.setPowerEnabled(true);
+                metaPowerData.setPowerActivated(true);
                 cap.sync();
             } else {
             }

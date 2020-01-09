@@ -1,9 +1,10 @@
 package com.speedstersreborn.util.handlers;
 
-import com.revivalmodding.revivalcore.core.abilities.IAbilityCap;
+import com.revivalmodding.revivalcore.core.capability.CoreCapabilityImpl;
+import com.revivalmodding.revivalcore.core.capability.ICoreCapability;
+import com.revivalmodding.revivalcore.core.capability.data.PlayerAbilityData;
+import com.revivalmodding.revivalcore.core.capability.data.PlayerMetaPowerData;
 import com.revivalmodding.revivalcore.core.common.events.PowerToggleEvent;
-import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
-import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
 import com.revivalmodding.revivalcore.meta.util.MetaHelper;
 import com.revivalmodding.revivalcore.meta.util.MetaPowerStrings;
 import com.revivalmodding.revivalcore.util.helper.ModHelper;
@@ -36,26 +37,27 @@ public class EventHandlePower {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
-            IMetaCap capmeta = CapabilityMeta.get(player);
-            IAbilityCap capAbilities = IAbilityCap.Impl.get(player);
+            ICoreCapability coreCapability = CoreCapabilityImpl.getInstance(player);
+            PlayerAbilityData abilityData = coreCapability.getAbilityData();
+            PlayerMetaPowerData metaPowerData = coreCapability.getMetaPowerData();
 
             if (cap.isSpeedster() || cap.hasVelocity()) {
-                setXPAdd(player, cap, capAbilities);
+                setXPAdd(player, cap, abilityData);
                 runWater(player, cap);
                 runWall(player, cap);
                 runAbilities(player, cap);
                 phasing(player, cap);
-                whileRunning(player, cap, capmeta);
+                whileRunning(player, cap, metaPowerData);
             } else if(!cap.isSpeedster()) {
             	if(isMoving(player)) {
-            		capAbilities.addXP(0.005 * (player.isSprinting() ? 1.5 : 1));
+            		abilityData.addXP(0.005F * (player.isSprinting() ? 1.5F : 1F));
             	}
             }
-            updateVelocity(player, cap, capmeta);
+            updateVelocity(player, cap, metaPowerData);
         }
     }
 
-    public static void setXPAdd(EntityPlayer player, ISpeedsterCap cap, IAbilityCap abilityCap) {
+    public static void setXPAdd(EntityPlayer player, ISpeedsterCap cap, PlayerAbilityData abilityCap) {
         if (!player.world.isRemote) {
             if (!player.capabilities.isCreativeMode) {
                 if (isMoving(player)) {
@@ -106,7 +108,7 @@ public class EventHandlePower {
         }
     }
 
-    public static void whileRunning(EntityPlayer player, ISpeedsterCap cap, IMetaCap capmeta) {
+    public static void whileRunning(EntityPlayer player, ISpeedsterCap cap, PlayerMetaPowerData capmeta) {
         FoodStats food = player.getFoodStats();
         if (!player.world.isRemote && cap.getSpeedLevel() > 1 && isMoving(player) && !player.isCreative()) {
             if (player.isBurning()) {
@@ -141,10 +143,10 @@ public class EventHandlePower {
         if (e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
             ISpeedsterCap cap = CapabilitySpeedster.get(player);
-            IMetaCap capa = CapabilityMeta.get(player);
+            PlayerMetaPowerData metaPowerData = CoreCapabilityImpl.getInstance(player).getMetaPowerData();
 
-            if (capa.hasMetaPowers() && MetaHelper.getMetaPowerName(capa.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER)) {
-                cap.setSpeedster(capa.isPowerEnabled());
+            if (metaPowerData.hasMetaPowers() && MetaHelper.getMetaPowerName(metaPowerData.getMetaPower()).equals(MetaPowerStrings.SPEEDSTER)) {
+                cap.setSpeedster(metaPowerData.isPowerActivated());
 
                 if (cap.getVelocityTime() > 1) {
                     if (cap.isSpeedster()) {
@@ -154,26 +156,27 @@ public class EventHandlePower {
                     }
                 }
             } else {
-                cap.setSpeedster(capa.hasMetaPowers());
+                cap.setSpeedster(metaPowerData.hasMetaPowers());
             }
         }
     }
 
     @SubscribeEvent
     public static void getTogglePowerEvent(PowerToggleEvent e) {
+        // TODO what is this doing there?
         EntityPlayer player = e.player;
-        IMetaCap capa = CapabilityMeta.get(player);
+        //IMetaCap capa = CapabilityMeta.get(player);
         ISpeedsterCap cap = CapabilitySpeedster.get(player);
     }
 
-    private static void updateLevel(ISpeedsterCap cap, IAbilityCap aCap) {
+    private static void updateLevel(ISpeedsterCap cap, PlayerAbilityData aCap) {
     	// TODO: Create level up event and use it here (event must be in core)
             aCap.setLevel(aCap.getLevel() + 1);
             if (cap.getMaxspeedLevel() < 20)
                 cap.setMaxSpeedLevel(cap.getMaxspeedLevel() + 5);
     }
 
-    public static boolean shouldchange(ISpeedsterCap cap, IMetaCap capa) {
+    public static boolean shouldchange(ISpeedsterCap cap, PlayerMetaPowerData capa) {
 
         if (!cap.hasVelocity() && cap.getVelocityTime() > 0) {
             return true;
@@ -193,7 +196,7 @@ public class EventHandlePower {
         return false;
     }
 
-    private static void updateVelocity(EntityPlayer player, ISpeedsterCap cap, IMetaCap capa) {
+    private static void updateVelocity(EntityPlayer player, ISpeedsterCap cap, PlayerMetaPowerData capa) {
         if (cap.getVelocityTime() >= 1) {
             cap.setVelocityTime(cap.getVelocityTime() - 1);
             if (cap.getVelocityTime() <= 0) {

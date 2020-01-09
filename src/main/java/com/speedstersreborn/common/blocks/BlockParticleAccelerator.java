@@ -1,7 +1,7 @@
 package com.speedstersreborn.common.blocks;
 
-import com.revivalmodding.revivalcore.meta.capability.CapabilityMeta;
-import com.revivalmodding.revivalcore.meta.capability.IMetaCap;
+import com.revivalmodding.revivalcore.core.capability.CoreCapabilityImpl;
+import com.revivalmodding.revivalcore.core.capability.data.PlayerMetaPowerData;
 import com.revivalmodding.revivalcore.meta.util.PEnumHandler;
 import com.speedstersreborn.common.capabilities.CapabilitySpeedster;
 import net.minecraft.block.Block;
@@ -22,18 +22,17 @@ public class BlockParticleAccelerator extends Block {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        IMetaCap cap = CapabilityMeta.get(playerIn);
-
-            if (playerIn.isSneaking()) {
-                cap.setPowerEnabled(false);
-                cap.clear();
-                CapabilitySpeedster.get(playerIn).clear(); // TODO Find a good place to remove all data written to SPeedCap
-            } else { // TODO make real stuff
-                cap.setMetaPower(PEnumHandler.MetaPower.SPEEDSTER.getID()); // TODO Change to MetaHelper once pushed final
-                if(cap.getMetaPower() == 0) {
-                    cap.setPowerEnabled(true);
-                }
+        PlayerMetaPowerData data = CoreCapabilityImpl.getInstance(playerIn).getMetaPowerData();
+        if (playerIn.isSneaking()) {
+            data.setPowerActivated(false);
+            data.clear();
+            CapabilitySpeedster.get(playerIn).clear(); // TODO Find a good place to remove all data written to SPeedCap
+        } else { // TODO make real stuff
+            data.setMetaPower(PEnumHandler.MetaPower.SPEEDSTER.getID()); // TODO Change to MetaHelper once pushed final
+            if (data.getMetaPower() == 0) {
+                data.setPowerActivated(true);
             }
+        }
         return true;
     }
 

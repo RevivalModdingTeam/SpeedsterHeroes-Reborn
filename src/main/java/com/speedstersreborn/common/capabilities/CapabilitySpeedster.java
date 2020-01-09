@@ -1,6 +1,7 @@
 package com.speedstersreborn.common.capabilities;
 
-import com.revivalmodding.revivalcore.core.abilities.IAbilityCap;
+import com.revivalmodding.revivalcore.core.capability.CoreCapabilityImpl;
+import com.revivalmodding.revivalcore.core.capability.ICoreCapability;
 import com.speedstersreborn.SpeedsterHeroesReborn;
 import com.speedstersreborn.api.SpeedAPI;
 import com.speedstersreborn.network.NetworkHandler;
@@ -59,7 +60,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             setSpeedLevel(0);
         }
         SpeedAPI.setSpeedFromCap(player);
-        IAbilityCap abilityCap = IAbilityCap.Impl.get(player);
+        ICoreCapability coreCapability = CoreCapabilityImpl.getInstance(player);
         
         if (hasVelocity()) {
             if (!hasTakenVelocityBefore)
@@ -79,7 +80,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
         }
 
         if(getMaxspeedLevel() < 5) {
-            this.setMaxSpeedLevel(abilityCap.getLevel() * 5);
+            this.setMaxSpeedLevel(coreCapability.getAbilityData().getLevel() * 5);
         }
 
         if (getSpeedLevel() < 0) {
@@ -258,7 +259,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
     @Override
     public void clear() {
         this.setPrimaryTrailColor(mainColor);
-        IAbilityCap.Impl.get(player).setLevel(0);
+        CoreCapabilityImpl.getInstance(player).getAbilityData().setLevel(0);
         this.setMaxSpeedLevel(5);
         this.setLastTrailColor(mainColor);
         this.clearV9();
@@ -275,7 +276,7 @@ public class CapabilitySpeedster implements ISpeedsterCap {
             this.setLastTrailColor(mainColor);
             this.isSpeedster = false;
             this.hasTakenVelocityBefore = false;
-            this.setMaxSpeedLevel(IAbilityCap.Impl.get(player).getLevel() * 5);
+            this.setMaxSpeedLevel(CoreCapabilityImpl.getInstance(player).getAbilityData().getLevel() * 5);
         }
     }
 
